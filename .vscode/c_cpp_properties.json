@@ -3,16 +3,16 @@
     {
       "name": "Win32",
       "includePath": [
-        "${workspaceFolder}/include/**",
         "${workspaceFolder}/src/**",
-        "${workspaceFolder}/dep/win/include/**",
-        "${workspaceFolder}/dep/win/lib/**"
+        "${workspaceFolder}/dep/win/lib/gcc_lib/mswu",
+        "${workspaceFolder}/dep/win/include",
+        "${workspaceFolder}/include/**"
       ],
       "defines": ["_DEBUG", "UNICODE", "_UNICODE"],
       "windowsSdkVersion": "10.0.19041.0",
       "cStandard": "c17",
       "cppStandard": "c++17",
-      "intelliSenseMode": "windows-msvc-x64"
+      "intelliSenseMode": "gcc-x86"
     }
   ],
   "version": 4
