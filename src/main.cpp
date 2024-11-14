@@ -40,7 +40,7 @@ bool MyApp::OnInit()
 }
  
 MyFrame::MyFrame()
-    : wxFrame(NULL, wxID_ANY, "Hello World")
+    : wxFrame(NULL, wxID_ANY, "Attendance System")
 {
     wxMenu *menuFile = new wxMenu;
     menuFile->Append(ID_Hello, "&Hello...\tCtrl-H",
@@ -54,6 +54,8 @@ MyFrame::MyFrame()
     wxMenuBar *menuBar = new wxMenuBar;
     menuBar->Append(menuFile, "&File");
     menuBar->Append(menuHelp, "&Help");
+
+    
  
     SetMenuBar( menuBar );
  
