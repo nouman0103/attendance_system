@@ -3,6 +3,7 @@
 #define INTERFACEFRAME_H
 
 #include "LoginPanel.h" // Include other panel headers as necessary
+#include "GuardPanel.h"
 #include <wx/wx.h>
 
 /*
@@ -37,6 +38,7 @@ private:
     // Add pointers to various panels as needed
     // Example:
     LoginPanel* loginPanel;
+    GuardPanel* guardPanel;
     // EmployeeDashboard* employeeDashboard;
     // SupervisorDashboard* supervisorDashboard;
     // Add other panels here

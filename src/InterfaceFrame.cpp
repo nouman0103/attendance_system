@@ -1,6 +1,7 @@
 // MyAppFrame.cpp
 #include "InterfaceFrame.h"
 #include "LoginPanel.h" // Make sure to create LoginPanel.h and LoginPanel.cpp
+#include "GuardPanel.h" // Make sure to create GuardPanel.h and GuardPanel.cpp
 // Include other panel headers as necessary
 
 /**
@@ -18,6 +19,12 @@ InterfaceFrame::InterfaceFrame(const wxString& title)
     // Assuming you have a LoginPanel class derived from wxPanel
     loginPanel = new LoginPanel(this);
     ShowPanel(loginPanel);
+
+    // Assuming you have a GuardPanel class derived from wxPanel
+    // guardPanel = new GuardPanel(this);
+    // ShowPanel(guardPanel);
+
+
 
     // For demonstration, we'll just display a simple message
     // wxPanel* initialPanel = new wxPanel(this, wxID_ANY);
