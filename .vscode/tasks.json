@@ -200,11 +200,10 @@
         ]
       },
       "windows": {
-        "command": "cmd",
+        "command": "g++",
 
         "args": [
-          "/c",
-          "g++",
+        
           "-I${workspaceFolder}\\dep\\win\\lib\\gcc_lib\\mswu",
           "-I${workspaceFolder}\\dep\\win\\include",
           "-I${workspaceFolder}\\include",

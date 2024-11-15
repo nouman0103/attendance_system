@@ -2,6 +2,7 @@
 #include "InterfaceFrame.h"
 #include "LoginPanel.h" // Make sure to create LoginPanel.h and LoginPanel.cpp
 #include "GuardPanel.h" // Make sure to create GuardPanel.h and GuardPanel.cpp
+#include "DataManager.h"
 // Include other panel headers as necessary
 
 /**
@@ -14,6 +15,11 @@ InterfaceFrame::InterfaceFrame(const wxString& title)
     // Initialize the menu and status bar
     InitializeMenu();
     InitializeStatusBar();
+    DataManager dm;
+    std::vector<Employee> employees = dm.readEmployee();
+    for (Employee e : employees) {
+        std::cout<<e.getName()<<std::endl;
+    }
 
     // Create and display the initial panel (e.g., LoginPanel)
     // Assuming you have a LoginPanel class derived from wxPanel

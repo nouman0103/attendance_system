@@ -1,7 +1,11 @@
 #include "User.h"
 
 User::User(std::string name, unsigned int id) : name(name), id(id), logged_in(false) {}
-
+User::User(std::vector<std::string> in) {
+    this->id = stoi(in[0]);
+    this->name = in[1];
+    this->logged_in = false;
+}
 User::~User() {}
 
 void User::setName(std::string name) {
@@ -35,4 +39,9 @@ void User::setID(unsigned int id) {
 
 unsigned int User::getID() {
     return id;
+}
+
+std::ostream &operator<<(std::ostream &out, const User &user) {
+    out << user.name << " " << user.id;
+    return out;
 }

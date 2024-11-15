@@ -46,10 +46,17 @@ std::shared_ptr<AttendanceRecord> Employee::getAttendanceRecord() {
     return attendanceRecord;
 }
 
-void Employee::setEmployeeID(int employeeID) {
-    this->employeeID = employeeID;
+
+
+Employee::Employee(std::vector<std::string> in) : User(in)
+ {
+    this->position = in[2];
+    this->attendanceRecord = nullptr;
+    this->leaveBalance = nullptr;
 }
 
-int Employee::getEmployeeID() {
-    return employeeID;
+std::ostream &operator<<(std::ostream &out, const Employee &employee) {
+    out << dynamic_cast<const User &>(employee) << " " << employee.position;
+    
+    return out;
 }

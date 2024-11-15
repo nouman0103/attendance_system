@@ -4,7 +4,9 @@
 #include "LeaveBalance.h"
 #include <memory>
 #include <iostream>
+#include <fstream>
 #include <string>
+#include <vector>
 /*
 class Employee {
     - String position
@@ -21,6 +23,7 @@ class Employee : public User
 {
 public:
     Employee(std::string name, unsigned int id, std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<LeaveBalance>  leaveBalance);
+    Employee(std::vector<std::string> in);
     ~Employee();
     void applyForLeave();
     void viewAttendance();
@@ -31,12 +34,10 @@ public:
     std::string getPosition();
     void setAttendanceRecord(std::shared_ptr<AttendanceRecord> attendanceRecord);
     std::shared_ptr<AttendanceRecord> getAttendanceRecord();
-    void setEmployeeID(int employeeID);
-    int getEmployeeID();
+    friend std::ostream &operator<<(std::ostream &out, const Employee &employee);
 
 private:
     std::string position;
     std::shared_ptr<AttendanceRecord> attendanceRecord;
     std::shared_ptr<LeaveBalance>  leaveBalance;
-    int employeeID;
 };
