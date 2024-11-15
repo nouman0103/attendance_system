@@ -12,7 +12,7 @@ void User::setName(std::string name) {
     this->name = name;
 }
 
-std::string User::getName() {
+std::string User::getName() const {
     return name;
 }
 

@@ -58,6 +58,16 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
         // This is a placeholder. Replace with actual role determination.
         std::string role = "Employee"; // Example roles: Employee, Supervisor, Director, Guard
 
+        // tell the parent frame to show the guard panel
+
+        if (username == "admin" && password == "admin") {
+            wxSimplebook *simplebook = dynamic_cast<wxSimplebook*>(this->GetParent());
+            simplebook->SetSelection(InterfaceFrame::PID_PAGE_ADMIN);
+        } else {
+            wxSimplebook *simplebook = dynamic_cast<wxSimplebook*>(this->GetParent());
+            simplebook->SetSelection(InterfaceFrame::PID_PAGE_GUARD);
+        }
+
         // Create the appropriate dashboard based on role
         // wxPanel* newPanel = nullptr;
         // if (role == "Employee")
@@ -92,6 +102,8 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
         // }
 
         wxMessageBox("Login successful!", "Success", wxOK | wxICON_INFORMATION);
+
+
     }
     else
     {

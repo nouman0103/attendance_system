@@ -2,6 +2,7 @@
 #include "InterfaceFrame.h"
 #include "LoginPanel.h" // Make sure to create LoginPanel.h and LoginPanel.cpp
 #include "GuardPanel.h" // Make sure to create GuardPanel.h and GuardPanel.cpp
+#include "AdminPanel.h"
 #include "DataManager.h"
 // Include other panel headers as necessary
 
@@ -15,16 +16,31 @@ InterfaceFrame::InterfaceFrame(const wxString& title)
     // Initialize the menu and status bar
     InitializeMenu();
     InitializeStatusBar();
-    DataManager dm;
-    std::vector<Employee> employees = dm.readEmployee();
-    for (Employee e : employees) {
-        std::cout<<e.getName()<<std::endl;
-    }
+    // DataManager dm;
+    // std::vector<Employee> employees = dm.readEmployee();
+    // for (Employee e : employees) {
+    //     std::cout<<e.getName()<<std::endl;
+    // }
 
     // Create and display the initial panel (e.g., LoginPanel)
     // Assuming you have a LoginPanel class derived from wxPanel
-    loginPanel = new LoginPanel(this);
-    ShowPanel(loginPanel);
+    //loginPanel = new LoginPanel(this);
+    //ShowPanel(loginPanel);
+
+    simplebook = new wxSimplebook(this, wxID_ANY);
+
+    // Add pages to the simplebook
+    simplebook->AddPage(new LoginPanel(simplebook), "Login");
+    simplebook->AddPage(new GuardPanel(simplebook), "Guard");
+    simplebook->AddPage(new AdminPanel(simplebook), "Admin");
+
+    ShowPage(PID_PAGE_LOGIN);
+
+    // Use a sizer to manage layout
+    wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+    sizer->Add(simplebook, 1, wxEXPAND);
+    SetSizer(sizer);
+    Layout();
 
     // Assuming you have a GuardPanel class derived from wxPanel
     // guardPanel = new GuardPanel(this);
@@ -87,21 +103,7 @@ void InterfaceFrame::InitializeStatusBar()
  * This method removes any existing panels and adds the new one.
  * @param panel Pointer to the wxPanel to display.
  */
-void InterfaceFrame::ShowPanel(wxPanel* panel)
+void InterfaceFrame::ShowPage(int pageId)
 {
-    // Remove existing children (panels)
-    wxSizer* currentSizer = GetSizer();
-    if (currentSizer)
-    {
-        currentSizer->Clear(true); // Delete the existing panel
-    }
-    else
-    {
-        currentSizer = new wxBoxSizer(wxVERTICAL);
-        SetSizer(currentSizer);
-    }
-
-    // Add the new panel
-    currentSizer->Add(panel, 1, wxEXPAND | wxALL, 5);
-    Layout();
+    simplebook->SetSelection(pageId);
 }
