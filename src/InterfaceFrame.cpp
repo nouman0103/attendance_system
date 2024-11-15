@@ -1,6 +1,6 @@
 // MyAppFrame.cpp
 #include "InterfaceFrame.h"
-//#include "LoginPanel.h" // Make sure to create LoginPanel.h and LoginPanel.cpp
+#include "LoginPanel.h" // Make sure to create LoginPanel.h and LoginPanel.cpp
 // Include other panel headers as necessary
 
 /**
@@ -16,16 +16,16 @@ InterfaceFrame::InterfaceFrame(const wxString& title)
 
     // Create and display the initial panel (e.g., LoginPanel)
     // Assuming you have a LoginPanel class derived from wxPanel
-    // loginPanel = new LoginPanel(this);
-    // ShowPanel(loginPanel);
+    loginPanel = new LoginPanel(this);
+    ShowPanel(loginPanel);
 
     // For demonstration, we'll just display a simple message
-    wxPanel* initialPanel = new wxPanel(this, wxID_ANY);
-    wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-    sizer->Add(new wxStaticText(initialPanel, wxID_ANY, "Welcome to the Attendance and Leave Management System"),
-               0, wxALL | wxALIGN_CENTER, 15);
-    initialPanel->SetSizer(sizer);
-    ShowPanel(initialPanel);
+    // wxPanel* initialPanel = new wxPanel(this, wxID_ANY);
+    // wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+    // sizer->Add(new wxStaticText(initialPanel, wxID_ANY, "Welcome to the Attendance and Leave Management System"),
+    //            0, wxALL | wxALIGN_CENTER, 15);
+    // initialPanel->SetSizer(sizer);
+    // ShowPanel(initialPanel);
 }
 
 /**

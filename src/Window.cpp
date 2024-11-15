@@ -1,8 +1,8 @@
 // MyApp.cpp
-#include "Interface.h"
+#include "Window.h"
 #include "InterfaceFrame.h"
 
-bool Interface::OnInit()
+bool Window::OnInit()
 {
     // Initialize all available image handlers (optional, useful if using images)
     //wxInitAllImageHandlers();
@@ -19,7 +19,7 @@ bool Interface::OnInit()
     return true;
 }
 
-int Interface::OnExit()
+int Window::OnExit()
 {
     // Perform any cleanup tasks if necessary
     return 0;

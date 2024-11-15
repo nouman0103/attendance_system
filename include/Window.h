@@ -1,6 +1,6 @@
 // MyApp.h
-#ifndef INTERFACE_H
-#define INTERFACE_H
+#ifndef WINDOW_H
+#define WINDOW_H
 
 #include <wx/wxprec.h>
  
@@ -10,8 +10,10 @@
 
 /*
 This class initializes the application by creating and displaying the main frame.
+
+WINDOW -> InterfaceFrame -> Panels (LoginPanel, EmployeeDashboard, SupervisorDashboard, etc.) 
 */
-class Interface : public wxApp
+class Window : public wxApp
 {
 public:
     virtual bool OnInit() override;

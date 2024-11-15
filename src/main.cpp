@@ -1,5 +1,5 @@
 
 #include "User.h"
-#include "Interface.h"
+#include "Window.h"
  
-wxIMPLEMENT_APP(Interface);
+wxIMPLEMENT_APP(Window);
