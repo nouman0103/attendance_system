@@ -7,6 +7,15 @@ Employee::Employee(std::string name, unsigned int id,std::string password, std::
     this->leaveBalance = leaveBalance;
 }
 
+Employee::Employee(json j) : User(j)
+ {
+    this->position = j["position"];
+    this->attendanceRecord = nullptr;
+    this->leaveBalance = nullptr;
+}
+
+
+
 Employee::~Employee() {
 }
 
@@ -46,17 +55,17 @@ std::shared_ptr<AttendanceRecord> Employee::getAttendanceRecord() {
     return attendanceRecord;
 }
 
-
-
-Employee::Employee(std::vector<std::string> in) : User(in)
- {
-    this->position = in[3];
-    this->attendanceRecord = nullptr;
-    this->leaveBalance = nullptr;
-}
-
 std::ostream &operator<<(std::ostream &out, const Employee &employee) {
+    
     out << dynamic_cast<const User &>(employee) << " " << employee.position;
+
     
     return out;
+}
+
+
+json Employee::to_json() {
+    json j = User::to_json();
+    j["position"] = position;
+    return j;
 }

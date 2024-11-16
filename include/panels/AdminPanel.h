@@ -11,6 +11,7 @@ public:
     AdminPanel(wxWindow* parent,std::shared_ptr<DataManager> dm);
     ~AdminPanel();
 
+    void updateEmployeeList();
     void addUser();
     void removeUser();
 
@@ -23,7 +24,6 @@ private:
     wxListBox* employeeList;
     wxChoice* userTypeChoice;
     wxTextCtrl* userNameCtrl;
-    wxTextCtrl* userIDCtrl;
     wxTextCtrl* passwordCtrl;
     wxButton* addUserButton;
     //DataManager* dm;

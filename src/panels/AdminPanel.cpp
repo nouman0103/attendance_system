@@ -26,12 +26,11 @@ AdminPanel::AdminPanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
     // }
 
     // Show the list of employees in a wxListBox
-    // std::vector<wxString> employeeNames;
-    // for (const Employee& e : employees) {
-    //     employeeNames.push_back(e.getName());
-    // }
-    // employeeList = new wxListBox(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, employeeNames.size(), employeeNames.data());
-    // mainSizer->Add(employeeList, 0, wxEXPAND);
+    
+    employeeList = new wxListBox(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, nullptr, 0);
+    updateEmployeeList();
+
+    mainSizer->Add(employeeList, 0, wxEXPAND);
 
     // add a horizontal separator
     mainSizer->Add(new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL), 0, wxEXPAND | wxALL, 5);
@@ -61,13 +60,6 @@ AdminPanel::AdminPanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
     userNameSizer->Add(userNameCtrl, 1, wxALL | wxEXPAND, 5);
     mainSizer->Add(userNameSizer, 0, wxEXPAND);
 
-    // User ID
-    wxBoxSizer* userIDSizer = new wxBoxSizer(wxHORIZONTAL);
-    userIDSizer->Add(new wxStaticText(this, wxID_ANY, "User ID:"), 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
-    userIDCtrl = new wxTextCtrl(this, wxID_ANY);
-    userIDSizer->Add(userIDCtrl, 1, wxALL | wxEXPAND, 5);
-    mainSizer->Add(userIDSizer, 0, wxEXPAND);
-
     // Initial Password
     wxBoxSizer* passwordSizer = new wxBoxSizer(wxHORIZONTAL);
     passwordSizer->Add(new wxStaticText(this, wxID_ANY, "Initial Password:"), 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
@@ -90,6 +82,19 @@ AdminPanel::~AdminPanel()
     
 }
 
+void AdminPanel::updateEmployeeList()
+{
+    // get list of all employees
+    // DataManager dm;
+    std::shared_ptr<std::vector<Employee>> employees = dm->getEmployees();
+    wxArrayString employeeNames;
+    for (Employee e : *employees) {
+        employeeNames.Add(e.getName() + " (" + e.getPosition() + ")");
+    }
+    employeeList->Clear();
+    employeeList->InsertItems(employeeNames, 0);
+}
+
 void AdminPanel::OnAddUser(wxCommandEvent& event)
 {
     std::cout << "Add user button clicked" << std::endl;
@@ -97,41 +102,33 @@ void AdminPanel::OnAddUser(wxCommandEvent& event)
     // get the values from the form
     wxString userType = userTypeChoice->GetStringSelection();
     wxString userName = userNameCtrl->GetValue();
-    wxString userID = userIDCtrl->GetValue();
     wxString password = passwordCtrl->GetValue();
 
     // msg box each value
-    wxMessageBox("User Type: " + userType + "\nUser Name: " + userName + "\nUser ID: " + userID + "\nPassword: " + password, "Add User", wxOK | wxICON_INFORMATION);
+    wxMessageBox("User Type: " + userType + "\nUser Name: " + "\nPassword: " + password, "Add User", wxOK | wxICON_INFORMATION);
 
     // validate the form
-    if (userName.IsEmpty() || userID.IsEmpty() || password.IsEmpty()) {
+    if (userName.IsEmpty() || password.IsEmpty()) {
         wxMessageBox("Please fill in all fields", "Error", wxOK | wxICON_ERROR);
         return;
     }
 
     // add the user to the database
     // DataManager dm;
-    Employee newEmployee(userName.ToStdString(), std::stoi(userID.ToStdString()),password.ToStdString(), userType.ToStdString(), nullptr, nullptr);
+    Employee newEmployee(userName.ToStdString(), 0, password.ToStdString(), userType.ToStdString(), nullptr, nullptr);
     // dm.writeEmployee(newEmployee);
-    dm->writeEmployee(newEmployee);
-
+    bool success = dm->writeEmployee(newEmployee);
+    if (!success) {
+        wxMessageBox("User already exists", "Error", wxOK | wxICON_ERROR);
+        return;
+    }
 
     // clear the form
     userNameCtrl->Clear();
-    userIDCtrl->Clear();
     passwordCtrl->Clear();
     
-
-    // // refresh the list of employees
-    // std::vector<Employee> employees = dm.readEmployee();
-    // std::vector<wxString> employeeNames;
-    // for (const Employee& e : employees) {
-    //     employeeNames.push_back(e.getName());
-    // }
-    // employeeList->Clear();
-    // employeeList->InsertItems(employeeNames, 0);
-
-    // msg box success
     wxMessageBox("User added successfully", "Success", wxOK | wxICON_INFORMATION);
+
+    updateEmployeeList();
 
 }

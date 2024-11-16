@@ -5,40 +5,61 @@
 #include <sstream>
 #include <vector>
 
+using json = nlohmann::json;
+
 DataManager::DataManager()
 {
-    readEmployee();
+    updateEmployees();
+    // readAttendanceRecord();
+    // readLeaveBalance();
 }
-void DataManager::writeEmployee(Employee employee)
+bool DataManager::writeEmployee(Employee employee)
 {
-    write.open("employee.txt", std::ios::app);
-    write << employee << std::endl;
-    write.close();
-    employees.push_back(employee);
-}
-
-void DataManager::readEmployee()
-{
-    read.open("employee.txt");
+    //Check if employee already exists
+    if (employeePassword.find(employee.getName()) != employeePassword.end())
+    {
+        return false;
+    }
+    std::ifstream read("employee.json");
     if (!read.is_open())
     {
         std::cerr << "Error opening file" << std::endl;
-        return;
+        return false;
     }
-    std::string line;
-    while (std::getline(read, line))
+    json j;
+    read >> j;
+    read.close();
+
+    json employeeJson = employee.to_json();
+    int newID = j["count"].get<int>() + 1;
+    employeeJson["id"] = newID;
+    j["count"] = newID;
+    j["employees"].push_back(employeeJson);
+    employee.setID(newID);
+    employees.push_back(employee);
+    employeePassword[employee.getName()] = employeeJson["password"];
+
+
+    std::ofstream write("employee.json");
+    write << j.dump(4);
+    write.close();
+    return true;
+}
+
+void DataManager::updateEmployees()
+{
+
+    std::ifstream read;
+    read.open("employee.json");
+    // parse the json file
+    json j;
+    read >> j;
+    read.close();
+    for (json employee : j["employees"])
     {
-        std::istringstream iss(line);
-        std::vector<std::string> tokens;
-        std::string token;
-        while (iss >> token)
-        {
-            tokens.push_back(token);
-        }
-        // Process tokens as needed
-        Employee employee(tokens);
-        employeePassword[employee.getID()] = tokens[3];
-        employees.push_back(employee);
+        Employee e(employee);
+        employeePassword[e.getName()] = employee["password"];
+        employees.push_back(e);
     }
     return;
 }
@@ -47,10 +68,7 @@ std::shared_ptr<std::vector<Employee>> DataManager::getEmployees()
 {
     return std::make_shared<std::vector<Employee>>(employees);
 }
-std::string DataManager::getPassword(int id)
-{
-    return employeePassword[id];
-}
+
 // void DataManager::writeAttendanceRecord(AttendanceRecord attendanceRecord)
 // {
 //     write.open("attendanceRecord.txt", std::ios::app);

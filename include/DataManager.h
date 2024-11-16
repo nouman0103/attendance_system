@@ -15,16 +15,16 @@ private:
     std::ifstream read;
     std::vector<Employee> employees;
     //Dictory of employees id and password
-    std::map<int,std::string> employeePassword;
+    std::map<std::string,std::string> employeePassword;
     // std::vector<AttendanceRecord> attendanceRecords;
     // std::vector<LeaveBalance> leaveBalances;
 
 public:
     DataManager();
-    void writeEmployee(Employee employee);
-    void readEmployee();
+    bool writeEmployee(Employee employee);
+    void updateEmployees();
     std::shared_ptr<std::vector<Employee>> getEmployees();
-    std::string getPassword(int id);
+    
 
     // void writeAttendanceRecord(AttendanceRecord attendanceRecord);
     // std::vector<AttendanceRecord> readAttendanceRecord();

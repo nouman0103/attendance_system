@@ -7,6 +7,9 @@
 #include <fstream>
 #include <string>
 #include <vector>
+
+using json = nlohmann::json;
+
 /*
 class Employee {
     - String position
@@ -25,7 +28,7 @@ class Employee : public User
 {
 public:
     Employee(std::string name, unsigned int id, std::string password,std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<LeaveBalance>  leaveBalance);
-    Employee(std::vector<std::string> in);
+    Employee(json j);
     ~Employee();
     void applyForLeave();
     void viewAttendance();
@@ -37,6 +40,7 @@ public:
     void setAttendanceRecord(std::shared_ptr<AttendanceRecord> attendanceRecord);
     std::shared_ptr<AttendanceRecord> getAttendanceRecord();
     friend std::ostream &operator<<(std::ostream &out, const Employee &employee);
+    json to_json();
 
 private:
     std::string position;
