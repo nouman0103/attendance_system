@@ -4,7 +4,11 @@
 
 #include <wx/wx.h>
 #include <wx/combobox.h>
+#include <vector>
 #include "User.h"
+
+#include "Employee.h"
+
 
 /**
  * @class GuardPanel
@@ -17,7 +21,7 @@ public:
     * @brief Constructs a GuardPanel object.
     * @param parent The parent window.
      */
-    GuardPanel(wxWindow* parent);
+    GuardPanel(wxWindow* parent,std::vector<Employee> employees);
 
 private:
     

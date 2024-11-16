@@ -16,11 +16,11 @@ InterfaceFrame::InterfaceFrame(const wxString& title)
     // Initialize the menu and status bar
     InitializeMenu();
     InitializeStatusBar();
-    // DataManager dm;
-    // std::vector<Employee> employees = dm.readEmployee();
-    // for (Employee e : employees) {
-    //     std::cout<<e.getName()<<std::endl;
-    // }
+        DataManager dm;
+        std::vector<Employee> employees = dm.readEmployee();
+        for (Employee e : employees) {
+            std::cout<<e.getName()<<std::endl;
+        }
 
     // Create and display the initial panel (e.g., LoginPanel)
     // Assuming you have a LoginPanel class derived from wxPanel
@@ -31,7 +31,7 @@ InterfaceFrame::InterfaceFrame(const wxString& title)
 
     // Add pages to the simplebook
     simplebook->AddPage(new LoginPanel(simplebook), "Login");
-    simplebook->AddPage(new GuardPanel(simplebook), "Guard");
+    simplebook->AddPage(new GuardPanel(simplebook,employees), "Guard");
     simplebook->AddPage(new AdminPanel(simplebook), "Admin");
 
     ShowPage(PID_PAGE_LOGIN);
