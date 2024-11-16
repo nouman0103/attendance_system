@@ -26,7 +26,7 @@ InterfaceFrame::InterfaceFrame(const wxString &title)
     simplebook = new wxSimplebook(this, wxID_ANY);
 
     // Add pages to the simplebook
-    simplebook->AddPage(new LoginPanel(simplebook), "Login");
+    simplebook->AddPage(new LoginPanel(simplebook,dm), "Login");
     simplebook->AddPage(new GuardPanel(simplebook, dm), "Guard");
     simplebook->AddPage(new AdminPanel(simplebook,dm), "Admin");
 

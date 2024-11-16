@@ -24,7 +24,7 @@ User(std::string name, unsigned int id);
 class Employee : public User
 {
 public:
-    Employee(std::string name, unsigned int id, std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<LeaveBalance>  leaveBalance);
+    Employee(std::string name, unsigned int id, std::string password,std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<LeaveBalance>  leaveBalance);
     Employee(std::vector<std::string> in);
     ~Employee();
     void applyForLeave();

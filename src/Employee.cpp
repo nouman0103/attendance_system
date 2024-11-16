@@ -1,7 +1,7 @@
 #include "Employee.h"
 
-Employee::Employee(std::string name, unsigned int id, std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<LeaveBalance> leaveBalance)
-    : User(name, id) {
+Employee::Employee(std::string name, unsigned int id,std::string password, std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<LeaveBalance> leaveBalance)
+    : User(name, id,password) {
     this->position = position;
     this->attendanceRecord = attendanceRecord;
     this->leaveBalance = leaveBalance;
@@ -50,7 +50,7 @@ std::shared_ptr<AttendanceRecord> Employee::getAttendanceRecord() {
 
 Employee::Employee(std::vector<std::string> in) : User(in)
  {
-    this->position = in[2];
+    this->position = in[3];
     this->attendanceRecord = nullptr;
     this->leaveBalance = nullptr;
 }

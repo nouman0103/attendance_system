@@ -9,10 +9,10 @@ DataManager::DataManager()
 {
     readEmployee();
 }
-void DataManager::writeEmployee(Employee employee,std::string password)
+void DataManager::writeEmployee(Employee employee)
 {
     write.open("employee.txt", std::ios::app);
-    write << employee<<" " << password << std::endl;
+    write << employee << std::endl;
     write.close();
     employees.push_back(employee);
 }
@@ -46,6 +46,10 @@ void DataManager::readEmployee()
 std::shared_ptr<std::vector<Employee>> DataManager::getEmployees()
 {
     return std::make_shared<std::vector<Employee>>(employees);
+}
+std::string DataManager::getPassword(int id)
+{
+    return employeePassword[id];
 }
 // void DataManager::writeAttendanceRecord(AttendanceRecord attendanceRecord)
 // {

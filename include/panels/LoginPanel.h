@@ -3,6 +3,8 @@
 #define LOGINPANEL_H
 
 #include <wx/wx.h>
+#include <memory>
+#include "DataManager.h"
 
 /**
  * @class LoginPanel
@@ -17,7 +19,7 @@ public:
      * @brief Constructs a LoginPanel object.
      * @param parent The parent window.
      */
-    LoginPanel(wxWindow* parent);
+    LoginPanel(wxWindow* parent, std::shared_ptr<DataManager> dm);
 
 private:
     /**
@@ -30,6 +32,8 @@ private:
     wxTextCtrl* m_usernameCtrl;
     wxTextCtrl* m_passwordCtrl;
     wxButton* m_loginButton;
+    //DataManager* dm;
+    std::shared_ptr<DataManager> dm;
 
     wxDECLARE_EVENT_TABLE();
 };

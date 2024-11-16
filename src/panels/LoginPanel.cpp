@@ -12,7 +12,7 @@ wxEND_EVENT_TABLE()
  * @brief Constructs a LoginPanel object.
  * @param parent The parent window.
  */
-LoginPanel::LoginPanel(wxWindow* parent)
+LoginPanel::LoginPanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
     : wxPanel(parent, wxID_ANY)
 {
     // Create sizer for layout
@@ -35,6 +35,8 @@ LoginPanel::LoginPanel(wxWindow* parent)
     // Login Button
     m_loginButton = new wxButton(this, wxID_ANY, "Login");
     mainSizer->Add(m_loginButton, 0, wxALL | wxALIGN_CENTER, 10);
+    //DataManager dm;
+    this->dm = dm;
 
     SetSizer(mainSizer);
 }
@@ -56,16 +58,32 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
     {
         // Determine user role based on username/password
         // This is a placeholder. Replace with actual role determination.
-        std::string role = "Employee"; // Example roles: Employee, Supervisor, Director, Guard
+        // std::string role = "Employee"; // Example roles: Employee, Supervisor, Director, Guard
 
         // tell the parent frame to show the guard panel
+        std::string role = "";
+        std::shared_ptr<std::vector<Employee>> employees = this->dm->getEmployees();
+        for (Employee e : *employees)
+        {
+            if (e.login(username.ToStdString(), password.ToStdString()))
+            {
+                role = e.getPosition();
+                break;
+            }
+        }
+
 
         if (username == "admin" && password == "admin") {
             wxSimplebook *simplebook = dynamic_cast<wxSimplebook*>(this->GetParent());
             simplebook->SetSelection(InterfaceFrame::PID_PAGE_ADMIN);
-        } else {
+            wxMessageBox("Login successful!", "Success", wxOK | wxICON_INFORMATION);
+        } else if (role!="") {
             wxSimplebook *simplebook = dynamic_cast<wxSimplebook*>(this->GetParent());
             simplebook->SetSelection(InterfaceFrame::PID_PAGE_GUARD);
+            wxMessageBox("Login successful!", "Success", wxOK | wxICON_INFORMATION);
+        }
+        else {
+            wxMessageBox("Invalid user role!", "Error", wxOK | wxICON_ERROR);
         }
 
         // Create the appropriate dashboard based on role
@@ -101,7 +119,7 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
         //     wxMessageBox("Invalid user role!", "Error", wxOK | wxICON_ERROR);
         // }
 
-        wxMessageBox("Login successful!", "Success", wxOK | wxICON_INFORMATION);
+        
 
 
     }

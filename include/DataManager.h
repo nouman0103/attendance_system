@@ -21,9 +21,10 @@ private:
 
 public:
     DataManager();
-    void writeEmployee(Employee employee,std::string password);
+    void writeEmployee(Employee employee);
     void readEmployee();
     std::shared_ptr<std::vector<Employee>> getEmployees();
+    std::string getPassword(int id);
 
     // void writeAttendanceRecord(AttendanceRecord attendanceRecord);
     // std::vector<AttendanceRecord> readAttendanceRecord();

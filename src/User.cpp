@@ -1,10 +1,10 @@
 #include "User.h"
 
-User::User(std::string name, unsigned int id) : name(name), id(id), logged_in(false) {}
+User::User(std::string name, unsigned int id,std::string password) : name(name), id(id),password(password)  {}
 User::User(std::vector<std::string> in) {
     this->id = stoi(in[0]);
     this->name = in[1];
-    this->logged_in = false;
+    this->password = in[2];
 }
 User::~User() {}
 
@@ -16,22 +16,15 @@ std::string User::getName() const {
     return name;
 }
 
-bool User::login(unsigned int id, std::string name, std::string password) {
+bool User::login(std::string name, std::string password) {
     // Placeholder for actual authentication logic
-    if (this->id == id && this->name == name && password == "password") {
-        logged_in = true;
+    if (this->name == name && password == this->password) {
         return true;
     }
     return false;
 }
 
-bool User::logout() {
-    if (logged_in) {
-        logged_in = false;
-        return true;
-    }
-    return false;
-}
+
 
 void User::setID(unsigned int id) {
     this->id = id;
@@ -42,6 +35,6 @@ unsigned int User::getID() {
 }
 
 std::ostream &operator<<(std::ostream &out, const User &user) {
-    out << user.id << " " << user.name;
+    out << user.id << " " << user.name << " " << user.password;
     return out;
 }

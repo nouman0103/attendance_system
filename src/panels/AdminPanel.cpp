@@ -111,9 +111,9 @@ void AdminPanel::OnAddUser(wxCommandEvent& event)
 
     // add the user to the database
     // DataManager dm;
-    Employee newEmployee(userName.ToStdString(), std::stoi(userID.ToStdString()), userType.ToStdString(), nullptr, nullptr);
+    Employee newEmployee(userName.ToStdString(), std::stoi(userID.ToStdString()),password.ToStdString(), userType.ToStdString(), nullptr, nullptr);
     // dm.writeEmployee(newEmployee);
-    dm->writeEmployee(newEmployee,password.ToStdString());
+    dm->writeEmployee(newEmployee);
 
 
     // clear the form
