@@ -20,6 +20,8 @@ public:
      * @param parent The parent window.
      */
     LoginPanel(wxWindow* parent, std::shared_ptr<DataManager> dm);
+    ~LoginPanel();
+    void clearFields();
 
 private:
     /**

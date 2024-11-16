@@ -4,6 +4,7 @@
 
 #include "LoginPanel.h" // Include other panel headers as necessary
 #include "GuardPanel.h"
+#include "AdminPanel.h"
 #include <wx/wx.h>
 #include <wx/simplebook.h>
 
@@ -59,8 +60,9 @@ private:
 
     // Add pointers to various panels as needed
     // Example:
-    //LoginPanel* loginPanel;
-    //GuardPanel* guardPanel;
+    LoginPanel* loginPanel;
+    GuardPanel* guardPanel;
+    AdminPanel* adminPanel;
     // EmployeeDashboard* employeeDashboard;
     // SupervisorDashboard* supervisorDashboard;
     // Add other panels here

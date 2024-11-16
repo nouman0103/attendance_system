@@ -41,6 +41,16 @@ LoginPanel::LoginPanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
     SetSizer(mainSizer);
 }
 
+LoginPanel::~LoginPanel()
+{
+}
+
+void LoginPanel::clearFields()
+{
+    m_usernameCtrl->Clear();
+    m_passwordCtrl->Clear();
+}
+
 /**
  * @brief Handles the login button click event.
  * @param event The event object.

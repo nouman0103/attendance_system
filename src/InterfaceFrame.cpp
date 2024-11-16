@@ -1,8 +1,5 @@
 // MyAppFrame.cpp
 #include "InterfaceFrame.h"
-#include "LoginPanel.h" // Make sure to create LoginPanel.h and LoginPanel.cpp
-#include "GuardPanel.h" // Make sure to create GuardPanel.h and GuardPanel.cpp
-#include "AdminPanel.h"
 #include "DataManager.h"
 // Include other panel headers as necessary
 
@@ -26,9 +23,13 @@ InterfaceFrame::InterfaceFrame(const wxString &title)
     simplebook = new wxSimplebook(this, wxID_ANY);
 
     // Add pages to the simplebook
-    simplebook->AddPage(new LoginPanel(simplebook,dm), "Login");
-    simplebook->AddPage(new GuardPanel(simplebook, dm), "Guard");
-    simplebook->AddPage(new AdminPanel(simplebook,dm), "Admin");
+    loginPanel = new LoginPanel(simplebook,dm);
+    guardPanel = new GuardPanel(simplebook, dm);
+    adminPanel = new AdminPanel(simplebook,dm);
+
+    simplebook->AddPage(loginPanel, "Login");
+    simplebook->AddPage(guardPanel, "Guard");
+    simplebook->AddPage(adminPanel, "Admin");
 
     ShowPage(PID_PAGE_LOGIN);
 
@@ -58,6 +59,16 @@ InterfaceFrame::InterfaceFrame(const wxString &title)
  */
 void InterfaceFrame::InitializeMenu()
 {
+    wxIcon icon;
+    if (icon.LoadFile("icon.ico", wxBITMAP_TYPE_ICO))
+    {
+        SetIcon(icon); // Set the frame's icon
+    }
+    else
+    {
+        wxLogError("Could not load icon 'icon.ico'.");
+    }
+
     wxMenuBar *menuBar = new wxMenuBar;
 
     // File Menu
@@ -69,6 +80,11 @@ void InterfaceFrame::InitializeMenu()
     wxMenu *helpMenu = new wxMenu;
     helpMenu->Append(wxID_ABOUT, "&About\tF1", "Show about dialog");
     menuBar->Append(helpMenu, "&Help");
+    
+    // Account Menu
+    wxMenu *accountMenu = new wxMenu;
+    accountMenu->Append(wxID_CANCEL, "Logout", "Logout from the system");
+    menuBar->Append(accountMenu, "&Account");
 
     // Set the menu bar
     SetMenuBar(menuBar);
@@ -79,6 +95,24 @@ void InterfaceFrame::InitializeMenu()
     Bind(wxEVT_MENU, [=](wxCommandEvent &)
          { wxMessageBox("Attendance and Leave Management System\nVersion 1.0",
                         "About", wxOK | wxICON_INFORMATION); }, wxID_ABOUT);
+    Bind(wxEVT_MENU, [=](wxCommandEvent &)
+            {
+                // get the current page
+                int currentPage = simplebook->GetSelection();
+                // check if the current page is the login page
+                if (currentPage == PID_PAGE_LOGIN)
+                {
+                    wxMessageBox("You are already logged out", "Logout", wxOK | wxICON_INFORMATION);
+                    return;
+                }
+                // show the login page
+                ShowPage(PID_PAGE_LOGIN);
+                loginPanel->clearFields();
+
+                wxMessageBox("You have been logged out", "Logout", wxOK | wxICON_INFORMATION);
+
+            }, wxID_CANCEL);
+
 }
 
 /**

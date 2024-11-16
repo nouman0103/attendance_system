@@ -104,9 +104,6 @@ void AdminPanel::OnAddUser(wxCommandEvent& event)
     wxString userName = userNameCtrl->GetValue();
     wxString password = passwordCtrl->GetValue();
 
-    // msg box each value
-    wxMessageBox("User Type: " + userType + "\nUser Name: " + "\nPassword: " + password, "Add User", wxOK | wxICON_INFORMATION);
-
     // validate the form
     if (userName.IsEmpty() || password.IsEmpty()) {
         wxMessageBox("Please fill in all fields", "Error", wxOK | wxICON_ERROR);
