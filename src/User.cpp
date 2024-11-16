@@ -42,6 +42,6 @@ unsigned int User::getID() {
 }
 
 std::ostream &operator<<(std::ostream &out, const User &user) {
-    out << user.name << " " << user.id;
+    out << user.id << " " << user.name;
     return out;
 }

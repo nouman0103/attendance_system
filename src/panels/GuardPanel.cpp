@@ -13,7 +13,7 @@ wxEND_EVENT_TABLE()
  * @brief Constructs a GuardPanel object.
  * @param parent The parent window.
  */
-GuardPanel::GuardPanel(wxWindow* parent, std::vector<Employee> employees)
+GuardPanel::GuardPanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
     : wxPanel(parent, wxID_ANY)
 {
     // Create sizer for layout
@@ -23,12 +23,16 @@ GuardPanel::GuardPanel(wxWindow* parent, std::vector<Employee> employees)
     wxBoxSizer* employeeSizer = new wxBoxSizer(wxHORIZONTAL);
     employeeSizer->Add(new wxStaticText(this, wxID_ANY, "Employee:"), 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
     employeeList = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, 0, nullptr, wxCB_READONLY);
-    // employeeList->Append("Alice");
-    // employeeList->Append("Bob");
-    // employeeList->Append("Charlie");
-    for (Employee e : employees) {
+    this->dm = dm;
+    std::shared_ptr<std::vector<Employee>> employees = dm->getEmployees();
+    for (Employee e : *employees)
+    {
         employeeList->Append(e.getName());
     }
+
+    // for (Employee e : employees) {
+    //     employeeList->Append(e.getName());
+    // }
     employeeList->SetSelection(0);
 
     employeeSizer->Add(employeeList, 1, wxALL | wxEXPAND, 5);

@@ -2,11 +2,13 @@
 #define ADMINPANEL_H
 
 #include <wx/wx.h>
+#include <memory>
+#include "DataManager.h"
 
 class AdminPanel : public wxPanel
 {
 public:
-    AdminPanel(wxWindow* parent);
+    AdminPanel(wxWindow* parent,std::shared_ptr<DataManager> dm);
     ~AdminPanel();
 
     void addUser();
@@ -24,6 +26,8 @@ private:
     wxTextCtrl* userIDCtrl;
     wxTextCtrl* passwordCtrl;
     wxButton* addUserButton;
+    //DataManager* dm;
+    std::shared_ptr<DataManager> dm;
 
     wxDECLARE_EVENT_TABLE();
 

@@ -8,6 +8,7 @@
 #include "User.h"
 
 #include "Employee.h"
+#include "DataManager.h"
 
 
 /**
@@ -21,7 +22,7 @@ public:
     * @brief Constructs a GuardPanel object.
     * @param parent The parent window.
      */
-    GuardPanel(wxWindow* parent,std::vector<Employee> employees);
+    GuardPanel(wxWindow* parent,std::shared_ptr<DataManager> dm);
 
 private:
     
@@ -35,7 +36,7 @@ private:
     wxButton* checkOutButton;
 
     User* user;
-
+    std::shared_ptr<DataManager> dm;
     wxDECLARE_EVENT_TABLE();
 };
 

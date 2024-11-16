@@ -5,21 +5,25 @@
 #include <sstream>
 #include <vector>
 
-void DataManager::writeEmployee(Employee employee)
+DataManager::DataManager()
+{
+    readEmployee();
+}
+void DataManager::writeEmployee(Employee employee,std::string password)
 {
     write.open("employee.txt", std::ios::app);
-    write << employee << std::endl;
+    write << employee<<" " << password << std::endl;
     write.close();
+    employees.push_back(employee);
 }
 
-std::vector<Employee> DataManager::readEmployee()
+void DataManager::readEmployee()
 {
-    std::vector<Employee> employees;
     read.open("employee.txt");
     if (!read.is_open())
     {
         std::cerr << "Error opening file" << std::endl;
-        return employees;
+        return;
     }
     std::string line;
     while (std::getline(read, line))
@@ -33,11 +37,16 @@ std::vector<Employee> DataManager::readEmployee()
         }
         // Process tokens as needed
         Employee employee(tokens);
+        employeePassword[employee.getID()] = tokens[3];
         employees.push_back(employee);
     }
-    return employees;
+    return;
 }
 
+std::shared_ptr<std::vector<Employee>> DataManager::getEmployees()
+{
+    return std::make_shared<std::vector<Employee>>(employees);
+}
 // void DataManager::writeAttendanceRecord(AttendanceRecord attendanceRecord)
 // {
 //     write.open("attendanceRecord.txt", std::ios::app);

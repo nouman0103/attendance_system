@@ -10,34 +10,30 @@
  * @brief Constructs the main application frame.
  * @param title The title of the window.
  */
-InterfaceFrame::InterfaceFrame(const wxString& title)
+InterfaceFrame::InterfaceFrame(const wxString &title)
     : wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600))
 {
     // Initialize the menu and status bar
     InitializeMenu();
     InitializeStatusBar();
-        DataManager dm;
-        std::vector<Employee> employees = dm.readEmployee();
-        for (Employee e : employees) {
-            std::cout<<e.getName()<<std::endl;
-        }
+    std::shared_ptr<DataManager> dm = std::make_shared<DataManager>();
 
     // Create and display the initial panel (e.g., LoginPanel)
     // Assuming you have a LoginPanel class derived from wxPanel
-    //loginPanel = new LoginPanel(this);
-    //ShowPanel(loginPanel);
+    // loginPanel = new LoginPanel(this);
+    // ShowPanel(loginPanel);
 
     simplebook = new wxSimplebook(this, wxID_ANY);
 
     // Add pages to the simplebook
     simplebook->AddPage(new LoginPanel(simplebook), "Login");
-    simplebook->AddPage(new GuardPanel(simplebook,employees), "Guard");
-    simplebook->AddPage(new AdminPanel(simplebook), "Admin");
+    simplebook->AddPage(new GuardPanel(simplebook, dm), "Guard");
+    simplebook->AddPage(new AdminPanel(simplebook,dm), "Admin");
 
     ShowPage(PID_PAGE_LOGIN);
 
     // Use a sizer to manage layout
-    wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+    wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
     sizer->Add(simplebook, 1, wxEXPAND);
     SetSizer(sizer);
     Layout();
@@ -45,8 +41,6 @@ InterfaceFrame::InterfaceFrame(const wxString& title)
     // Assuming you have a GuardPanel class derived from wxPanel
     // guardPanel = new GuardPanel(this);
     // ShowPanel(guardPanel);
-
-
 
     // For demonstration, we'll just display a simple message
     // wxPanel* initialPanel = new wxPanel(this, wxID_ANY);
@@ -64,15 +58,15 @@ InterfaceFrame::InterfaceFrame(const wxString& title)
  */
 void InterfaceFrame::InitializeMenu()
 {
-    wxMenuBar* menuBar = new wxMenuBar;
+    wxMenuBar *menuBar = new wxMenuBar;
 
     // File Menu
-    wxMenu* fileMenu = new wxMenu;
+    wxMenu *fileMenu = new wxMenu;
     fileMenu->Append(wxID_EXIT, "E&xit\tAlt-X", "Quit this program");
     menuBar->Append(fileMenu, "&File");
 
     // Help Menu
-    wxMenu* helpMenu = new wxMenu;
+    wxMenu *helpMenu = new wxMenu;
     helpMenu->Append(wxID_ABOUT, "&About\tF1", "Show about dialog");
     menuBar->Append(helpMenu, "&Help");
 
@@ -80,11 +74,11 @@ void InterfaceFrame::InitializeMenu()
     SetMenuBar(menuBar);
 
     // Bind menu events
-    Bind(wxEVT_MENU, [=](wxCommandEvent&) { Close(true); }, wxID_EXIT);
-    Bind(wxEVT_MENU, [=](wxCommandEvent&) {
-        wxMessageBox("Attendance and Leave Management System\nVersion 1.0",
-                     "About", wxOK | wxICON_INFORMATION);
-    }, wxID_ABOUT);
+    Bind(wxEVT_MENU, [=](wxCommandEvent &)
+         { Close(true); }, wxID_EXIT);
+    Bind(wxEVT_MENU, [=](wxCommandEvent &)
+         { wxMessageBox("Attendance and Leave Management System\nVersion 1.0",
+                        "About", wxOK | wxICON_INFORMATION); }, wxID_ABOUT);
 }
 
 /**

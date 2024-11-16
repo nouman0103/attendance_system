@@ -11,11 +11,12 @@ wxBEGIN_EVENT_TABLE(AdminPanel, wxPanel)
 wxEND_EVENT_TABLE()
 
 
-AdminPanel::AdminPanel(wxWindow* parent)
+AdminPanel::AdminPanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
     : wxPanel(parent, wxID_ANY)
 {
     // Create sizer for layout
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
+    this->dm = dm;
 
     // get list of all employees
     // DataManager dm;
@@ -109,9 +110,10 @@ void AdminPanel::OnAddUser(wxCommandEvent& event)
     }
 
     // add the user to the database
-    DataManager dm;
+    // DataManager dm;
     Employee newEmployee(userName.ToStdString(), std::stoi(userID.ToStdString()), userType.ToStdString(), nullptr, nullptr);
-    dm.writeEmployee(newEmployee);
+    // dm.writeEmployee(newEmployee);
+    dm->writeEmployee(newEmployee,password.ToStdString());
 
 
     // clear the form
