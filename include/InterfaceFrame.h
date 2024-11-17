@@ -5,6 +5,7 @@
 #include "LoginPanel.h" // Include other panel headers as necessary
 #include "GuardPanel.h"
 #include "AdminPanel.h"
+#include "EmployeePanel.h"
 #include <wx/wx.h>
 #include <wx/simplebook.h>
 
@@ -24,7 +25,8 @@ public:
     {
         PID_PAGE_LOGIN = 0,
         PID_PAGE_GUARD = 1,
-        PID_PAGE_ADMIN = 2
+        PID_PAGE_ADMIN = 2,
+        PID_PAGE_EMPLOYEE = 3
         // Add other page identifiers here
     };
 
@@ -63,6 +65,7 @@ private:
     LoginPanel* loginPanel;
     GuardPanel* guardPanel;
     AdminPanel* adminPanel;
+    EmployeePanel* employeePanel;
     // EmployeeDashboard* employeeDashboard;
     // SupervisorDashboard* supervisorDashboard;
     // Add other panels here

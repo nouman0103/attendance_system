@@ -4,6 +4,10 @@
 
 #include <wx/wx.h>
 #include <wx/combobox.h>
+#include <wx/datetime.h>
+#include <wx/datetimectrl.h>
+#include <wx/datectrl.h>
+#include <wx/timectrl.h>
 #include <vector>
 #include "User.h"
 
@@ -34,6 +38,11 @@ private:
     wxComboBox* employeeList;
     wxButton* checkInButton;
     wxButton* checkOutButton;
+    // Component for date picker
+    wxDatePickerCtrl* datePicker;
+    // Component for time picker
+    wxTimePickerCtrl* timePicker;
+
 
     User* user;
     std::shared_ptr<DataManager> dm;

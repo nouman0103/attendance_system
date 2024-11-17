@@ -2,6 +2,8 @@
 #include "GuardPanel.h"
 #include "InterfaceFrame.h" // To access ShowPanel
 #include <iostream>
+#include <wx/datectrl.h>
+#include <wx/datetimectrl.h>
 // Include other dashboards as needed
 
 wxBEGIN_EVENT_TABLE(GuardPanel, wxPanel)
@@ -39,6 +41,22 @@ GuardPanel::GuardPanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
 
     mainSizer->Add(employeeSizer, 0, wxEXPAND);
 
+    // Component for date picker
+    wxBoxSizer* dateSizer = new wxBoxSizer(wxHORIZONTAL);
+    dateSizer->Add(new wxStaticText(this, wxID_ANY, "Date:"), 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
+    datePicker = new wxDatePickerCtrl(this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DROPDOWN);
+    dateSizer->Add(datePicker, 1, wxALL | wxEXPAND, 5);
+    mainSizer->Add(dateSizer, 0, wxEXPAND);
+
+    // Component for time picker
+    wxBoxSizer* timeSizer = new wxBoxSizer(wxHORIZONTAL);
+    timeSizer->Add(new wxStaticText(this, wxID_ANY, "Time:"), 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
+    timePicker = new wxTimePickerCtrl(this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DROPDOWN);
+    timeSizer->Add(timePicker, 1, wxALL | wxEXPAND, 5);
+    mainSizer->Add(timeSizer, 0, wxEXPAND);
+
+
+
     // Check In Button
     checkInButton = new wxButton(this, ID_CHECKIN, "Check In");
     mainSizer->Add(checkInButton, 0, wxALL | wxALIGN_CENTER, 10);
@@ -57,8 +75,20 @@ GuardPanel::GuardPanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
 void GuardPanel::OnCheckIn(wxCommandEvent& event)
 {
     wxString employee = employeeList->GetValue();
-    std::cout << "Checking in: " << employee << std::endl;
-    wxMessageBox("Checked in: " + employee, "Check In", wxOK | wxICON_INFORMATION);
+    // Get the selected date and time
+    wxDateTime date = datePicker->GetValue();
+    wxDateTime time = timePicker->GetValue();
+    // Combine the date and time into a single datetime object
+    wxDateTime checkInTime(date.GetDay(), date.GetMonth(), date.GetYear(), time.GetHour(), time.GetMinute(), time.GetSecond());
+    if (!checkInTime.IsValid())
+    {
+        wxLogMessage("Invalid date or time.");
+        return;
+    }
+    // convert to unix timestamp
+    time_t timestamp = checkInTime.GetTicks();
+
+    wxMessageBox("Checked in: " + employee + " at " + checkInTime.FormatTime() + " On " + checkInTime.FormatDate() + " (" + std::to_string(timestamp) + ")", "Check In", wxOK | wxICON_INFORMATION);
 }
 
 
@@ -69,7 +99,21 @@ void GuardPanel::OnCheckIn(wxCommandEvent& event)
 void GuardPanel::OnCheckOut(wxCommandEvent& event)
 {
     wxString employee = employeeList->GetValue();
-    std::cout << "Checking out: " << employee << std::endl;
-    wxMessageBox("Checked out: " + employee, "Check Out", wxOK | wxICON_INFORMATION);
+    // Get the selected date and time
+    wxDateTime date = datePicker->GetValue();
+    wxDateTime time = timePicker->GetValue();
+    // Combine the date and time into a single datetime object
+    wxDateTime checkOutTime(date.GetDay(), date.GetMonth(), date.GetYear(), time.GetHour(), time.GetMinute(), time.GetSecond());
+    if (!checkOutTime.IsValid())
+    {
+        wxLogMessage("Invalid date or time.");
+        return;
+    }
+    // convert to unix timestamp
+    time_t timestamp = checkOutTime.GetTicks();
+
+    wxMessageBox("Checked out: " + employee + " at " + checkOutTime.FormatTime() + " On " + checkOutTime.FormatDate() + " (" + std::to_string(timestamp) + ")", "Check Out", wxOK | wxICON_INFORMATION);
+    
+    
 }
 // GuardPanel.cpp

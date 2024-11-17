@@ -87,13 +87,18 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
             wxSimplebook *simplebook = dynamic_cast<wxSimplebook*>(this->GetParent());
             simplebook->SetSelection(InterfaceFrame::PID_PAGE_ADMIN);
             wxMessageBox("Login successful!", "Success", wxOK | wxICON_INFORMATION);
-        } else if (role!="") {
+        } else if (role=="Guard") {
             wxSimplebook *simplebook = dynamic_cast<wxSimplebook*>(this->GetParent());
             simplebook->SetSelection(InterfaceFrame::PID_PAGE_GUARD);
             wxMessageBox("Login successful!", "Success", wxOK | wxICON_INFORMATION);
         }
+        else if (role=="Employee") {
+            wxSimplebook *simplebook = dynamic_cast<wxSimplebook*>(this->GetParent());
+            simplebook->SetSelection(InterfaceFrame::PID_PAGE_EMPLOYEE);
+            wxMessageBox("Login successful!", "Success", wxOK | wxICON_INFORMATION);
+        }
         else {
-            wxMessageBox("Invalid user role!", "Error", wxOK | wxICON_ERROR);
+            wxMessageBox("Failed to login! Please ensure your input details are correct.", "Error", wxOK | wxICON_ERROR);
         }
 
         // Create the appropriate dashboard based on role

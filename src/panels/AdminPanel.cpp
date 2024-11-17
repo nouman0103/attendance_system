@@ -1,4 +1,4 @@
-// LoginPanel.cpp
+// AdminPanel.cpp
 #include "AdminPanel.h"
 #include "InterfaceFrame.h" // To access ShowPanel
 #include <iostream>
