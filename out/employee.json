@@ -1,40 +1,28 @@
 {
-    "count": 6,
+    "count": 4,
     "employees": [
         {
             "id": 1,
             "name": "Abdullah",
-            "password": "abcdef",
-            "position": "Director"
+            "password": "123",
+            "position": "Employee"
         },
         {
             "id": 2,
             "name": "Khan",
-            "password": "abcdef",
+            "password": "123",
             "position": "Guard"
         },
         {
             "id": 3,
-            "name": "Nomi",
-            "password": "12345",
-            "position": "Guard"
+            "name": "123",
+            "password": "123",
+            "position": "Employee"
         },
         {
             "id": 4,
-            "name": "Abc",
-            "password": "abcdefghi",
-            "position": "Guard"
-        },
-        {
-            "id": 5,
-            "name": "Abdul Khan",
-            "password": "abcdef",
-            "position": "Supervisor"
-        },
-        {
-            "id": 6,
-            "name": "john",
-            "password": "abcdef",
+            "name": "Nomi",
+            "password": "123",
             "position": "Employee"
         }
     ]
