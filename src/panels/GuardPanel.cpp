@@ -21,9 +21,23 @@ GuardPanel::GuardPanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
     // Create sizer for layout
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
 
+    // add padding
+    mainSizer->AddSpacer(10);
+
+    // title of guard panel
+    wxStaticText* title = new wxStaticText(this, wxID_ANY, "Mark Attendance", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE);
+    title->SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
+    mainSizer->Add(title, 0, wxALL | wxEXPAND, 10);
+
+
+
+
     // Employee List
     wxBoxSizer* employeeSizer = new wxBoxSizer(wxHORIZONTAL);
-    employeeSizer->Add(new wxStaticText(this, wxID_ANY, "Employee:"), 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
+    wxStaticText* employeeSelectLabel = new wxStaticText(this, wxID_ANY, "Employee:");
+    employeeSelectLabel->SetMinSize(wxSize(100, -1)); // Set constant width for the label
+    employeeSizer->Add(employeeSelectLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
+
     employeeList = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, 0, nullptr, wxCB_READONLY);
     this->dm = dm;
     std::shared_ptr<std::vector<Employee>> employees = dm->getEmployees();
@@ -43,16 +57,32 @@ GuardPanel::GuardPanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
 
     // Component for date picker
     wxBoxSizer* dateSizer = new wxBoxSizer(wxHORIZONTAL);
-    dateSizer->Add(new wxStaticText(this, wxID_ANY, "Date:"), 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
+    wxStaticText* dateSelectLabel = new wxStaticText(this, wxID_ANY, "Date:");
+    dateSelectLabel->SetMinSize(wxSize(100, -1)); // Set constant width for the label
+    dateSizer->Add(dateSelectLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
     datePicker = new wxDatePickerCtrl(this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DROPDOWN);
     dateSizer->Add(datePicker, 1, wxALL | wxEXPAND, 5);
     mainSizer->Add(dateSizer, 0, wxEXPAND);
 
     // Component for time picker
     wxBoxSizer* timeSizer = new wxBoxSizer(wxHORIZONTAL);
-    timeSizer->Add(new wxStaticText(this, wxID_ANY, "Time:"), 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
-    timePicker = new wxTimePickerCtrl(this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DROPDOWN);
-    timeSizer->Add(timePicker, 1, wxALL | wxEXPAND, 5);
+    wxStaticText* timeSelectLabel = new wxStaticText(this, wxID_ANY, "Time:");
+    timeSelectLabel->SetMinSize(wxSize(100, -1)); // Set constant width for the label
+    timeSizer->Add(timeSelectLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
+    
+    // Create a wxChoice control with options for each hour of the day
+    wxArrayString hours;
+    for (int i = 0; i < 24; ++i)
+    {
+        hours.Add(wxString::Format("%02d:00", i));
+    }
+    hourChoice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, hours);
+    timeSizer->Add(hourChoice, 1, wxALL | wxEXPAND, 5);
+    // set current hour as default
+    wxDateTime now = wxDateTime::Now();
+    hourChoice->SetSelection(now.GetHour());
+
+    
     mainSizer->Add(timeSizer, 0, wxEXPAND);
 
 
@@ -77,7 +107,10 @@ void GuardPanel::OnCheckIn(wxCommandEvent& event)
     wxString employee = employeeList->GetValue();
     // Get the selected date and time
     wxDateTime date = datePicker->GetValue();
-    wxDateTime time = timePicker->GetValue();
+    // get time from hourChoice
+    int hourIndex = hourChoice->GetSelection();
+    wxDateTime time(hourIndex, 0, 0);
+
     // Combine the date and time into a single datetime object
     wxDateTime checkInTime(date.GetDay(), date.GetMonth(), date.GetYear(), time.GetHour(), time.GetMinute(), time.GetSecond());
     if (!checkInTime.IsValid())
@@ -87,7 +120,6 @@ void GuardPanel::OnCheckIn(wxCommandEvent& event)
     }
     // convert to unix timestamp
     time_t timestamp = checkInTime.GetTicks();
-
     wxMessageBox("Checked in: " + employee + " at " + checkInTime.FormatTime() + " On " + checkInTime.FormatDate() + " (" + std::to_string(timestamp) + ")", "Check In", wxOK | wxICON_INFORMATION);
 }
 
@@ -101,7 +133,11 @@ void GuardPanel::OnCheckOut(wxCommandEvent& event)
     wxString employee = employeeList->GetValue();
     // Get the selected date and time
     wxDateTime date = datePicker->GetValue();
-    wxDateTime time = timePicker->GetValue();
+    // get time from hourChoice
+    int hourIndex = hourChoice->GetSelection();
+    wxDateTime time(hourIndex, 0, 0);
+
+
     // Combine the date and time into a single datetime object
     wxDateTime checkOutTime(date.GetDay(), date.GetMonth(), date.GetYear(), time.GetHour(), time.GetMinute(), time.GetSecond());
     if (!checkOutTime.IsValid())

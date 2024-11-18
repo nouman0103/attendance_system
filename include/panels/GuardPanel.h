@@ -41,7 +41,7 @@ private:
     // Component for date picker
     wxDatePickerCtrl* datePicker;
     // Component for time picker
-    wxTimePickerCtrl* timePicker;
+    wxChoice* hourChoice;
 
 
     User* user;
