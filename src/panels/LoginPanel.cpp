@@ -18,29 +18,46 @@ LoginPanel::LoginPanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
     // Create sizer for layout
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
 
+    // Add padding
+    mainSizer->AddSpacer(10);
+
+    // Creating a title
+    wxStaticText* title = new wxStaticText(this, wxID_ANY, "Login Portal", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE);
+    title->SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
+    mainSizer->Add(title, 0, wxALL | wxEXPAND, 10);
+
+    mainSizer->AddSpacer(5);
+
     // Username
     wxBoxSizer* userSizer = new wxBoxSizer(wxHORIZONTAL);
-    userSizer->Add(new wxStaticText(this, wxID_ANY, "Username:"), 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
+    wxStaticText* userLabel = new wxStaticText(this, wxID_ANY, "Username:");
+    userLabel->SetMinSize(wxSize(100, -1)); // Set constant width for the label
+    userSizer->Add(userLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
     m_usernameCtrl = new wxTextCtrl(this, wxID_ANY);
-    userSizer->Add(m_usernameCtrl, 1, wxALL | wxEXPAND, 5);
-    mainSizer->Add(userSizer, 0, wxEXPAND);
+    userSizer->Add(m_usernameCtrl, 1, wxLEFT | wxRIGHT | wxEXPAND, 20); // Add horizontal padding
+    mainSizer->Add(userSizer, 0, wxLEFT | wxRIGHT | wxEXPAND, 20); // Add horizontal padding
+    mainSizer->AddSpacer(5);
 
     // Password
     wxBoxSizer* passSizer = new wxBoxSizer(wxHORIZONTAL);
-    passSizer->Add(new wxStaticText(this, wxID_ANY, "Password:"), 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
+    wxStaticText* passLabel = new wxStaticText(this, wxID_ANY, "Password:");
+    passLabel->SetMinSize(wxSize(100, -1)); // Set constant width for the label
+    passSizer->Add(passLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
     m_passwordCtrl = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxTE_PASSWORD);
-    passSizer->Add(m_passwordCtrl, 1, wxALL | wxEXPAND, 5);
-    mainSizer->Add(passSizer, 0, wxEXPAND);
+    passSizer->Add(m_passwordCtrl, 1, wxLEFT | wxRIGHT | wxEXPAND, 20); // Add horizontal padding
+    mainSizer->Add(passSizer, 0, wxLEFT | wxRIGHT | wxEXPAND, 20); // Add horizontal padding
+
+    mainSizer->AddSpacer(5);
 
     // Login Button
     m_loginButton = new wxButton(this, wxID_ANY, "Login");
     mainSizer->Add(m_loginButton, 0, wxALL | wxALIGN_CENTER, 10);
-    //DataManager dm;
+
+    // DataManager
     this->dm = dm;
 
     SetSizer(mainSizer);
 }
-
 LoginPanel::~LoginPanel()
 {
 }
