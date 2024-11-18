@@ -26,7 +26,7 @@ std::string AttendanceEntry::getTime() const
 json AttendanceEntry::to_json() const
 {
     json j;
-    j["id"] = id;
+    // j["id"] = id;
     j["type"] = static_cast<int>(type);
     j["time"] = time;
     return j;

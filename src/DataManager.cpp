@@ -117,7 +117,7 @@ void DataManager::readAttendanceRecord()
         std::vector<AttendanceEntry> attendances;
         for (auto &attendance : employee.value()["attendance"])
         {
-            AttendanceEntry a(attendance["id"], attendance["type"], attendance["time"]);
+            AttendanceEntry a(employee.key(), attendance["type"], attendance["time"]);
             
             attendances.push_back(a);
         }
