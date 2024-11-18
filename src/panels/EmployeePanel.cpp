@@ -14,6 +14,14 @@ EmployeePanel::EmployeePanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->dm = dm;
 
+    // create a fake bar
+    m_barGraph = new HorizontalBar(this);
+    mainSizer->Add(m_barGraph, 0, wxALL | wxEXPAND, 10);
+
+    // Set some example data
+    m_barGraph->SetData(16, 5, 5, 5);
+    
+
     // add a horizontal separator
     mainSizer->Add(new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL), 0, wxEXPAND | wxALL, 5);
     

@@ -4,6 +4,7 @@
 #include <wx/wx.h>
 #include <memory>
 #include "DataManager.h"
+#include "HorizontalBar.h"
 
 class EmployeePanel : public wxPanel
 {
@@ -14,6 +15,8 @@ public:
 private:
     //DataManager* dm;
     std::shared_ptr<DataManager> dm;
+
+    HorizontalBar* m_barGraph;
 
     //wxDECLARE_EVENT_TABLE();
 
