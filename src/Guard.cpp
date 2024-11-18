@@ -39,7 +39,7 @@ bool Guard::markAttendance(std::shared_ptr<Employee> employee, AttendanceEntry e
         return false;
     }
     // Add the entry to the attendance record
-    // record.get()->addAttendance(entry);
+    record.get()->addAttendance(entry);
 
     return true;
 }

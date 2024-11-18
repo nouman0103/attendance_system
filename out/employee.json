@@ -1,11 +1,17 @@
 {
-    "count": 1,
+    "count": 2,
     "employees": [
         {
             "id": 1,
             "name": "Khan",
             "password": "123",
             "position": "Guard"
+        },
+        {
+            "id": 2,
+            "name": "Nomi",
+            "password": "123",
+            "position": "Employee"
         }
     ]
 }

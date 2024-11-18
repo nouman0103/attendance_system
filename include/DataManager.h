@@ -1,6 +1,7 @@
 #pragma once
 #include "Employee.h"
 #include "AttendanceRecord.h"
+#include "AttendanceEntry.h"
 #include "LeaveBalance.h"
 #include <iostream>
 #include <fstream>
@@ -26,7 +27,7 @@ public:
     std::shared_ptr<std::vector<Employee>> getEmployees();
 
     std::shared_ptr<Employee> getEmployee(std::string name);
-    void writeAttendanceRecord(AttendanceRecord attendanceRecord);
+    void writeAttendanceRecord(AttendanceEntry attendanceEntry);
     void readAttendanceRecord();
     // void writeLeaveBalance(LeaveBalance leaveBalance);
     // std::vector<LeaveBalance> readLeaveBalance();

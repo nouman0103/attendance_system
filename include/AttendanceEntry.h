@@ -1,10 +1,11 @@
 #pragma once
-
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
 #include <iostream>
 #include <ctime> // Import the ctime library
-enum class Attendance { CHECK_IN, CHECK_OUT };
+using json = nlohmann::json;
+enum class Attendance { CHECK_IN, CHECK_OUT,NONE };
 class AttendanceEntry {
 public:
     AttendanceEntry(std::string id, Attendance type, time_t time);
@@ -12,6 +13,7 @@ public:
     Attendance getType() const;
     std::string getTime() const;
     void print() const;
+    json to_json() const;
 private:
     std::string id;
     Attendance type;

@@ -121,6 +121,7 @@ void GuardPanel::OnCheckIn(wxCommandEvent &event)
         wxLogMessage("Cannot check in . Employee already  checked in.");
         return;
     }
+    dm->writeAttendanceRecord(entry);
     wxMessageBox("Checked in: " + employee + " at " + checkInTime.FormatTime() + " On " + checkInTime.FormatDate() + " (" + std::to_string(timestamp) + ")", "Check In", wxOK | wxICON_INFORMATION);
 }
 
@@ -139,14 +140,15 @@ void GuardPanel::OnCheckOut(wxCommandEvent &event)
 
     // Combine the date and time into a single datetime object
     wxDateTime checkOutTime(date.GetDay(), date.GetMonth(), date.GetYear(), time.GetHour(), time.GetMinute(), time.GetSecond());
-    AttendanceEntry entry(employee.ToStdString(), Attendance::CHECK_IN, checkOutTime.GetTicks());
+    AttendanceEntry entry(employee.ToStdString(), Attendance::CHECK_OUT, checkOutTime.GetTicks());
     std::shared_ptr<Employee> emp = dm->getEmployee(employee.ToStdString());
 
     if (!guard.markAttendance(emp, entry))
     {
-        wxLogMessage("Cannot check out. Employee already checked out.");
+        wxLogMessage("Cannot check out. Employee Missing Maybe out of his misery.");
         return;
     }
+    dm->writeAttendanceRecord(entry);
 
     // convert to unix timestamp
     time_t timestamp = checkOutTime.GetTicks();

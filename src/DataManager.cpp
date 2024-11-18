@@ -88,12 +88,21 @@ std::shared_ptr<std::vector<Employee>> DataManager::getEmployees()
     return std::make_shared<std::vector<Employee>>(employees);
 }
 
-// void DataManager::writeAttendanceRecord(AttendanceRecord attendanceRecord)
-// {
-//     write.open("attendanceRecord.txt", std::ios::app);
-//     write << attendanceRecord;
-//     write.close();
-// }
+
+void DataManager::writeAttendanceRecord(AttendanceEntry attendanceEntry)
+{
+    std::ifstream read("record.json");
+    json j;
+    read >> j;
+    read.close();
+    std::string name = attendanceEntry.getID();
+    json record = j[name];
+    record["attendance"].push_back(attendanceEntry.to_json());
+    j[name] = record;
+    std::ofstream write("record.json");
+    write << j.dump(4);
+    write.close();
+}
 
 void DataManager::readAttendanceRecord()
 {
@@ -104,7 +113,7 @@ void DataManager::readAttendanceRecord()
     
     for (auto &employee : j.items())
     {
-        
+        std::string name = employee.key();
         std::vector<AttendanceEntry> attendances;
         for (auto &attendance : employee.value()["attendance"])
         {
