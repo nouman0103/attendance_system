@@ -13,6 +13,7 @@
 
 #include "Employee.h"
 #include "DataManager.h"
+#include "Guard.h"
 
 
 /**
@@ -44,7 +45,7 @@ private:
     wxChoice* hourChoice;
 
 
-    User* user;
+    Guard guard;
     std::shared_ptr<DataManager> dm;
     wxDECLARE_EVENT_TABLE();
 };

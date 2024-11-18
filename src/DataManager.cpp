@@ -10,7 +10,7 @@ using json = nlohmann::json;
 DataManager::DataManager()
 {
     updateEmployees();
-    // readAttendanceRecord();
+    readAttendanceRecord();
     // readLeaveBalance();
 }
 bool DataManager::writeEmployee(Employee employee)
@@ -43,7 +43,7 @@ bool DataManager::writeEmployee(Employee employee)
     write << j.dump(4);
     write.close();
 
-    std::ofstream writeAttendance("record.json");
+    std::ifstream attendance("record.json");
     /*
     name: {
     attendance:[],
@@ -52,9 +52,13 @@ bool DataManager::writeEmployee(Employee employee)
     }
     */
     json record;
+    attendance >> record;
     record[employee.getName()]["attendance"] = json::array();
     record[employee.getName()]["leave"] = json::array();
     record[employee.getName()]["leaveBalance"] = 0;
+    attendance.close();
+
+    std::ofstream writeAttendance("record.json");
     writeAttendance << record.dump(4);
     writeAttendance.close();
 
@@ -116,6 +120,14 @@ void DataManager::readAttendanceRecord()
     }
 }
 
+std::shared_ptr<Employee> DataManager::getEmployee(std::string name)
+{
+    if (employeeDict.find(name) == employeeDict.end())
+    {
+        return nullptr;
+    }
+    return employeeDict[name];
+}
 // void DataManager::writeLeaveBalance(LeaveBalance leaveBalance)
 // {
 //     write.open("leaveBalance.txt", std::ios::app);
