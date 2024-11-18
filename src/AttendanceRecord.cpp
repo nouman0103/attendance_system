@@ -1,10 +1,8 @@
 #include "AttendanceRecord.h"
 
 AttendanceRecord::AttendanceRecord(std::shared_ptr<Employee> employee, std::vector<AttendanceEntry> attendances)
-    : employee(employee), attendances(attendances)
-{
+    : attendances(attendances), employee(employee) {
 }
-
 void AttendanceRecord::addAttendance(AttendanceEntry attendance)
 {
     attendances.push_back(attendance);

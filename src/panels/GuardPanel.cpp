@@ -29,6 +29,7 @@ GuardPanel::GuardPanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
     std::shared_ptr<std::vector<Employee>> employees = dm->getEmployees();
     for (Employee e : *employees)
     {
+        // wxLogDebug(e.getName());
         employeeList->Append(e.getName());
     }
 
