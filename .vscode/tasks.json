@@ -205,7 +205,6 @@
         "command": "g++",
 
         "args": [
-        
           "-I${workspaceFolder}\\dep\\win\\lib\\gcc_lib\\mswu",
           "-I${workspaceFolder}\\dep\\win\\include",
           "-I${workspaceFolder}\\include",
@@ -222,14 +221,16 @@
           "|",
           "%{$_.FullName}",
           ")",
-          "-g",
+          "-g1",
           "-Wall",
           "-D_WINDOWS",
           "-D_UNICODE",
           "-D__WXMSW__",
           "-DNDEBUG",
           "-DNOPCH",
-          "-std=c++11"
+          "-std=c++11",
+          "-flto=auto",
+          "-O0"
         ]
       },
       "options": {
