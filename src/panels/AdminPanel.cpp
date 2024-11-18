@@ -8,6 +8,7 @@
 
 wxBEGIN_EVENT_TABLE(AdminPanel, wxPanel)
     EVT_BUTTON(wxID_ANY, AdminPanel::OnAddUser)
+    EVT_SHOW(AdminPanel::OnShow)
 wxEND_EVENT_TABLE()
 
 
@@ -74,7 +75,23 @@ AdminPanel::AdminPanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
 
 
     SetSizer(mainSizer);
+
+    Bind(wxEVT_SHOW, &AdminPanel::OnShow, this);
     
+}
+
+
+void AdminPanel::OnShow(wxShowEvent& event)
+{
+    if (event.IsShown())
+    {
+        // clear the form
+        userNameCtrl->Clear();
+        passwordCtrl->Clear();
+        
+        updateEmployeeList();
+    }
+    event.Skip(); // Ensure the default handling of the event
 }
 
 AdminPanel::~AdminPanel()

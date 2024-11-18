@@ -19,6 +19,7 @@ private:
     // Add private member variables and methods here
 
     void OnAddUser(wxCommandEvent& event);
+    void OnShow(wxShowEvent& event);
 
     // UI Components
     wxListBox* employeeList;
@@ -28,6 +29,8 @@ private:
     wxButton* addUserButton;
     //DataManager* dm;
     std::shared_ptr<DataManager> dm;
+
+
 
     wxDECLARE_EVENT_TABLE();
 
