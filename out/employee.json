@@ -1,26 +1,14 @@
 {
-    "count": 4,
+    "count": 2,
     "employees": [
         {
             "id": 1,
-            "name": "Abdullah",
-            "password": "123",
-            "position": "Employee"
-        },
-        {
-            "id": 2,
             "name": "Khan",
             "password": "123",
             "position": "Guard"
         },
         {
-            "id": 3,
-            "name": "123",
-            "password": "123",
-            "position": "Employee"
-        },
-        {
-            "id": 4,
+            "id": 2,
             "name": "Nomi",
             "password": "123",
             "position": "Employee"

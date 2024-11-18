@@ -1,4 +1,25 @@
 {
+    "Khan": {
+        "attendance": [
+            {
+                "id": "Khan",
+                "time": 1731960000,
+                "type": 0
+            },
+            {
+                "id": "Khan",
+                "time": 1731960000,
+                "type": 1
+            },
+            {
+                "id": "Khan",
+                "time": 1731974400,
+                "type": 0
+            }
+        ],
+        "leave": [],
+        "leaveBalance": 0
+    },
     "Nomi": {
         "attendance": [],
         "leave": [],

@@ -15,5 +15,9 @@ std::shared_ptr<Employee> AttendanceRecord::getEmployee() const
 
 Attendance AttendanceRecord::getLastStatus() const
 {
+    if (attendances.empty())
+    {
+        return Attendance::NONE;
+    }
     return attendances.back().getType();
 }

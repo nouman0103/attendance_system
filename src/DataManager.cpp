@@ -10,7 +10,7 @@ using json = nlohmann::json;
 DataManager::DataManager()
 {
     updateEmployees();
-    // readAttendanceRecord();
+    readAttendanceRecord();
     // readLeaveBalance();
 }
 bool DataManager::writeEmployee(Employee employee)
@@ -43,7 +43,7 @@ bool DataManager::writeEmployee(Employee employee)
     write << j.dump(4);
     write.close();
 
-    std::ofstream writeAttendance("record.json");
+    std::ifstream attendance("record.json");
     /*
     name: {
     attendance:[],
@@ -52,9 +52,13 @@ bool DataManager::writeEmployee(Employee employee)
     }
     */
     json record;
+    attendance >> record;
     record[employee.getName()]["attendance"] = json::array();
     record[employee.getName()]["leave"] = json::array();
     record[employee.getName()]["leaveBalance"] = 0;
+    attendance.close();
+
+    std::ofstream writeAttendance("record.json");
     writeAttendance << record.dump(4);
     writeAttendance.close();
 
@@ -84,12 +88,21 @@ std::shared_ptr<std::vector<Employee>> DataManager::getEmployees()
     return std::make_shared<std::vector<Employee>>(employees);
 }
 
-// void DataManager::writeAttendanceRecord(AttendanceRecord attendanceRecord)
-// {
-//     write.open("attendanceRecord.txt", std::ios::app);
-//     write << attendanceRecord;
-//     write.close();
-// }
+
+void DataManager::writeAttendanceRecord(AttendanceEntry attendanceEntry)
+{
+    std::ifstream read("record.json");
+    json j;
+    read >> j;
+    read.close();
+    std::string name = attendanceEntry.getID();
+    json record = j[name];
+    record["attendance"].push_back(attendanceEntry.to_json());
+    j[name] = record;
+    std::ofstream write("record.json");
+    write << j.dump(4);
+    write.close();
+}
 
 void DataManager::readAttendanceRecord()
 {
@@ -100,11 +113,11 @@ void DataManager::readAttendanceRecord()
     
     for (auto &employee : j.items())
     {
-        
+        std::string name = employee.key();
         std::vector<AttendanceEntry> attendances;
         for (auto &attendance : employee.value()["attendance"])
         {
-            AttendanceEntry a(attendance["id"], attendance["type"], attendance["time"]);
+            AttendanceEntry a(employee.key(), attendance["type"], attendance["time"]);
             
             attendances.push_back(a);
         }
@@ -116,6 +129,14 @@ void DataManager::readAttendanceRecord()
     }
 }
 
+std::shared_ptr<Employee> DataManager::getEmployee(std::string name)
+{
+    if (employeeDict.find(name) == employeeDict.end())
+    {
+        return nullptr;
+    }
+    return employeeDict[name];
+}
 // void DataManager::writeLeaveBalance(LeaveBalance leaveBalance)
 // {
 //     write.open("leaveBalance.txt", std::ios::app);

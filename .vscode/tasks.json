@@ -221,16 +221,14 @@
           "|",
           "%{$_.FullName}",
           ")",
-          "-g1",
+          "-g",
           "-Wall",
           "-D_WINDOWS",
           "-D_UNICODE",
           "-D__WXMSW__",
           "-DNDEBUG",
           "-DNOPCH",
-          "-std=c++11",
-          "-flto=auto",
-          "-O0"
+          "-std=c++11"
         ]
       },
       "options": {
