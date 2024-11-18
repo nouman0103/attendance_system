@@ -13,8 +13,8 @@ HorizontalBar::HorizontalBar(wxWindow* parent)
 
     m_presentBrush = wxBrush(wxColour(76, 251, 126)); // Green
     m_casualLeaveBrush = wxBrush(wxColour(14,165,226)); // Blue
-    m_earnedLeaveBrush = wxBrush(wxColour(44,44,116)); // Blue
-    m_officialLeaveBrush = wxBrush(wxColour(69, 44, 116)); // Blue
+    m_earnedLeaveBrush = wxBrush(wxColour(26, 77, 186)); // Blue
+    m_officialLeaveBrush = wxBrush(wxColour(44,44,116)); // Blue
     m_notMarkedBrush = wxBrush(wxColour(132, 132, 132)); // Grey
 
 }
@@ -107,7 +107,7 @@ void HorizontalBar::OnPaint(wxPaintEvent& event)
     // if labelX + 100 > barWidth, then reset labelX to 30 and increase labelY by 20
     if (labelX + 100 > barWidth)
     {
-        labelX = 30;
+        labelX = 10;
         labelY += 20;
         dotY += 20;
     }
@@ -121,7 +121,7 @@ void HorizontalBar::OnPaint(wxPaintEvent& event)
 
     if (labelX + 100 > barWidth)
     {
-        labelX = 30;
+        labelX = 10;
         labelY += 20;
         dotY += 20;
     }
@@ -135,7 +135,7 @@ void HorizontalBar::OnPaint(wxPaintEvent& event)
 
     if (labelX + 100 > barWidth)
     {
-        labelX = 30;
+        labelX = 10;
         labelY += 20;
         dotY += 20;
     }
