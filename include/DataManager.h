@@ -15,8 +15,8 @@ private:
     std::ifstream read;
     std::vector<Employee> employees;
     //Dictory of employees id and password
-    std::map<std::string,std::string> employeePassword;
-    // std::vector<AttendanceRecord> attendanceRecords;
+    std::map<std::string,std::shared_ptr<Employee>> employeeDict;
+    std::vector<AttendanceRecord> attendanceRecords;
     // std::vector<LeaveBalance> leaveBalances;
 
 public:
@@ -26,8 +26,8 @@ public:
     std::shared_ptr<std::vector<Employee>> getEmployees();
     
 
-    // void writeAttendanceRecord(AttendanceRecord attendanceRecord);
-    // std::vector<AttendanceRecord> readAttendanceRecord();
+    void writeAttendanceRecord(AttendanceRecord attendanceRecord);
+    void readAttendanceRecord();
     // void writeLeaveBalance(LeaveBalance leaveBalance);
     // std::vector<LeaveBalance> readLeaveBalance();
     // void writeGuard(Guard guard);

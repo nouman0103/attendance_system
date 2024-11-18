@@ -22,7 +22,7 @@ class Employee {
 }
 User(std::string name, unsigned int id);
 */
-
+class AttendanceRecord;
 
 class Employee : public User
 {

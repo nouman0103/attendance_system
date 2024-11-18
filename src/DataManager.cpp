@@ -15,8 +15,8 @@ DataManager::DataManager()
 }
 bool DataManager::writeEmployee(Employee employee)
 {
-    //Check if employee already exists
-    if (employeePassword.find(employee.getName()) != employeePassword.end())
+    // Check if employee already exists
+    if (employeeDict.find(employee.getName()) != employeeDict.end())
     {
         return false;
     }
@@ -37,12 +37,27 @@ bool DataManager::writeEmployee(Employee employee)
     j["employees"].push_back(employeeJson);
     employee.setID(newID);
     employees.push_back(employee);
-    employeePassword[employee.getName()] = employeeJson["password"];
-
+    employeeDict[employee.getName()] = std::make_shared<Employee>(employees.back());
 
     std::ofstream write("employee.json");
     write << j.dump(4);
     write.close();
+
+    std::ofstream writeAttendance("record.json");
+    /*
+    name: {
+    attendance:[],
+    leave:[]
+    leaveBalance : number
+    }
+    */
+    json record;
+    record[employee.getName()]["attendance"] = json::array();
+    record[employee.getName()]["leave"] = json::array();
+    record[employee.getName()]["leaveBalance"] = 0;
+    writeAttendance << record.dump(4);
+    writeAttendance.close();
+
     return true;
 }
 
@@ -58,7 +73,7 @@ void DataManager::updateEmployees()
     for (json employee : j["employees"])
     {
         Employee e(employee);
-        employeePassword[e.getName()] = employee["password"];
+        employeeDict[e.getName()] = std::make_shared<Employee>(e);
         employees.push_back(e);
     }
     return;
@@ -76,22 +91,30 @@ std::shared_ptr<std::vector<Employee>> DataManager::getEmployees()
 //     write.close();
 // }
 
-// std::vector<AttendanceRecord> DataManager::readAttendanceRecord()
-// {
-//     std::vector<AttendanceRecord> attendanceRecords;
-//     read.open("attendanceRecord.txt");
-//     if (read.is_open())
-//     {
-//         while (!read.eof())
-//         {
-//             AttendanceRecord attendanceRecord;
-//             read >> attendanceRecord;
-//             attendanceRecords.push_back(attendanceRecord);
-//         }
-//         read.close();
-//     }
-//     return attendanceRecords;
-// }
+void DataManager::readAttendanceRecord()
+{
+    std::ifstream read("record.json");
+    json j;
+    read >> j;
+    read.close();
+    
+    for (auto &employee : j.items())
+    {
+        
+        std::vector<AttendanceEntry> attendances;
+        for (auto &attendance : employee.value()["attendance"])
+        {
+            AttendanceEntry a(attendance["id"], attendance["type"], attendance["time"]);
+            
+            attendances.push_back(a);
+        }
+        attendanceRecords.push_back(AttendanceRecord(employeeDict[employee.key()], attendances));
+        employeeDict[employee.key()]->setAttendanceRecord(std::make_shared<AttendanceRecord>(attendanceRecords.back()));
+
+        
+        // attendanceRecords.push_back(record);
+    }
+}
 
 // void DataManager::writeLeaveBalance(LeaveBalance leaveBalance)
 // {
