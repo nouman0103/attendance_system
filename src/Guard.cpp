@@ -38,6 +38,14 @@ bool Guard::markAttendance(std::shared_ptr<Employee> employee, AttendanceEntry e
     {
         return false;
     }
+    // check if check out time is before check in time
+    if (record.get()->getLastStatus() == Attendance::CHECK_IN && entry.getType() == Attendance::CHECK_OUT)
+    {
+        if (record.get()->getLastTime() > entry.getTimestamp())
+        {
+            return false;
+        }
+    }
     // Add the entry to the attendance record
     record.get()->addAttendance(entry);
 

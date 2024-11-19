@@ -1,5 +1,5 @@
 {
-    "count": 2,
+    "count": 3,
     "employees": [
         {
             "id": 1,
@@ -11,6 +11,12 @@
             "id": 2,
             "name": "Nomi",
             "password": "123",
+            "position": "Employee"
+        },
+        {
+            "id": 3,
+            "name": "john",
+            "password": "abcdef",
             "position": "Employee"
         }
     ]

@@ -13,6 +13,7 @@ public:
     std::shared_ptr<Employee> getEmployee() const;
     std::vector<AttendanceEntry> getAttendances() const;
     Attendance getLastStatus() const;
+    time_t getLastTime() const;
 
 private:
     std::vector<AttendanceEntry> attendances;

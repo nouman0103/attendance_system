@@ -33,6 +33,7 @@ private:
     
     void OnCheckIn(wxCommandEvent& event);
     void OnCheckOut(wxCommandEvent& event);
+    void OnShow(wxShowEvent &event);
 
    
     // UI Components

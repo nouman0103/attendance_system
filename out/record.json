@@ -24,5 +24,27 @@
         "attendance": [],
         "leave": [],
         "leaveBalance": 0
+    },
+    "john": {
+        "attendance": [
+            {
+                "time": 1731996000,
+                "type": 0
+            },
+            {
+                "time": 1731999600,
+                "type": 1
+            },
+            {
+                "time": 1732006800,
+                "type": 0
+            },
+            {
+                "time": 1732032000,
+                "type": 1
+            }
+        ],
+        "leave": [],
+        "leaveBalance": 0
     }
 }

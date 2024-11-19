@@ -12,6 +12,7 @@ public:
     std::string getID() const;
     Attendance getType() const;
     std::string getTime() const;
+    time_t getTimestamp() const;
     void print() const;
     json to_json() const;
 private:

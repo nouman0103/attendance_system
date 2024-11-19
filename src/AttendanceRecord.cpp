@@ -21,3 +21,12 @@ Attendance AttendanceRecord::getLastStatus() const
     }
     return attendances.back().getType();
 }
+
+time_t AttendanceRecord::getLastTime() const
+{
+    if (attendances.empty())
+    {
+        return 0;
+    }
+    return attendances.back().getTimestamp();
+}

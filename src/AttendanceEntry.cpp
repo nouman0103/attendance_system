@@ -23,6 +23,11 @@ std::string AttendanceEntry::getTime() const
     return std::string(ctime(&time));
 }
 
+time_t AttendanceEntry::getTimestamp() const
+{
+    return time;
+}
+
 json AttendanceEntry::to_json() const
 {
     json j;

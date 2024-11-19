@@ -8,15 +8,16 @@
 
 wxBEGIN_EVENT_TABLE(GuardPanel, wxPanel)
     EVT_BUTTON(ID_CHECKIN, GuardPanel::OnCheckIn)
-        EVT_BUTTON(ID_CHECKOUT, GuardPanel::OnCheckOut)
-            wxEND_EVENT_TABLE()
+    EVT_BUTTON(ID_CHECKOUT, GuardPanel::OnCheckOut)
+    EVT_SHOW(GuardPanel::OnShow)
+wxEND_EVENT_TABLE()
 
-    /**
-     * @brief Constructs a GuardPanel object.
-     * @param parent The parent window.
-     */
-    GuardPanel::GuardPanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
-    : wxPanel(parent, wxID_ANY),guard("Guard", 1, "password", "Guard", nullptr, nullptr)
+/**
+ * @brief Constructs a GuardPanel object.
+ * @param parent The parent window.
+ */
+GuardPanel::GuardPanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
+: wxPanel(parent, wxID_ANY),guard("Guard", 1, "password", "Guard", nullptr, nullptr)
 {
     // Create sizer for layout
     wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
@@ -29,6 +30,9 @@ wxBEGIN_EVENT_TABLE(GuardPanel, wxPanel)
     title->SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
     mainSizer->Add(title, 0, wxALL | wxEXPAND, 10);
 
+    this->dm = dm;
+    
+
     // Employee List
     wxBoxSizer *employeeSizer = new wxBoxSizer(wxHORIZONTAL);
     wxStaticText *employeeSelectLabel = new wxStaticText(this, wxID_ANY, "Employee:");
@@ -36,21 +40,7 @@ wxBEGIN_EVENT_TABLE(GuardPanel, wxPanel)
     employeeSizer->Add(employeeSelectLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
 
     employeeList = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, 0, nullptr, wxCB_READONLY);
-    this->dm = dm;
-    std::shared_ptr<std::vector<Employee>> employees = dm->getEmployees();
-    for (Employee e : *employees)
-    {
-        // wxLogDebug(e.getName());
-        employeeList->Append(e.getName());
-    }
-
-    // for (Employee e : employees) {
-    //     employeeList->Append(e.getName());
-    // }
-    employeeList->SetSelection(0);
-
     employeeSizer->Add(employeeList, 1, wxALL | wxEXPAND, 5);
-
     mainSizer->Add(employeeSizer, 0, wxEXPAND);
 
     // Component for date picker
@@ -76,9 +66,6 @@ wxBEGIN_EVENT_TABLE(GuardPanel, wxPanel)
     }
     hourChoice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, hours);
     timeSizer->Add(hourChoice, 1, wxALL | wxEXPAND, 5);
-    // set current hour as default
-    wxDateTime now = wxDateTime::Now();
-    hourChoice->SetSelection(now.GetHour());
 
     mainSizer->Add(timeSizer, 0, wxEXPAND);
 
@@ -92,7 +79,30 @@ wxBEGIN_EVENT_TABLE(GuardPanel, wxPanel)
 
     SetSizer(mainSizer);
 
+    Bind(wxEVT_SHOW, &GuardPanel::OnShow, this);
+
     // Set the guard
+}
+
+void GuardPanel::OnShow(wxShowEvent &event)
+{
+    if (event.IsShown())
+    {
+        // clear the form
+        employeeList->Clear();
+        std::shared_ptr<std::vector<Employee>> employees = dm->getEmployees();
+        for (Employee e : *employees)
+        {
+            employeeList->Append(e.getName());
+        }
+        employeeList->SetSelection(0);
+        // udpate date picker
+        datePicker->SetValue(wxDateTime::Now());
+        // update time picker
+        hourChoice->SetSelection(wxDateTime::Now().GetHour());
+
+    }
+    event.Skip(); // Ensure the default handling of the event
 }
 
 /**
