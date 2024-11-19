@@ -8,6 +8,9 @@
 
 BEGIN_EVENT_TABLE(EmployeePanel, wxPanel)
     EVT_SHOW(EmployeePanel::OnShow)
+    EVT_BUTTON(ID_LEAVE_PORTAL, EmployeePanel::OnLeavePortal)
+    EVT_BUTTON(ID_PREV_WEEK, EmployeePanel::OnPrevWeek)
+    EVT_BUTTON(ID_NEXT_WEEK, EmployeePanel::OnNextWeek)
 END_EVENT_TABLE()
 
 
@@ -30,7 +33,7 @@ EmployeePanel::EmployeePanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
     wxBoxSizer* dateRangeSizer = new wxBoxSizer(wxHORIZONTAL);
     
     // Add left button
-    wxButton* leftButton = new wxButton(this, wxID_ANY, "<");
+    wxButton* leftButton = new wxButton(this, ID_PREV_WEEK, "<");
     leftButton->SetMaxSize(wxSize(30, -1));
     dateRangeSizer->Add(leftButton, 1, wxALL | wxALIGN_CENTER_VERTICAL, 5);
     
@@ -39,7 +42,7 @@ EmployeePanel::EmployeePanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
     dateRangeSizer->Add(dateRangeText, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
     
     // Add right button
-    wxButton* rightButton = new wxButton(this, wxID_ANY, ">");
+    wxButton* rightButton = new wxButton(this, ID_NEXT_WEEK, ">");
     rightButton->SetMaxSize(wxSize(30, -1));
     dateRangeSizer->Add(rightButton, 1, wxALL | wxALIGN_CENTER_VERTICAL, 5);
 
@@ -55,6 +58,11 @@ EmployeePanel::EmployeePanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
     
     // add a horizontal separator
     mainSizer->Add(new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL), 0, wxEXPAND | wxALL, 5);
+
+    // add a button that says "Open Leave Portal"
+    wxButton* leavePortalButton = new wxButton(this, ID_LEAVE_PORTAL, "Open Leave Portal");
+    mainSizer->Add(leavePortalButton, 0, wxALL | wxALIGN_CENTER, 10);
+
     SetSizer(mainSizer);
 
     Bind(wxEVT_SHOW, &EmployeePanel::OnShow, this);
@@ -81,3 +89,20 @@ void EmployeePanel::OnShow(wxShowEvent& event)
     event.Skip(); // Ensure the default handling of the event
 }
 
+void EmployeePanel::OnLeavePortal(wxCommandEvent& event)
+{
+    wxSimplebook* simplebook = dynamic_cast<wxSimplebook*>(this->GetParent());
+    InterfaceFrame* frame = dynamic_cast<InterfaceFrame*>(simplebook->GetParent());
+    simplebook->SetSelection(InterfaceFrame::PID_PAGE_LEAVE);
+    frame->updateStatusBar("Opening Leave Portal.", 1);
+}
+
+void EmployeePanel::OnPrevWeek(wxCommandEvent& event)
+{
+    wxMessageBox("Previous week", "Info", wxOK | wxICON_INFORMATION);
+}
+
+void EmployeePanel::OnNextWeek(wxCommandEvent& event)
+{
+    wxMessageBox("Next week", "Info", wxOK | wxICON_INFORMATION);
+}

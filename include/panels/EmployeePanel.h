@@ -14,16 +14,26 @@ public:
 
 private:
     void OnShow(wxShowEvent& event);
+    void OnLeavePortal(wxCommandEvent& event);
+    void OnPrevWeek(wxCommandEvent& event);
+    void OnNextWeek(wxCommandEvent& event);
 
     //DataManager* dm;
     std::shared_ptr<DataManager> dm;
 
     HorizontalBar* m_barGraph;
-
     wxStaticText* dateRangeText;
 
 
     wxDECLARE_EVENT_TABLE();
+
+};
+
+enum ButtonID
+{
+    ID_PREV_WEEK = 1,
+    ID_NEXT_WEEK = 2,
+    ID_LEAVE_PORTAL = 3
 
 };
 

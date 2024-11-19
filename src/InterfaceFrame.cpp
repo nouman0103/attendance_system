@@ -27,11 +27,13 @@ InterfaceFrame::InterfaceFrame(const wxString &title)
     guardPanel = new GuardPanel(simplebook, dm);
     adminPanel = new AdminPanel(simplebook,dm);
     employeePanel = new EmployeePanel(simplebook,dm);
+    leavePanel = new LeavePanel(simplebook,dm);
 
     simplebook->AddPage(loginPanel, "Login");
     simplebook->AddPage(guardPanel, "Guard");
     simplebook->AddPage(adminPanel, "Admin");
     simplebook->AddPage(employeePanel, "Employee");
+    simplebook->AddPage(leavePanel, "Leave");
 
     ShowPage(PID_PAGE_LOGIN);
 
@@ -75,7 +77,7 @@ void InterfaceFrame::InitializeMenu()
 
     // File Menu
     wxMenu *fileMenu = new wxMenu;
-    fileMenu->Append(wxID_EXIT, "E&xit\tAlt-X", "Quit this program");
+    fileMenu->Append(wxID_EXIT, "E&xit\tCtrl-W", "Quit this program");
     menuBar->Append(fileMenu, "&File");
 
     // Help Menu
@@ -85,7 +87,7 @@ void InterfaceFrame::InitializeMenu()
     
     // Account Menu
     wxMenu *accountMenu = new wxMenu;
-    accountMenu->Append(wxID_CANCEL, "Logout", "Logout from the system");
+    accountMenu->Append(wxID_CANCEL, "Logout\tAlt-X", "Logout from the system");
     menuBar->Append(accountMenu, "&Account");
 
     // Set the menu bar

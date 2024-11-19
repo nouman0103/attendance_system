@@ -9,7 +9,7 @@ wxEND_EVENT_TABLE()
 HorizontalBar::HorizontalBar(wxWindow* parent)
     : wxPanel(parent, wxFULL_REPAINT_ON_RESIZE), m_presentHours(0), m_casualLeaveHours(0), m_earnedLeaveHours(0), m_officialLeaveHours(0)
 {
-    SetMinSize(wxSize(400, 150));
+    SetMinSize(wxSize(400, 120));
 
     m_presentBrush = wxBrush(wxColour(76, 251, 126)); // Green
     m_casualLeaveBrush = wxBrush(wxColour(14,165,226)); // Blue
@@ -84,7 +84,7 @@ void HorizontalBar::OnPaint(wxPaintEvent& event)
     std::string casualLeaveLabel = std::to_string(m_casualLeaveHours) + " Hrs Casual Leave";
     std::string earnedLeaveLabel = std::to_string(m_earnedLeaveHours) + " Hrs Earned Leave";
     std::string officialLeaveLabel = std::to_string(m_officialLeaveHours) + " Hrs Official Leave";
-    std::string notMarkedLabel = std::to_string(totalHours - m_presentHours - m_casualLeaveHours - m_earnedLeaveHours - m_officialLeaveHours) + "Hrs Not Marked";
+    std::string notMarkedLabel = std::to_string(totalHours - m_presentHours - m_casualLeaveHours - m_earnedLeaveHours - m_officialLeaveHours) + " Hrs Not Marked";
 
 
     dc.SetBrush(m_presentBrush);
