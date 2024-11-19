@@ -6,6 +6,7 @@
 
 wxBEGIN_EVENT_TABLE(LoginPanel, wxPanel)
     EVT_BUTTON(wxID_ANY, LoginPanel::OnLogin)
+    EVT_SHOW(LoginPanel::OnShow)
 wxEND_EVENT_TABLE()
 
 /**
@@ -99,20 +100,24 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
             }
         }
 
-
+        wxSimplebook *simplebook = dynamic_cast<wxSimplebook*>(this->GetParent());
+        InterfaceFrame *frame = dynamic_cast<InterfaceFrame*>(simplebook->GetParent());
         if (username == "admin" && password == "admin") {
-            wxSimplebook *simplebook = dynamic_cast<wxSimplebook*>(this->GetParent());
             simplebook->SetSelection(InterfaceFrame::PID_PAGE_ADMIN);
             wxMessageBox("Login successful!", "Success", wxOK | wxICON_INFORMATION);
+            frame->updateStatusBar("admin logged in." + role, 1);
         } else if (role=="Guard") {
-            wxSimplebook *simplebook = dynamic_cast<wxSimplebook*>(this->GetParent());
             simplebook->SetSelection(InterfaceFrame::PID_PAGE_GUARD);
             wxMessageBox("Login successful!", "Success", wxOK | wxICON_INFORMATION);
+            frame->updateStatusBar(username + " logged in as " + role, 1);
         }
         else if (role=="Employee") {
-            wxSimplebook *simplebook = dynamic_cast<wxSimplebook*>(this->GetParent());
             simplebook->SetSelection(InterfaceFrame::PID_PAGE_EMPLOYEE);
             wxMessageBox("Login successful!", "Success", wxOK | wxICON_INFORMATION);
+
+            // call InterfaceFrame::updateStatusBar to update the status bar
+            frame->updateStatusBar(username + " logged in as " + role, 1);
+
         }
         else {
             wxMessageBox("Failed to login! Please ensure your input details are correct.", "Error", wxOK | wxICON_ERROR);
@@ -159,4 +164,17 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
     {
         wxMessageBox("Please enter both username and password.", "Error", wxOK | wxICON_ERROR);
     }
+}
+
+void LoginPanel::OnShow(wxShowEvent& event)
+{
+    if (event.IsShown())
+    {
+        clearFields();
+        // update the status bar
+        wxSimplebook *simplebook = dynamic_cast<wxSimplebook*>(this->GetParent());
+        InterfaceFrame *frame = dynamic_cast<InterfaceFrame*>(simplebook->GetParent());
+        frame->updateStatusBar("Ready", 1);
+    }
+    event.Skip();
 }

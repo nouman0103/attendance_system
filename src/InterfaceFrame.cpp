@@ -127,6 +127,11 @@ void InterfaceFrame::InitializeStatusBar()
     SetStatusText("Ready", 1);
 }
 
+void InterfaceFrame::updateStatusBar(const wxString &text, int field)
+{
+    SetStatusText(text, field);
+}
+
 /**
  * @brief Displays the specified panel in the main frame.
  *

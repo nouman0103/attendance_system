@@ -35,6 +35,7 @@ public:
      * @param pageId The identifier of the page to display.
      */
     void ShowPage(int pageId);
+    void updateStatusBar(const wxString& text, int field);
 
 private:
     /**
@@ -52,6 +53,8 @@ private:
      * @param panel Pointer to the wxPanel to display.
      */
     void ShowPanel(wxPanel* panel);
+
+    
 
     
 

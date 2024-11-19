@@ -29,6 +29,7 @@ private:
      * @param event The event object.
      */
     void OnLogin(wxCommandEvent& event);
+    void OnShow(wxShowEvent& event);
 
     // UI Components
     wxTextCtrl* m_usernameCtrl;

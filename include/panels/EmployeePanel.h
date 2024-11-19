@@ -13,12 +13,17 @@ public:
     ~EmployeePanel();
 
 private:
+    void OnShow(wxShowEvent& event);
+
     //DataManager* dm;
     std::shared_ptr<DataManager> dm;
 
     HorizontalBar* m_barGraph;
 
-    //wxDECLARE_EVENT_TABLE();
+    wxStaticText* dateRangeText;
+
+
+    wxDECLARE_EVENT_TABLE();
 
 };
 
