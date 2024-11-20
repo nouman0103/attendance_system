@@ -5,11 +5,11 @@ CXX := g++
 LINKER := g++
 
 # Compiler Flags
-CXXFLAGS := -g -Wall -D_WINDOWS -D_UNICODE -D__WXMSW__ -DNDEBUG -DNOPCH -std=c++11
+CXXFLAGS := -g -Wall  -D_WINDOWS -D_UNICODE -D__WXMSW__ -DNDEBUG -DNOPCH -std=c++11
 
 # Include Directories
-INCLUDES := -Idemp/win/lib/gcc_lib/mswu \
-           -Idemp/win/include \
+INCLUDES := -Idep/win/lib/gcc_lib/mswu \
+           -Idep/win/include \
            -Iinclude \
            -Iinclude/panels
 
@@ -27,8 +27,10 @@ LIBS := -lwxmsw32u_core -lwxbase32u -lwxpng -lcomdlg32 \
 SRC_DIR := src
 OUT_DIR := out
 
-# Find all .cpp files in src directory and subdirectories
-SOURCES := $(shell dir /S /B $(SRC_DIR)\*.cpp)
+# Find all .cpp files in src directory and subdirectories using Make's wildcard
+SOURCES := $(wildcard $(SRC_DIR)/*.cpp) \
+           $(wildcard $(SRC_DIR)/panels/*.cpp) \
+           $(wildcard $(SRC_DIR)/*/*/*.cpp)
 
 # Generate object file paths by replacing src/ with out/ and .cpp with .o
 OBJECTS := $(patsubst $(SRC_DIR)/%.cpp, $(OUT_DIR)/%.o, $(SOURCES))
@@ -44,7 +46,7 @@ all: init compile link
 
 # Initialize build environment
 init:
-    @if not exist "$(OUT_DIR)" mkdir "$(OUT_DIR)"
+	@if not exist "$(OUT_DIR)" mkdir "$(OUT_DIR)"
 
 # Compile all .cpp files to .o
 compile: $(OBJECTS)
@@ -54,13 +56,13 @@ link: $(TARGET)
 
 # Pattern rule to compile .cpp to .o
 $(OUT_DIR)/%.o: $(SRC_DIR)/%.cpp
-    $(CXX) $(CXXFLAGS) $(INCLUDES) -c "$<" -o "$@"
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c "$<" -o "$@"
 
 # Link object files to create the executable
 $(TARGET): $(OBJECTS)
-    $(LINKER) $(CXXFLAGS) -mwindows -static $(OBJECTS) -o "$@" $(LIBDIRS) $(LIBS)
+	$(LINKER) $(CXXFLAGS) -mwindows -static $(OBJECTS) -o "$@" $(LIBDIRS) $(LIBS)
 
 # Clean build artifacts
 clean:
-    del /Q /S "$(OUT_DIR)\*.o" "$(TARGET)"
-    rmdir /S /Q "$(OUT_DIR)"
+	del /Q /S "$(OUT_DIR)\*.o" "$(TARGET)"
+	
