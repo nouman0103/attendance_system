@@ -23,7 +23,7 @@ LoginPanel::LoginPanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
     mainSizer->AddSpacer(10);
 
     // Creating a title
-    wxStaticText* title = new wxStaticText(this, wxID_ANY, "Login Portal", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE);
+    wxStaticText* title = new wxStaticText(this, wxID_ANY, "Login  Portal", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE);
     title->SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
     mainSizer->Add(title, 0, wxALL | wxEXPAND, 10);
 

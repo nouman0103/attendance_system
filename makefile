@@ -14,7 +14,7 @@ INCLUDES := -Idep/win/lib/gcc_lib/mswu \
            -Iinclude/panels
 
 # Library Directories
-LIBDIRS := -Ldemp/win/lib/gcc_lib \
+LIBDIRS := -Ldep/win/lib/gcc_lib \
           -Lc:/mingw-w64/mingw64/x86_64-w64-mingw32/lib
 
 # Libraries to Link

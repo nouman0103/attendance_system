@@ -263,6 +263,16 @@
       },
       "problemMatcher": [],
       "dependsOn": ["Compile"]
+    },
+    {
+      "type": "shell",
+      "label": "Run mingw32-make",
+      "command": "mingw32-make",
+      "args": ["compile", "-j", "10"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
     }
   ]
 }
