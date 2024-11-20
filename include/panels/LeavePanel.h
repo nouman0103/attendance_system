@@ -34,6 +34,9 @@ private:
     void OnBack(wxCommandEvent &event);
 
 
+    wxComboBox* leaveType;
+
+
 
     std::shared_ptr<DataManager> dm;
     wxDECLARE_EVENT_TABLE();

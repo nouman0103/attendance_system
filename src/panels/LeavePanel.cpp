@@ -54,10 +54,9 @@ LeavePanel::LeavePanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     leaveTypes.Add("Official Leave");
     leaveTypes.Add("Unpaid Leave");
     
-    wxComboBox* leaveType = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, leaveTypes, wxCB_READONLY);
+    leaveType = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, leaveTypes, wxCB_READONLY);
     leaveTypeSizer->Add(leaveType, 1, wxALL | wxEXPAND, verticalSpacing);
     mainSizer->Add(leaveTypeSizer, 0, wxLEFT | wxRIGHT | wxEXPAND, verticalSpacing);
-    
     // Start Date
     wxBoxSizer* startDateSizer = new wxBoxSizer(wxHORIZONTAL);
     wxStaticText* startDateLabel = new wxStaticText(this, wxID_ANY, "Start Date:");
@@ -184,6 +183,7 @@ void LeavePanel::OnShow(wxShowEvent &event)
 {
     if (event.IsShown())
     {
+        leaveType->SetSelection(0);
     }
     event.Skip(); // Ensure the default handling of the event
 }
