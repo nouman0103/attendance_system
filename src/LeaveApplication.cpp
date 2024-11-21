@@ -40,7 +40,7 @@ OfficialLeaveApplication::OfficialLeaveApplication(json j) : LeaveApplication(j)
 
 bool OfficialLeaveApplication::approve(std::shared_ptr<Employee> approver)
 {
-    if (!approver->getPosition().compare("Director" || !approver->getPosition().compare("Supervisor")))
+    if (!approver->getPosition().compare("Director") || !approver->getPosition().compare("Supervisor"))
     {
         return false;
     }
@@ -53,7 +53,7 @@ bool OfficialLeaveApplication::approve(std::shared_ptr<Employee> approver)
     return true;
 }
 
-bool OfficialLeaveApplication::reject()
+bool OfficialLeaveApplication::reject(std::shared_ptr<Employee> approver)
 {
     if (this->status == LeaveStatus::APPROVED)
     {
@@ -183,3 +183,8 @@ bool UnpaidLeaveApplication::reject(std::shared_ptr<Employee> approver)
 }
 
 
+
+std::string UnpaidLeaveApplication::getTaskType()
+{
+    return "Unpaid Leave";
+}

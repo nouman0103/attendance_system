@@ -2,6 +2,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "Employee.h"
 #include <ctime>
 enum class LeaveStatus
 {
@@ -9,6 +10,7 @@ enum class LeaveStatus
     APPROVED,
     REJECTED
 };
+class Employee;
 class LeaveApplication
 {
 protected:
@@ -64,7 +66,6 @@ class EarnedLeaveApplication : public LeaveApplication
 public:
     EarnedLeaveApplication(std::shared_ptr<Employee> employee, time_t startDate, time_t endDate, std::string reason, time_t applicationDate, time_t approvalDate, LeaveStatus status);
     EarnedLeaveApplication(json j);
-    bool applyForApproval(std::shared_ptr<Employee> approver) override;
     bool approve(std::shared_ptr<Employee> approver) override;
     bool reject(std::shared_ptr<Employee> approver) override;
     std::string getTaskType() override;

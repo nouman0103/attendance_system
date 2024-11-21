@@ -23,6 +23,7 @@ class Employee {
 User(std::string name, unsigned int id);
 */
 class AttendanceRecord;
+class LeaveApplication;
 
 class Employee : public User
 {
