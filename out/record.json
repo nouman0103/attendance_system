@@ -75,7 +75,44 @@
                 "type": 1
             }
         ],
-        "leave": [],
+        "leave": [
+            {
+                "applicationDate": 1732213029,
+                "approvalDate": 0,
+                "endDate": 1732215600,
+                "reason": "123",
+                "startDate": 1732129200,
+                "status": 0,
+                "taskType": "Casual Leave"
+            },
+            {
+                "applicationDate": 1732213160,
+                "approvalDate": 0,
+                "endDate": 1732042800,
+                "reason": "123",
+                "startDate": 1732215600,
+                "status": 0,
+                "taskType": "Earned Leave"
+            },
+            {
+                "applicationDate": 1732213166,
+                "approvalDate": 0,
+                "endDate": 1732906800,
+                "reason": "123",
+                "startDate": 1732215600,
+                "status": 0,
+                "taskType": "Earned Leave"
+            },
+            {
+                "applicationDate": 1732213192,
+                "approvalDate": 0,
+                "endDate": 1732906800,
+                "reason": "123",
+                "startDate": 1732215600,
+                "status": 0,
+                "taskType": "Earned Leave"
+            }
+        ],
         "leaveBalance": 0
     },
     "john": {

@@ -49,11 +49,11 @@ LeavePanel::LeavePanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     leaveTypeSizer->Add(leaveTypeLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, verticalSpacing);
     
     wxArrayString leaveTypes;
+    
     leaveTypes.Add("Casual Leave");
     leaveTypes.Add("Earned Leave");
     leaveTypes.Add("Official Leave");
     leaveTypes.Add("Unpaid Leave");
-    
     leaveType = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, leaveTypes, wxCB_READONLY);
     leaveTypeSizer->Add(leaveType, 1, wxALL | wxEXPAND, verticalSpacing);
     mainSizer->Add(leaveTypeSizer, 0, wxLEFT | wxRIGHT | wxEXPAND, verticalSpacing);
@@ -237,6 +237,37 @@ void LeavePanel::OnSubmit(wxCommandEvent &event)
         wxLogMessage("Reason: %s", reasonValue);
 
         wxMessageBox("Leave application submitted successfully.", "Success", wxOK | wxICON_INFORMATION);
+    }
+    /*leaveTypes.Add("Casual Leave");
+    leaveTypes.Add("Earned Leave");
+    leaveTypes.Add("Official Leave");
+    leaveTypes.Add("Unpaid Leave");*/
+    
+    if (leaveTypeValue == "Casual Leave" )
+    {
+        std::shared_ptr<CasualLeaveApplication> casualLeaveApplication = std::make_shared<CasualLeaveApplication>(dm->getCurrentEmployee(), startDateValue.GetTicks(), endDateValue.GetTicks(), reasonValue.ToStdString(), wxDateTime::Now().GetTicks(), 0, LeaveStatus::PENDING);
+        dm->writeLeaveApplication(casualLeaveApplication);
+        
+    }
+    else if (leaveTypeValue == "Earned Leave")
+    {
+        std::shared_ptr<EarnedLeaveApplication> earnedLeaveApplication = std::make_shared<EarnedLeaveApplication>(dm->getCurrentEmployee(), startDateValue.GetTicks(), endDateValue.GetTicks(), reasonValue.ToStdString(), wxDateTime::Now().GetTicks(), 0, LeaveStatus::PENDING);
+        dm->writeLeaveApplication(earnedLeaveApplication);
+    }
+    else if (leaveTypeValue == "Official Leave")
+    {
+        std::shared_ptr<OfficialLeaveApplication> officialLeaveApplication = std::make_shared<OfficialLeaveApplication>(dm->getCurrentEmployee(), startDateValue.GetTicks(), endDateValue.GetTicks(), reasonValue.ToStdString(), wxDateTime::Now().GetTicks(), 0, LeaveStatus::PENDING);
+        dm->writeLeaveApplication(officialLeaveApplication);
+    }
+    else if (leaveTypeValue == "Unpaid Leave")
+    {
+        std::shared_ptr<UnpaidLeaveApplication> unpaidLeaveApplication = std::make_shared<UnpaidLeaveApplication>(dm->getCurrentEmployee(), startDateValue.GetTicks(), endDateValue.GetTicks(), reasonValue.ToStdString(), wxDateTime::Now().GetTicks(), 0, LeaveStatus::PENDING);
+        dm->writeLeaveApplication(unpaidLeaveApplication);
+    }
+    else
+    {
+        wxMessageBox("Please select a leave type.", "Error", wxOK | wxICON_ERROR);
+
     }
 
 }
