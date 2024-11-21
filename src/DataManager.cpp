@@ -159,26 +159,18 @@ std::shared_ptr<Employee> DataManager::getEmployee(std::string name)
     }
     return employeeDict[name];
 }
-// void DataManager::writeLeaveBalance(LeaveBalance leaveBalance)
-// {
-//     write.open("leaveBalance.txt", std::ios::app);
-//     write << leaveBalance;
-//     write.close();
-// }
 
-// std::vector<LeaveBalance> DataManager::readLeaveBalance()
-// {
-//     std::vector<LeaveBalance> leaveBalances;
-//     read.open("leaveBalance.txt");
-//     if (read.is_open())
-//     {
-//         while (!read.eof())
-//         {
-//             LeaveBalance leaveBalance;
-//             read >> leaveBalance;
-//             leaveBalances.push_back(leaveBalance);
-//         }
-//         read.close();
-//     }
-//     return leaveBalances;
-// }
+void DataManager::writeLeaveApplication(std::shared_ptr<LeaveApplication> leaveApplication)
+{
+    std::ifstream read("record.json");
+    json j;
+    read >> j;
+    read.close();
+    std::string name = leaveApplication.get()->getEmployee()->getName();
+    json record = j[name];
+    record["leave"].push_back(leaveApplication.get()->to_json());
+    j[name] = record;
+    std::ofstream write("record.json");
+    write << j.dump(4);
+    write.close();
+}

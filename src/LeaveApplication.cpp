@@ -1,5 +1,4 @@
 #include "LeaveApplication.h"
-#include "DataManager.h"
 
 LeaveApplication::LeaveApplication(std::shared_ptr<Employee> employee, time_t startDate, time_t endDate, std::string reason, time_t applicationDate, time_t approvalDate, LeaveStatus status)
 {
@@ -23,6 +22,8 @@ LeaveApplication::LeaveApplication(json j)
     this->status = j["status"];
 }
 
+
+
 std::shared_ptr<Employee> LeaveApplication::getEmployee()
 {
     return this->employee;
@@ -36,6 +37,55 @@ OfficialLeaveApplication::OfficialLeaveApplication(json j) : LeaveApplication(j)
 {
 }
 
+json CasualLeaveApplication::to_json()
+{
+    json j;
+    j["startDate"] = this->startDate;
+    j["endDate"] = this->endDate;
+    j["reason"] = this->reason;
+    j["applicationDate"] = this->applicationDate;
+    j["approvalDate"] = this->approvalDate;
+    j["status"] = this->status;
+    j["taskType"] = this->getTaskType();
+    return j;
+}
+
+json OfficialLeaveApplication::to_json()
+{
+    json j;
+    j["startDate"] = this->startDate;
+    j["endDate"] = this->endDate;
+    j["reason"] = this->reason;
+    j["applicationDate"] = this->applicationDate;
+    j["approvalDate"] = this->approvalDate;
+    j["status"] = this->status;
+    j["taskType"] = this->getTaskType();
+    return j;
+}
+json UnpaidLeaveApplication::to_json()
+{
+    json j;
+    j["startDate"] = this->startDate;
+    j["endDate"] = this->endDate;
+    j["reason"] = this->reason;
+    j["applicationDate"] = this->applicationDate;
+    j["approvalDate"] = this->approvalDate;
+    j["status"] = this->status;
+    j["taskType"] = this->getTaskType();
+    return j;
+}
+json EarnedLeaveApplication::to_json()
+{
+    json j;
+    j["startDate"] = this->startDate;
+    j["endDate"] = this->endDate;
+    j["reason"] = this->reason;
+    j["applicationDate"] = this->applicationDate;
+    j["approvalDate"] = this->approvalDate;
+    j["status"] = this->status;
+    j["taskType"] = this->getTaskType();
+    return j;
+}
 
 
 bool OfficialLeaveApplication::approve(std::shared_ptr<Employee> approver)

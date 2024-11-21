@@ -4,6 +4,7 @@
 #include <vector>
 #include "Employee.h"
 #include <ctime>
+
 enum class LeaveStatus
 {
     PENDING,
@@ -26,6 +27,7 @@ public:
     LeaveApplication(std::shared_ptr<Employee> employee, time_t startDate, time_t endDate, std::string reason, time_t applicationDate, time_t approvalDate, LeaveStatus status);
     LeaveApplication(json j);
     std::shared_ptr<Employee> getEmployee();
+    virtual json  to_json() = 0;
     virtual bool approve(std::shared_ptr<Employee> approver) = 0;
     virtual bool reject(std::shared_ptr<Employee> approver) = 0;
     virtual std::string getTaskType() = 0;
@@ -38,6 +40,7 @@ public:
     OfficialLeaveApplication(json j);
     bool approve(std::shared_ptr<Employee> approver) override;
     bool reject(std::shared_ptr<Employee> approver) override;
+    json to_json() override;
     std::string getTaskType() override;
 };
 
@@ -48,6 +51,7 @@ public:
     CasualLeaveApplication(json j);
     bool approve(std::shared_ptr<Employee> approver) override;
     bool reject(std::shared_ptr<Employee> approver) override;
+    json to_json() override;
     std::string getTaskType() override;
 };
 
@@ -58,6 +62,7 @@ public:
     UnpaidLeaveApplication(json j);
     bool approve(std::shared_ptr<Employee> approver) override;
     bool reject(std::shared_ptr<Employee> approver) override;
+    json to_json() override;
     std::string getTaskType() override;
 };
 
@@ -68,5 +73,6 @@ public:
     EarnedLeaveApplication(json j);
     bool approve(std::shared_ptr<Employee> approver) override;
     bool reject(std::shared_ptr<Employee> approver) override;
+    json to_json() override;
     std::string getTaskType() override;
 };

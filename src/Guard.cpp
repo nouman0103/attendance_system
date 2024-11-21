@@ -1,7 +1,7 @@
 #include "Guard.h"
 
-Guard::Guard(std::string name, unsigned int id, std::string password, std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<LeaveApplication> leaveBalance)
-    : Employee(name, id, password, position, attendanceRecord, leaveBalance)
+Guard::Guard(std::string name, unsigned int id, std::string password, std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<std::vector<LeaveApplication>> leaveApplications)
+    : Employee(name, id, password, position, attendanceRecord, leaveApplications)
 {
 }
 Guard::Guard(Employee employee) : Employee(employee)

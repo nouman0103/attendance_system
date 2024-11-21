@@ -9,6 +9,7 @@
 #include <vector>
 #include <memory>
 #include <map>
+
 class DataManager
 {
 private:
@@ -19,6 +20,7 @@ private:
     std::map<std::string, std::shared_ptr<Employee>> employeeDict;
     std::vector<AttendanceRecord> attendanceRecords;
     std::shared_ptr<Employee> currentEmployee;
+    std::vector<LeaveApplication> leaveApplications;
 
     // std::vector<LeaveBalance> leaveBalances;
 
@@ -33,6 +35,8 @@ public:
     std::shared_ptr<Employee> getEmployee(std::string name);
     void writeAttendanceRecord(AttendanceEntry attendanceEntry);
     void readAttendanceRecord();
+    void writeLeaveApplication(std::shared_ptr<LeaveApplication> leaveApplication);
+    std::vector<LeaveApplication> readLeaveApplication();
     // void writeLeaveBalance(LeaveBalance leaveBalance);
     // std::vector<LeaveBalance> readLeaveBalance();
     // void writeGuard(Guard guard);
