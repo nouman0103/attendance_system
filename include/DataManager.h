@@ -18,12 +18,16 @@ private:
     // Dictory of employees id and password
     std::map<std::string, std::shared_ptr<Employee>> employeeDict;
     std::vector<AttendanceRecord> attendanceRecords;
+    std::shared_ptr<Employee> currentEmployee;
+
     // std::vector<LeaveBalance> leaveBalances;
 
 public:
     DataManager();
     bool writeEmployee(Employee employee);
     void updateEmployees();
+    bool setEmployee(std::shared_ptr<Employee> employee);
+    std::shared_ptr<Employee> getCurrentEmployee();
     std::shared_ptr<std::vector<Employee>> getEmployees();
 
     std::shared_ptr<Employee> getEmployee(std::string name);

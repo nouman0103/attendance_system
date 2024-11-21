@@ -46,7 +46,7 @@ private:
     wxChoice* hourChoice;
 
 
-    Guard guard;
+    std::shared_ptr<Guard> guard;
     std::shared_ptr<DataManager> dm;
     wxDECLARE_EVENT_TABLE();
 };

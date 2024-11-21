@@ -30,3 +30,31 @@ time_t AttendanceRecord::getLastTime() const
     }
     return attendances.back().getTimestamp();
 }
+
+int AttendanceRecord::getHourWorkInWeek(time_t weekstart)
+{
+    int total = 0;
+    time_t weekend = weekstart + 7 * 24 * 60 * 60;
+    time_t last_checkin = -1;
+
+
+    for (auto &attendance : attendances)
+    {
+        if (attendance.getTimestamp() >= weekstart && attendance.getTimestamp() < weekend)
+        {
+            if (attendance.getType() == Attendance::CHECK_IN)
+            {
+                last_checkin = attendance.getTimestamp();
+            }
+            else if (attendance.getType() == Attendance::CHECK_OUT)
+            {
+                if (last_checkin != -1)
+                {
+                    total += (attendance.getTimestamp() - last_checkin) / 3600;
+                    last_checkin = -1;
+                }
+            }
+        }
+    }
+    return total;
+}
