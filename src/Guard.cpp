@@ -7,6 +7,9 @@ Guard::Guard(std::string name, unsigned int id, std::string password, std::strin
 Guard::Guard(Employee employee) : Employee(employee)
 {
 }
+Guard::Guard(json j) : Employee(j)
+{
+}
 
 Guard::~Guard()
 {
