@@ -15,6 +15,14 @@
 #include "DataManager.h"
 
 
+enum RoleType
+{
+    ROLE_NONE = 0,
+    ROLE_SUPERVISOR = 1,
+    ROLE_DIRETOR = 2
+};
+
+
 /**
  * @class ApprovalPanel
  * @brief Panel for leave approval
@@ -27,10 +35,16 @@ public:
     * @param parent The parent window.
      */
     ApprovalPanel(wxWindow* parent,std::shared_ptr<DataManager> dm);
+    void setLoggedInAsPosition(int role);
+    int getLoggedInAsPosition();
 
 private:
-
     void OnShow(wxShowEvent &event);
+    void OnViewReports(wxCommandEvent &event);
+    void filterOutstandingLeaves(wxCommandEvent &event);
+    int loggedInAsPosition;
+    bool filtered = false;
+    wxButton *outstandingLeavesButton;
 
 
     std::shared_ptr<DataManager> dm;

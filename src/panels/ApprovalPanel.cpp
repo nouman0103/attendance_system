@@ -32,20 +32,29 @@ ApprovalPanel::ApprovalPanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
 
     this->dm = dm;
 
+    // button that says monthly attendance report
+    wxButton *monthlyAttendanceReport = new wxButton(this, wxID_ANY, "View Attendance Reports");
+    mainSizer->Add(monthlyAttendanceReport, 0, wxALL | wxALIGN_CENTER, 10);
+    // bind the button with OnViewReports
+    monthlyAttendanceReport->Bind(wxEVT_BUTTON, &ApprovalPanel::OnViewReports, this);
+
+
     // horizontal line
     wxStaticLine *line = new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL);
     mainSizer->Add(line, 0, wxALL | wxEXPAND, 10);
 
 
-    // leave application type dropdown
-    // Leave Type
-    const int verticalSpacing = 5; // Define a variable for vertical spacing
-    
+    // button that says outstanding leaves
+    outstandingLeavesButton = new wxButton(this, wxID_ANY, "Filter Outstanding Leaves");
+    mainSizer->Add(outstandingLeavesButton, 0, wxALL | wxALIGN_CENTER, 10);
+    // bind the button with filterOutstandingLeaves
+    outstandingLeavesButton->Bind(wxEVT_BUTTON, &ApprovalPanel::filterOutstandingLeaves, this);
+
     
     // create a table to display leave history
     // format: Sr | Leave Type | Start Date | End Date | Reason | Status
-        // Create a scrolled window
-        wxScrolledWindow* scrolledWindow = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxVSCROLL);
+    // Create a scrolled window
+    wxScrolledWindow* scrolledWindow = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxVSCROLL);
     scrolledWindow->SetScrollRate(5, 5);
     
     // Create a grid sizer
@@ -154,15 +163,88 @@ ApprovalPanel::ApprovalPanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     SetSizer(mainSizer);
 
     Bind(wxEVT_SHOW, &ApprovalPanel::OnShow, this);
+
 }
 
 void ApprovalPanel::OnShow(wxShowEvent &event)
 {
     if (event.IsShown())
     {
+        filtered = false;
+        outstandingLeavesButton->SetLabel("Filter Outstanding Leaves");
+        std::string position = dm->getCurrentEmployee()->getPosition();
+        if (position == "Supervisor")
+        {
+            setLoggedInAsPosition(ROLE_SUPERVISOR);
+        }
+        else if (position == "Director")
+        {
+            setLoggedInAsPosition(ROLE_DIRETOR);
+        }
+        else
+        {
+            setLoggedInAsPosition(ROLE_NONE);
+        }
     }
     event.Skip(); // Ensure the default handling of the event
 }
+
+void ApprovalPanel::filterOutstandingLeaves(wxCommandEvent &event)
+{
+    if(!filtered)
+    {
+        wxMessageBox("Filter Outstanding Leaves", "Filter Outstanding Leaves", wxOK | wxICON_INFORMATION);
+        filtered = true;
+        outstandingLeavesButton->SetLabel("Show All Leaves");
+    }
+    else
+    {
+        wxMessageBox("Show All Leaves", "Show All Leaves", wxOK | wxICON_INFORMATION);
+        filtered = false;
+        outstandingLeavesButton->SetLabel("Filter Outstanding Leaves");
+    }
+    // if (!filtered)
+    // get the current employee
+    // Employee *employee = dm->getCurrentEmployee();
+    // // get the outstanding leaves
+    // std::vector<Leave> outstandingLeaves = dm->getOutstandingLeaves(employee->getId());
+    // // display the outstanding leaves
+    // for (Leave leave : outstandingLeaves)
+    // {
+    //     std::cout << leave.toString() << std::endl;
+    // }
+}
+
+void ApprovalPanel::setLoggedInAsPosition(int position)
+{
+    loggedInAsPosition = position;
+}
+
+int ApprovalPanel::getLoggedInAsPosition()
+{
+    return loggedInAsPosition;
+}
+
+void ApprovalPanel::OnViewReports(wxCommandEvent &event)
+{
+    wxSimplebook *simplebook = dynamic_cast<wxSimplebook *>(this->GetParent());
+    InterfaceFrame *frame = dynamic_cast<InterfaceFrame *>(simplebook->GetParent());
+    // get the current page
+    int currentPage = simplebook->GetSelection();
+    // check if the current page is the login page
+    if (currentPage == InterfaceFrame::PID_PAGE_ATTENDANCE_REPORT)
+    {
+        wxMessageBox("You are already on the Attendance Report page", "Attendance Report", wxOK | wxICON_INFORMATION);
+        return;
+    }
+    // show the login page
+    frame->ShowPage(InterfaceFrame::PID_PAGE_ATTENDANCE_REPORT);
+    // loginPanel->clearFields();
+
+    // wxMessageBox("You have been logged out", "Logout", wxOK | wxICON_INFORMATION);
+}
+
+
 
 
 // ApprovalPanel.cpp

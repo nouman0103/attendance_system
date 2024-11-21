@@ -6,6 +6,7 @@
 #include "GuardPanel.h"
 #include "AdminPanel.h"
 #include "LeavePanel.h"
+#include "AttendanceReportPanel.h"
 #include "EmployeePanel.h"
 #include "ApprovalPanel.h"
 #include <wx/wx.h>
@@ -30,7 +31,8 @@ public:
         PID_PAGE_ADMIN = 2,
         PID_PAGE_EMPLOYEE = 3,
         PID_PAGE_LEAVE = 4,
-        PID_PAGE_APPROVAL = 5
+        PID_PAGE_APPROVAL = 5,
+        PID_PAGE_ATTENDANCE_REPORT = 6,
         // Add other page identifiers here
     };
 
@@ -75,6 +77,7 @@ private:
     EmployeePanel* employeePanel;
     LeavePanel* leavePanel;
     ApprovalPanel* approvalPanel;
+    AttendanceReportPanel* attendanceReportPanel;
     // EmployeeDashboard* employeeDashboard;
     // SupervisorDashboard* supervisorDashboard;
     // Add other panels here
