@@ -25,7 +25,16 @@
         "leaveBalance": 0
     },
     "Nomi": {
-        "attendance": [],
+        "attendance": [
+            {
+                "time": 1732172400,
+                "type": 0
+            },
+            {
+                "time": 1732194000,
+                "type": 1
+            }
+        ],
         "leave": [],
         "leaveBalance": 0
     },

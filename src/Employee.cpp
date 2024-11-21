@@ -13,11 +13,20 @@ Employee::Employee(json j) : User(j)
     this->attendanceRecord = nullptr;
     this->leaveBalance = nullptr;
 }
-
-
-
-Employee::~Employee() {
+Employee::Employee(const Employee &employee) : User(employee) {
+    this->position = employee.position;
+    this->attendanceRecord = employee.attendanceRecord;
+    this->leaveBalance = employee.leaveBalance;
 }
+
+Employee::~Employee()
+{
+    // Destructor implementation
+}
+
+
+
+
 
 void Employee::applyForLeave() {
     // Implementation of leave application

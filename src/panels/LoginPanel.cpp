@@ -96,6 +96,8 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
             if (e.login(username.ToStdString(), password.ToStdString()))
             {
                 role = e.getPosition();
+                dm->setEmployee(dm->getEmployee(username.ToStdString()));
+
                 break;
             }
         }

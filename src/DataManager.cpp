@@ -88,6 +88,17 @@ std::shared_ptr<std::vector<Employee>> DataManager::getEmployees()
     return std::make_shared<std::vector<Employee>>(employees);
 }
 
+bool DataManager::setEmployee(std::shared_ptr<Employee> employee)
+{
+    currentEmployee = employee;
+    if (currentEmployee)
+        return true;
+    return false;
+}
+std::shared_ptr<Employee> DataManager::getCurrentEmployee()
+{
+    return currentEmployee;
+}
 
 void DataManager::writeAttendanceRecord(AttendanceEntry attendanceEntry)
 {
@@ -110,7 +121,7 @@ void DataManager::readAttendanceRecord()
     json j;
     read >> j;
     read.close();
-    
+
     for (auto &employee : j.items())
     {
         std::string name = employee.key();
@@ -118,13 +129,12 @@ void DataManager::readAttendanceRecord()
         for (auto &attendance : employee.value()["attendance"])
         {
             AttendanceEntry a(employee.key(), attendance["type"], attendance["time"]);
-            
+
             attendances.push_back(a);
         }
         attendanceRecords.push_back(AttendanceRecord(employeeDict[employee.key()], attendances));
         employeeDict[employee.key()]->setAttendanceRecord(std::make_shared<AttendanceRecord>(attendanceRecords.back()));
 
-        
         // attendanceRecords.push_back(record);
     }
 }

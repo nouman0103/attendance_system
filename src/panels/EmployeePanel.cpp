@@ -37,6 +37,7 @@ EmployeePanel::EmployeePanel(wxWindow* parent, std::shared_ptr<DataManager> dm)
     leftButton->SetMaxSize(wxSize(30, -1));
     dateRangeSizer->Add(leftButton, 1, wxALL | wxALIGN_CENTER_VERTICAL, 5);
     
+
     // Add date range label
     dateRangeText = new wxStaticText(this, wxID_ANY, "12/1/2021 - 12/7/2021", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
     dateRangeSizer->Add(dateRangeText, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
@@ -78,6 +79,7 @@ void EmployeePanel::OnShow(wxShowEvent& event)
     if (event.IsShown())
     {
         // Update the date range text
+
         dateRangeText->SetLabel("12/1/2021 - 12/7/2021");
 
 

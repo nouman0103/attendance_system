@@ -17,7 +17,7 @@ wxEND_EVENT_TABLE()
  * @param parent The parent window.
  */
 GuardPanel::GuardPanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
-: wxPanel(parent, wxID_ANY),guard("Guard", 1, "password", "Guard", nullptr, nullptr)
+: wxPanel(parent, wxID_ANY)
 {
     // Create sizer for layout
     wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
@@ -100,6 +100,11 @@ void GuardPanel::OnShow(wxShowEvent &event)
         datePicker->SetValue(wxDateTime::Now());
         // update time picker
         hourChoice->SetSelection(wxDateTime::Now().GetHour());
+        guard = std::make_shared<Guard>(*dm->getCurrentEmployee().get());
+        
+        
+        //Msg Box for Guard Detail
+        
 
     }
     event.Skip(); // Ensure the default handling of the event
@@ -126,7 +131,7 @@ void GuardPanel::OnCheckIn(wxCommandEvent &event)
     AttendanceEntry entry(employee.ToStdString(), Attendance::CHECK_IN, timestamp);
     std::shared_ptr<Employee> emp = dm->getEmployee(employee.ToStdString());
     //...
-    if (!guard.markAttendance(emp, entry))
+    if (!guard.get()->markAttendance(emp, entry))
     {
         wxLogMessage("Cannot check in . Employee already  checked in.");
         return;
@@ -153,7 +158,7 @@ void GuardPanel::OnCheckOut(wxCommandEvent &event)
     AttendanceEntry entry(employee.ToStdString(), Attendance::CHECK_OUT, checkOutTime.GetTicks());
     std::shared_ptr<Employee> emp = dm->getEmployee(employee.ToStdString());
 
-    if (!guard.markAttendance(emp, entry))
+    if (!guard.get()->markAttendance(emp, entry))
     {
         wxLogMessage("Cannot check out. Employee Missing Maybe out of his misery.");
         return;
