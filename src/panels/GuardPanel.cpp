@@ -8,16 +8,16 @@
 
 wxBEGIN_EVENT_TABLE(GuardPanel, wxPanel)
     EVT_BUTTON(ID_CHECKIN, GuardPanel::OnCheckIn)
-    EVT_BUTTON(ID_CHECKOUT, GuardPanel::OnCheckOut)
-    EVT_SHOW(GuardPanel::OnShow)
-wxEND_EVENT_TABLE()
+        EVT_BUTTON(ID_CHECKOUT, GuardPanel::OnCheckOut)
+            EVT_SHOW(GuardPanel::OnShow)
+                wxEND_EVENT_TABLE()
 
-/**
- * @brief Constructs a GuardPanel object.
- * @param parent The parent window.
- */
-GuardPanel::GuardPanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
-: wxPanel(parent, wxID_ANY)
+    /**
+     * @brief Constructs a GuardPanel object.
+     * @param parent The parent window.
+     */
+    GuardPanel::GuardPanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
+    : wxPanel(parent, wxID_ANY)
 {
     // Create sizer for layout
     wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
@@ -31,7 +31,6 @@ GuardPanel::GuardPanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     mainSizer->Add(title, 0, wxALL | wxEXPAND, 10);
 
     this->dm = dm;
-    
 
     // Employee List
     wxBoxSizer *employeeSizer = new wxBoxSizer(wxHORIZONTAL);
@@ -101,11 +100,8 @@ void GuardPanel::OnShow(wxShowEvent &event)
         // update time picker
         hourChoice->SetSelection(wxDateTime::Now().GetHour());
         guard = std::make_shared<Guard>(*dm->getCurrentEmployee().get());
-        
-        
-        //Msg Box for Guard Detail
-        
 
+        // Msg Box for Guard Detail
     }
     event.Skip(); // Ensure the default handling of the event
 }
