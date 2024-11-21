@@ -29,6 +29,7 @@ InterfaceFrame::InterfaceFrame(const wxString &title)
     employeePanel = new EmployeePanel(simplebook,dm);
     leavePanel = new LeavePanel(simplebook,dm);
     approvalPanel = new ApprovalPanel(simplebook, dm);
+    attendanceReportPanel = new AttendanceReportPanel(simplebook, dm);
 
     simplebook->AddPage(loginPanel, "Login");
     simplebook->AddPage(guardPanel, "Guard");
@@ -36,6 +37,7 @@ InterfaceFrame::InterfaceFrame(const wxString &title)
     simplebook->AddPage(employeePanel, "Employee");
     simplebook->AddPage(leavePanel, "Leave");
     simplebook->AddPage(approvalPanel, "Approval");
+    simplebook->AddPage(attendanceReportPanel, "Attendance Report");
 
     ShowPage(PID_PAGE_LOGIN);
 
