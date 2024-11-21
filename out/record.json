@@ -75,5 +75,10 @@
         ],
         "leave": [],
         "leaveBalance": 0
+    },
+    "sup": {
+        "attendance": [],
+        "leave": [],
+        "leaveBalance": 0
     }
 }

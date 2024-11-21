@@ -1,6 +1,6 @@
-// LeavePanel.h
-#ifndef LEAVEPANEL_H
-#define LEAVEPANEL_H
+// ApprovalPanel.h
+#ifndef APPROVALPANEL_H
+#define APPROVALPANEL_H
 
 #include <wx/wx.h>
 #include <wx/combobox.h>
@@ -16,26 +16,21 @@
 
 
 /**
- * @class LeavePanel
- * @brief Panel for leave operations.
+ * @class ApprovalPanel
+ * @brief Panel for leave approval
  */
-class LeavePanel : public wxPanel
+class ApprovalPanel : public wxPanel
 {
 public:
     /**
-    * @brief Constructs a LeavePanel object.
+    * @brief Constructs a ApprovalPanel object.
     * @param parent The parent window.
      */
-    LeavePanel(wxWindow* parent,std::shared_ptr<DataManager> dm);
+    ApprovalPanel(wxWindow* parent,std::shared_ptr<DataManager> dm);
 
 private:
 
     void OnShow(wxShowEvent &event);
-    void OnBack(wxCommandEvent &event);
-
-
-    wxComboBox* leaveType;
-
 
 
     std::shared_ptr<DataManager> dm;
@@ -43,4 +38,4 @@ private:
 };
 
 
-#endif // LEAVEPANEL_H
+#endif // APPROVALPANEL_H
