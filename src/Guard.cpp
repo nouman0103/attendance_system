@@ -1,10 +1,13 @@
 #include "Guard.h"
 
-Guard::Guard(std::string name, unsigned int id, std::string password, std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<LeaveBalance> leaveBalance)
+Guard::Guard(std::string name, unsigned int id, std::string password, std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<LeaveApplication> leaveBalance)
     : Employee(name, id, password, position, attendanceRecord, leaveBalance)
 {
 }
 Guard::Guard(Employee employee) : Employee(employee)
+{
+}
+Guard::Guard(json j) : Employee(j)
 {
 }
 

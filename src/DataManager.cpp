@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include "Guard.h"
 
 using json = nlohmann::json;
 
@@ -76,9 +77,20 @@ void DataManager::updateEmployees()
     read.close();
     for (json employee : j["employees"])
     {
-        Employee e(employee);
-        employeeDict[e.getName()] = std::make_shared<Employee>(e);
-        employees.push_back(e);
+        if (employee["role"] == "Guard")
+        {
+            Guard g(employee);
+            employees.push_back(g);
+            employeeDict[g.getName()] = std::make_shared<Employee>(g);
+            employees.push_back(g);
+        }
+        else
+        {
+            Employee e(employee);
+            employees.push_back(e);
+            employeeDict[e.getName()] = std::make_shared<Employee>(e);
+            employees.push_back(e);
+        }
     }
     return;
 }

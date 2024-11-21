@@ -2,7 +2,7 @@
 #include "Employee.h"
 #include "AttendanceRecord.h"
 #include "AttendanceEntry.h"
-#include "LeaveBalance.h"
+#include "LeaveApplication.h"
 #include <iostream>
 #include <fstream>
 #include <string>

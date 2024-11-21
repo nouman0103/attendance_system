@@ -1,7 +1,7 @@
 #pragma once
 #include "User.h"
 #include "AttendanceRecord.h"
-#include "LeaveBalance.h"
+#include "LeaveApplication.h"
 #include <memory>
 #include <iostream>
 #include <fstream>
@@ -23,11 +23,12 @@ class Employee {
 User(std::string name, unsigned int id);
 */
 class AttendanceRecord;
+class LeaveApplication;
 
 class Employee : public User
 {
 public:
-    Employee(std::string name, unsigned int id, std::string password, std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<LeaveBalance> leaveBalance);
+    Employee(std::string name, unsigned int id, std::string password, std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<LeaveApplication> leaveBalance);
     Employee(json j);
     Employee(const Employee &employee);
     virtual ~Employee();
@@ -35,8 +36,8 @@ public:
     void applyForLeave();
     void viewAttendance();
     void viewLeaveDetails();
-    void setLeaveBalance(std::shared_ptr<LeaveBalance> leaveBalance);
-    std::shared_ptr<LeaveBalance> getLeaveBalance();
+    void setLeaveApplication(std::shared_ptr<LeaveApplication> employeeLeaveApplication);
+    std::shared_ptr<LeaveApplication> getLeaveBalance();
     void setPosition(std::string position);
     std::string getPosition();
     void setAttendanceRecord(std::shared_ptr<AttendanceRecord> attendanceRecord);
@@ -47,5 +48,5 @@ public:
 private:
     std::string position;
     std::shared_ptr<AttendanceRecord> attendanceRecord;
-    std::shared_ptr<LeaveBalance> leaveBalance;
+    std::shared_ptr<LeaveApplication> employeeLeaveApplication;
 };

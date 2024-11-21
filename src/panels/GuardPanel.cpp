@@ -99,7 +99,7 @@ void GuardPanel::OnShow(wxShowEvent &event)
         datePicker->SetValue(wxDateTime::Now());
         // update time picker
         hourChoice->SetSelection(wxDateTime::Now().GetHour());
-        guard = std::make_shared<Guard>(*dm->getCurrentEmployee().get());
+        guard = std::dynamic_pointer_cast<Guard>(dm->getCurrentEmployee());
 
         // Msg Box for Guard Detail
     }
