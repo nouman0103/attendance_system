@@ -6,10 +6,11 @@ wxBEGIN_EVENT_TABLE(HorizontalBar, wxPanel)
     EVT_SIZE(HorizontalBar::OnSize)
 wxEND_EVENT_TABLE()
 
-HorizontalBar::HorizontalBar(wxWindow* parent)
+HorizontalBar::HorizontalBar(wxWindow* parent, int duration)
     : wxPanel(parent, wxFULL_REPAINT_ON_RESIZE), m_presentHours(0), m_casualLeaveHours(0), m_earnedLeaveHours(0), m_officialLeaveHours(0)
 {
     SetMinSize(wxSize(400, 120));
+    this->duration = duration;
 
     m_presentBrush = wxBrush(wxColour(76, 251, 126)); // Green
     m_casualLeaveBrush = wxBrush(wxColour(14,165,226)); // Blue
@@ -43,8 +44,8 @@ void HorizontalBar::OnPaint(wxPaintEvent& event)
     wxSize size = GetClientSize();
     
 
-
-    int totalHours = std::max(40,m_presentHours+m_casualLeaveHours+m_earnedLeaveHours+m_officialLeaveHours);
+    int durationHours = (duration / 7) * 40;
+    int totalHours = std::max(durationHours, m_presentHours+m_casualLeaveHours+m_earnedLeaveHours+m_officialLeaveHours);
     int barWidth = size.GetWidth();
     int barHeight = 50;
 
@@ -70,6 +71,11 @@ void HorizontalBar::OnPaint(wxPaintEvent& event)
 
     dc.SetBrush(m_officialLeaveBrush);
     dc.DrawRectangle(presentWidth + casualLeaveWidth + earnedLeaveWidth, 0, officialLeaveWidth, barHeight);
+
+    // draw a vertical dotted white line at 80% of the width
+    dc.SetPen(wxPen(wxColour(255, 255, 255), 1, wxPENSTYLE_DOT));
+    dc.DrawLine(barWidth * 0.8, 0, barWidth * 0.8, barHeight);
+    
 
     // draw labels below the bar with a colored dot
     int dotSize = 10;

@@ -6,7 +6,7 @@
 class HorizontalBar : public wxPanel
 {
 public:
-    HorizontalBar(wxWindow* parent);
+    HorizontalBar(wxWindow* parent, int duration);
 
     void SetData(int presentHours, int casualLeaveHours, int earnedLeaveHours, int officialLeaveHours);
 
@@ -14,6 +14,7 @@ private:
     void OnPaint(wxPaintEvent& event);
     void OnSize(wxSizeEvent& event);
 
+    int duration;
     int m_presentHours;
     int m_casualLeaveHours;
     int m_earnedLeaveHours;
@@ -24,8 +25,6 @@ private:
     wxBrush m_earnedLeaveBrush;
     wxBrush m_officialLeaveBrush;
     wxBrush m_notMarkedBrush;
-
-
 
 
     wxDECLARE_EVENT_TABLE();

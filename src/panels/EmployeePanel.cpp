@@ -25,7 +25,7 @@ EmployeePanel::EmployeePanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
 
     // title of employee panel
     wxStaticText *title = new wxStaticText(this, wxID_ANY, "Weekly Report", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE);
-    title->SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
+    title->SetFont(wxFont(16, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
     mainSizer->Add(title, 0, wxALL | wxEXPAND, 10);
 
     // write the date range (for example, "12/1/2021 - 12/7/2021")
@@ -49,8 +49,23 @@ EmployeePanel::EmployeePanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     mainSizer->Add(dateRangeSizer, 0, wxALIGN_CENTER_HORIZONTAL);
 
     // create a fake bar
-    m_barGraph = new HorizontalBar(this);
-    mainSizer->Add(m_barGraph, 0, wxALL | wxEXPAND, 10);
+    m_barGraphWeekly = new HorizontalBar(this, 7);
+    mainSizer->Add(m_barGraphWeekly, 0, wxALL | wxEXPAND, 10);
+
+    // add a horizontal separator
+    mainSizer->Add(new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL), 0, wxEXPAND | wxALL, 5);
+
+    wxStaticText *title2 = new wxStaticText(this, wxID_ANY, "Month's Report", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE);
+    title2->SetFont(wxFont(16, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
+    mainSizer->Add(title2, 0, wxALL | wxEXPAND, 10);
+
+
+    // add a horizontal bar with duration of 30
+    m_barGraphMonthly = new HorizontalBar(this, 30);
+    mainSizer->Add(m_barGraphMonthly, 0, wxALL | wxEXPAND, 10);
+    m_barGraphMonthly->SetData(70, 8, 3, 0);
+
+
 
     // add a horizontal separator
     mainSizer->Add(new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL), 0, wxEXPAND | wxALL, 5);
@@ -94,7 +109,7 @@ void EmployeePanel::OnShow(wxShowEvent &event)
         int hours = current_employee->getAttendanceRecord()->getHourWorkInWeek(weekStart.GetTicks());
 
         // set bar Data
-        m_barGraph->SetData(hours, 0, 0, 0);
+        m_barGraphWeekly->SetData(hours, 0, 0, 0);
     }
     event.Skip(); // Ensure the default handling of the event
 }
@@ -113,7 +128,7 @@ void EmployeePanel::OnPrevWeek(wxCommandEvent &event)
     weekEnd = weekEnd.Subtract(wxTimeSpan(7 * 24, 0, 0, 0));
     dateRangeText->SetLabelText(weekStart.Format("%d/%m/%Y") + " - " + weekEnd.Format("%d/%m/%Y"));
     int hours = dm->getCurrentEmployee()->getAttendanceRecord()->getHourWorkInWeek(weekStart.GetTicks());
-    m_barGraph->SetData(hours, 0, 0, 0);
+    m_barGraphWeekly->SetData(hours, 0, 0, 0);
 }
 
 void EmployeePanel::OnNextWeek(wxCommandEvent &event)
@@ -122,5 +137,5 @@ void EmployeePanel::OnNextWeek(wxCommandEvent &event)
     weekEnd = weekEnd.Add(wxTimeSpan(7 * 24, 0, 0, 0));
     dateRangeText->SetLabelText(weekStart.Format("%d/%m/%Y") + " - " + weekEnd.Format("%d/%m/%Y"));
     int hours = dm->getCurrentEmployee()->getAttendanceRecord()->getHourWorkInWeek(weekStart.GetTicks());
-    m_barGraph->SetData(hours, 0, 0, 0);
+    m_barGraphWeekly->SetData(hours, 0, 0, 0);
 }

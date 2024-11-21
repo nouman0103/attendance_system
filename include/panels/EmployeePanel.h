@@ -22,7 +22,8 @@ private:
     std::shared_ptr<DataManager> dm;
     wxDateTime weekStart;
     wxDateTime weekEnd;
-    HorizontalBar* m_barGraph;
+    HorizontalBar* m_barGraphWeekly;
+    HorizontalBar* m_barGraphMonthly;
     wxStaticText* dateRangeText;
 
 
