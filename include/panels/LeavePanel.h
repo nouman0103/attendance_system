@@ -32,9 +32,14 @@ private:
 
     void OnShow(wxShowEvent &event);
     void OnBack(wxCommandEvent &event);
+    void OnSubmit(wxCommandEvent &event);
 
 
     wxComboBox* leaveType;
+    wxDatePickerCtrl* startDate;
+    wxDatePickerCtrl* endDate;
+    wxTextCtrl* reason;
+    wxGridSizer* gridSizer;
 
 
 

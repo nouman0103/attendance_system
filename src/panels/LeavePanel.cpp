@@ -64,7 +64,7 @@ LeavePanel::LeavePanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     startDateSizer->Add(startDateLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, verticalSpacing);
     
     wxDateTime dt = wxDateTime::Now();
-    wxDatePickerCtrl* startDate = new wxDatePickerCtrl(this, wxID_ANY, dt, wxDefaultPosition, wxDefaultSize, wxDP_DROPDOWN);
+    startDate = new wxDatePickerCtrl(this, wxID_ANY, dt, wxDefaultPosition, wxDefaultSize, wxDP_DROPDOWN);
     startDateSizer->Add(startDate, 1, wxALL | wxEXPAND, verticalSpacing);
     mainSizer->Add(startDateSizer, 0, wxLEFT | wxRIGHT | wxEXPAND, verticalSpacing);
     
@@ -74,7 +74,7 @@ LeavePanel::LeavePanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     endDateLabel->SetMinSize(wxSize(100, -1)); // Set constant width for the label
     endDateSizer->Add(endDateLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, verticalSpacing);
     
-    wxDatePickerCtrl* endDate = new wxDatePickerCtrl(this, wxID_ANY, dt, wxDefaultPosition, wxDefaultSize, wxDP_DROPDOWN);
+    endDate = new wxDatePickerCtrl(this, wxID_ANY, dt, wxDefaultPosition, wxDefaultSize, wxDP_DROPDOWN);
     endDateSizer->Add(endDate, 1, wxALL | wxEXPAND, verticalSpacing);
     mainSizer->Add(endDateSizer, 0, wxLEFT | wxRIGHT | wxEXPAND, verticalSpacing);
     
@@ -84,13 +84,15 @@ LeavePanel::LeavePanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     reasonLabel->SetMinSize(wxSize(100, -1)); // Set constant width for the label
     reasonSizer->Add(reasonLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, verticalSpacing);
     
-    wxTextCtrl* reason = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE);
+    reason = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE);
     reasonSizer->Add(reason, 1, wxALL | wxEXPAND, verticalSpacing);
     mainSizer->Add(reasonSizer, 0, wxLEFT | wxRIGHT | wxEXPAND, verticalSpacing);
     
     // Submit Button
     wxButton* submit = new wxButton(this, wxID_ANY, "Submit");
     mainSizer->Add(submit, 0, wxALL | wxALIGN_CENTER, verticalSpacing);
+    // Bind the button to its event handler
+    submit->Bind(wxEVT_BUTTON, &LeavePanel::OnSubmit, this);
 
 
     // add horizontal line
@@ -104,7 +106,7 @@ LeavePanel::LeavePanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     scrolledWindow->SetScrollRate(5, 5);
     
     // Create a grid sizer
-    wxGridSizer* gridSizer = new wxGridSizer(6, 5, 5);
+    gridSizer = new wxGridSizer(6, 5, 5);
     wxStaticText* header1 = new wxStaticText(scrolledWindow, wxID_ANY, "Sr");
     wxStaticText* header2 = new wxStaticText(scrolledWindow, wxID_ANY, "Leave Type");
     wxStaticText* header3 = new wxStaticText(scrolledWindow, wxID_ANY, "Start Date");
@@ -194,6 +196,49 @@ void LeavePanel::OnBack(wxCommandEvent &event)
     InterfaceFrame *frame = dynamic_cast<InterfaceFrame *>(simplebook->GetParent());
     simplebook->SetSelection(InterfaceFrame::PID_PAGE_EMPLOYEE);
     frame->updateStatusBar("Back to attendance.", 1);
+}
+
+void LeavePanel::OnSubmit(wxCommandEvent &event)
+{
+    // Get the values from the form
+    wxString leaveTypeValue = leaveType->GetStringSelection();
+    wxDateTime startDateValue = wxDateTime();
+    wxDateTime endDateValue = wxDateTime();
+    // Get the start date
+    if (startDate)
+    {
+        startDateValue = startDate->GetValue();
+    }
+    // Get the end date
+    if (endDate)
+    {
+        endDateValue = endDate->GetValue();
+    }
+
+    // Get the reason
+    wxString reasonValue = reason->GetValue();
+    
+    // Validate the form
+    if (leaveTypeValue.IsEmpty() || reasonValue.IsEmpty())
+    {
+        wxMessageBox("Please fill in all fields.", "Error", wxOK | wxICON_ERROR);
+    }
+    else if (startDateValue.IsLaterThan(endDateValue))
+    {
+        wxMessageBox("End date must be after start date.", "Error", wxOK | wxICON_ERROR);
+    }
+    else
+    {
+        // Submit the leave application
+        // show values in wxLogMessage
+        wxLogMessage("Leave Type: %s", leaveTypeValue);
+        wxLogMessage("Start Date: %s", startDateValue.FormatISODate());
+        wxLogMessage("End Date: %s", endDateValue.FormatISODate());
+        wxLogMessage("Reason: %s", reasonValue);
+
+        wxMessageBox("Leave application submitted successfully.", "Success", wxOK | wxICON_INFORMATION);
+    }
+
 }
 
 // LeavePanel.cpp
