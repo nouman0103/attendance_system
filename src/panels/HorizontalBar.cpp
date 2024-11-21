@@ -44,7 +44,7 @@ void HorizontalBar::OnPaint(wxPaintEvent& event)
     
 
 
-    int totalHours = 40;
+    int totalHours = std::max(40,m_presentHours+m_casualLeaveHours+m_earnedLeaveHours+m_officialLeaveHours);
     int barWidth = size.GetWidth();
     int barHeight = 50;
 
@@ -84,7 +84,7 @@ void HorizontalBar::OnPaint(wxPaintEvent& event)
     std::string casualLeaveLabel = std::to_string(m_casualLeaveHours) + " Hrs Casual Leave";
     std::string earnedLeaveLabel = std::to_string(m_earnedLeaveHours) + " Hrs Earned Leave";
     std::string officialLeaveLabel = std::to_string(m_officialLeaveHours) + " Hrs Official Leave";
-    std::string notMarkedLabel = std::to_string(totalHours - m_presentHours - m_casualLeaveHours - m_earnedLeaveHours - m_officialLeaveHours) + " Hrs Not Marked";
+    std::string notMarkedLabel = std::to_string(std::max(totalHours - m_presentHours - m_casualLeaveHours - m_earnedLeaveHours - m_officialLeaveHours,0)) + " Hrs Not Marked";
 
 
     dc.SetBrush(m_presentBrush);
