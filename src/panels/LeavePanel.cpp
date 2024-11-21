@@ -133,40 +133,6 @@ LeavePanel::LeavePanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     gridSizer->Add(header6, 0, wxALIGN_CENTER);
     
     // Add data
-    for (int i = 0; i < 10; i++)
-    {
-        wxStaticText* data1 = new wxStaticText(scrolledWindow, wxID_ANY, "1");
-        wxStaticText* data2 = new wxStaticText(scrolledWindow, wxID_ANY, "Casual Leave");
-        wxStaticText* data3 = new wxStaticText(scrolledWindow, wxID_ANY, "12/1/2021");
-        wxStaticText* data4 = new wxStaticText(scrolledWindow, wxID_ANY, "12/7/2021");
-        wxStaticText* data5 = new wxStaticText(scrolledWindow, wxID_ANY, "Vacation");
-        wxStaticText* data6 = new wxStaticText(scrolledWindow, wxID_ANY, "Approved");
-    
-        data1->SetMaxSize(wxSize(10, -1));
-        // Set max width for data5
-        data5->SetMaxSize(wxSize(200, -1));
-    
-        // Change data6 color based on status
-        if (data6->GetLabel() == "Approved")
-        {
-            data6->SetForegroundColour(wxColour(0, 128, 0));
-        }
-        else if (data6->GetLabel() == "Pending")
-        {
-            data6->SetForegroundColour(wxColour(255, 165, 0));
-        }
-        else
-        {
-            data6->SetForegroundColour(wxColour(255, 0, 0));
-        }
-    
-        gridSizer->Add(data1, 0, wxALIGN_CENTER);
-        gridSizer->Add(data2, 0, wxALIGN_CENTER);
-        gridSizer->Add(data3, 0, wxALIGN_CENTER);
-        gridSizer->Add(data4, 0, wxALIGN_CENTER);
-        gridSizer->Add(data5, 0, wxALIGN_CENTER);
-        gridSizer->Add(data6, 0, wxALIGN_CENTER);
-    }
     
     // Set the sizer for the scrolled window
     scrolledWindow->SetSizer(gridSizer);
@@ -186,6 +152,47 @@ void LeavePanel::OnShow(wxShowEvent &event)
     if (event.IsShown())
     {
         leaveType->SetSelection(0);
+        //Clear the form
+        startDate->SetValue(wxDateTime::Now());
+        endDate->SetValue(wxDateTime::Now());
+        reason->Clear();
+        // Clear the grid
+        // if (gridSizer)
+        // {
+        //     wxSizerItemList children = gridSizer->GetChildren();
+        //     for (wxSizerItem* child : children)
+        //     {
+        //         gridSizer->Detach(child->GetWindow());
+        //         child->GetWindow()->Destroy();
+        //     }
+        // }
+        // Get the leave applications
+        std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>> leaveApplications = dm->getCurrentEmployee()->getLeaveApplications();
+        // Add the leave applications to the grid
+        
+        if (leaveApplications)
+        {
+            int i = 1;
+            for (std::shared_ptr<LeaveApplication> leaveApplication : *leaveApplications)
+            {
+                wxMessageBox("Leave application found.", "Success", wxOK | wxICON_INFORMATION);
+                wxStaticText* sr = new wxStaticText(this, wxID_ANY, std::to_string(i));
+                wxStaticText* leaveType = new wxStaticText(this, wxID_ANY, leaveApplication->getTaskType());
+                wxStaticText* startDate = new wxStaticText(this, wxID_ANY, wxDateTime(leaveApplication->getStartDate()).FormatISODate());
+                wxStaticText* endDate = new wxStaticText(this, wxID_ANY, wxDateTime(leaveApplication->getEndDate()).FormatISODate());
+                wxStaticText* reason = new wxStaticText(this, wxID_ANY, leaveApplication->getReason());
+                wxStaticText* status = new wxStaticText(this, wxID_ANY, leaveApplication->getStatus() == LeaveStatus::PENDING ? "Pending" : leaveApplication->getStatus() == LeaveStatus::APPROVED ? "Approved" : "Rejected");
+                
+                gridSizer->Add(sr, 0, wxALIGN_CENTER);
+                gridSizer->Add(leaveType, 0, wxALIGN_CENTER);
+                gridSizer->Add(startDate, 0, wxALIGN_CENTER);
+                gridSizer->Add(endDate, 0, wxALIGN_CENTER);
+                gridSizer->Add(reason, 0, wxALIGN_CENTER);
+                gridSizer->Add(status, 0, wxALIGN_CENTER);
+                
+                i++;
+            }
+        }
     }
     event.Skip(); // Ensure the default handling of the event
 }

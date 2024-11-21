@@ -1,6 +1,6 @@
 #include "Employee.h"
 
-Employee::Employee(std::string name, unsigned int id, std::string password, std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<std::vector<LeaveApplication>> leaveApplications)
+Employee::Employee(std::string name, unsigned int id, std::string password, std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>> leaveApplications)
     : User(name, id,password) {
     this->position = position;
     this->attendanceRecord = attendanceRecord;
@@ -40,11 +40,11 @@ void Employee::viewLeaveDetails() {
     // Implementation to view leave details
 }
 
-void Employee::setLeaveApplication(std::shared_ptr<std::vector<LeaveApplication>> leaveApplications) {
+void Employee::setLeaveApplication(std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>> leaveApplications) {
     this->leaveApplications = leaveApplications;
 }
 
-std::shared_ptr<std::vector<LeaveApplication>> Employee::getLeaveApplications()
+std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>> Employee::getLeaveApplications()
 {
     return leaveApplications;
 }
