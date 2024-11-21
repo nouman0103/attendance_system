@@ -1,22 +1,22 @@
 #include "Employee.h"
 
-Employee::Employee(std::string name, unsigned int id,std::string password, std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<LeaveBalance> leaveBalance)
+Employee::Employee(std::string name, unsigned int id,std::string password, std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<LeaveApplication> leaveBalance)
     : User(name, id,password) {
     this->position = position;
     this->attendanceRecord = attendanceRecord;
-    this->leaveBalance = leaveBalance;
+    this->employeeLeaveApplication = leaveBalance;
 }
 
 Employee::Employee(json j) : User(j)
  {
     this->position = j["position"];
     this->attendanceRecord = nullptr;
-    this->leaveBalance = nullptr;
+    this->employeeLeaveApplication = nullptr;
 }
 Employee::Employee(const Employee &employee) : User(employee) {
     this->position = employee.position;
     this->attendanceRecord = employee.attendanceRecord;
-    this->leaveBalance = employee.leaveBalance;
+    this->employeeLeaveApplication = employee.employeeLeaveApplication;
 }
 
 Employee::~Employee()
@@ -40,12 +40,12 @@ void Employee::viewLeaveDetails() {
     // Implementation to view leave details
 }
 
-void Employee::setLeaveBalance(std::shared_ptr<LeaveBalance> leaveBalance) {
-    this->leaveBalance = leaveBalance;
+void Employee::setLeaveApplication(std::shared_ptr<LeaveApplication> employeeLeaveApplication) {
+    this->employeeLeaveApplication = employeeLeaveApplication;
 }
 
-std::shared_ptr<LeaveBalance> Employee::getLeaveBalance() {
-    return leaveBalance;
+std::shared_ptr<LeaveApplication> Employee::getLeaveBalance() {
+    return employeeLeaveApplication;
 }
 
 void Employee::setPosition(std::string position) {
