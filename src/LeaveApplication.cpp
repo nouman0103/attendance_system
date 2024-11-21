@@ -23,6 +23,35 @@ LeaveApplication::LeaveApplication(json j)
 }
 
 
+time_t LeaveApplication::getStartDate()
+{
+    return this->startDate;
+}
+
+time_t LeaveApplication::getEndDate()
+{
+    return this->endDate;
+}
+
+std::string LeaveApplication::getReason()
+{
+    return this->reason;
+}
+
+time_t LeaveApplication::getApplicationDate()
+{
+    return this->applicationDate;
+}
+
+time_t LeaveApplication::getApprovalDate()
+{
+    return this->approvalDate;
+}
+
+LeaveStatus LeaveApplication::getStatus()
+{
+    return this->status;
+}
 
 std::shared_ptr<Employee> LeaveApplication::getEmployee()
 {

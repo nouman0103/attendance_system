@@ -28,7 +28,7 @@ class LeaveApplication;
 class Employee : public User
 {
 public:
-    Employee(std::string name, unsigned int id, std::string password, std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<std::vector<LeaveApplication>> leaveApplications);
+    Employee(std::string name, unsigned int id, std::string password, std::string position, std::shared_ptr<AttendanceRecord> attendanceRecord, std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>> leaveApplications);
     Employee(json j);
     Employee(const Employee &employee);
     virtual ~Employee();
@@ -36,8 +36,8 @@ public:
     void applyForLeave();
     void viewAttendance();
     void viewLeaveDetails();
-    void setLeaveApplication(std::shared_ptr<std::vector<LeaveApplication>> leaveApplications);
-    std::shared_ptr<std::vector<LeaveApplication>> getLeaveApplications();
+    void setLeaveApplication(std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>> leaveApplications);
+    std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>> getLeaveApplications();
     void setPosition(std::string position);
     std::string getPosition();
     void setAttendanceRecord(std::shared_ptr<AttendanceRecord> attendanceRecord);
@@ -48,5 +48,5 @@ public:
 private:
     std::string position;
     std::shared_ptr<AttendanceRecord> attendanceRecord;
-    std::shared_ptr<std::vector<LeaveApplication>> leaveApplications;
+    std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>> leaveApplications;
 };

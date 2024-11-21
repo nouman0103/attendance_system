@@ -27,11 +27,20 @@ public:
     LeaveApplication(std::shared_ptr<Employee> employee, time_t startDate, time_t endDate, std::string reason, time_t applicationDate, time_t approvalDate, LeaveStatus status);
     LeaveApplication(json j);
     std::shared_ptr<Employee> getEmployee();
+    time_t getStartDate();
+    time_t getEndDate();
+    std::string getReason();
+    time_t getApplicationDate();
+    time_t getApprovalDate();
+    LeaveStatus getStatus();
+    
     virtual json  to_json() = 0;
     virtual bool approve(std::shared_ptr<Employee> approver) = 0;
     virtual bool reject(std::shared_ptr<Employee> approver) = 0;
     virtual std::string getTaskType() = 0;
 };
+
+
 
 class OfficialLeaveApplication : public LeaveApplication
 {

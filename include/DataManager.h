@@ -19,8 +19,9 @@ private:
     // Dictory of employees id and password
     std::map<std::string, std::shared_ptr<Employee>> employeeDict;
     std::vector<AttendanceRecord> attendanceRecords;
+    std::map<std::string, std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>>> leavesDict;
     std::shared_ptr<Employee> currentEmployee;
-    std::vector<LeaveApplication> leaveApplications;
+
 
     // std::vector<LeaveBalance> leaveBalances;
 
@@ -36,7 +37,7 @@ public:
     void writeAttendanceRecord(AttendanceEntry attendanceEntry);
     void readAttendanceRecord();
     void writeLeaveApplication(std::shared_ptr<LeaveApplication> leaveApplication);
-    std::vector<LeaveApplication> readLeaveApplication();
+    void readLeaveApplication();
     // void writeLeaveBalance(LeaveBalance leaveBalance);
     // std::vector<LeaveBalance> readLeaveBalance();
     // void writeGuard(Guard guard);

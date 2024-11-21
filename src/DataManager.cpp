@@ -13,6 +13,7 @@ DataManager::DataManager()
     updateEmployees();
     readAttendanceRecord();
     // readLeaveBalance();
+    readLeaveApplication();
 }
 bool DataManager::writeEmployee(Employee employee)
 {
@@ -173,4 +174,62 @@ void DataManager::writeLeaveApplication(std::shared_ptr<LeaveApplication> leaveA
     std::ofstream write("record.json");
     write << j.dump(4);
     write.close();
+    leavesDict[name]->push_back(leaveApplication);
+}
+
+void DataManager::readLeaveApplication()
+{
+    std::ifstream read("record.json");
+    json j;
+    read >> j;
+    read.close();
+    /* {
+                "applicationDate": 1732213029,
+                "approvalDate": 0,
+                "endDate": 1732215600,
+                "reason": "123",
+                "startDate": 1732129200,
+                "status": 0,
+                "taskType": "Casual Leave"
+            },*/
+
+    for (auto &employee : j.items())
+    {
+        std::string name = employee.key();
+        std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>> leaves = std::make_shared<std::vector<std::shared_ptr<LeaveApplication>>>();
+        for (auto &leave : employee.value()["leave"])
+        {
+            if (leave["taskType"] == "Casual Leave")
+            {
+                std::shared_ptr<CasualLeaveApplication> a = std::make_shared<CasualLeaveApplication>(
+                   employeeDict[employee.key()], leave["startDate"], leave["endDate"], leave["reason"], leave["applicationDate"], leave["approvalDate"], leave["status"]
+                    );
+                leaves->push_back(a);
+            }
+            else if (leave["taskType"] == "Earned Leave")
+            {
+                std::shared_ptr<EarnedLeaveApplication> a = std::make_shared<EarnedLeaveApplication>(
+                    employeeDict[employee.key()], leave["startDate"], leave["endDate"], leave["reason"], leave["applicationDate"], leave["approvalDate"], leave["status"]
+                    );
+                leaves->push_back(a);
+            }
+            else if (leave["taskType"] == "Official Leave")
+            {
+                std::shared_ptr<OfficialLeaveApplication> a = std::make_shared<OfficialLeaveApplication>(
+                    employeeDict[employee.key()], leave["startDate"], leave["endDate"], leave["reason"], leave["applicationDate"], leave["approvalDate"], leave["status"]
+                );
+                leaves->push_back(a);
+            }
+            else if (leave["taskType"] == "Unpaid Leave")
+            {
+                std::shared_ptr<UnpaidLeaveApplication> a = std::make_shared<UnpaidLeaveApplication>(
+                    employeeDict[employee.key()], leave["startDate"], leave["endDate"], leave["reason"], leave["applicationDate"], leave["approvalDate"], leave["status"]
+                );
+                leaves->push_back(a);
+            }
+        }
+        // leaveApplications.push_back(LeaveApplication(employeeDict[employee.key()], leaves));
+        leavesDict[employee.key()] = leaves;
+        employeeDict[employee.key()]->setLeaveApplication(leaves);
+    }
 }
