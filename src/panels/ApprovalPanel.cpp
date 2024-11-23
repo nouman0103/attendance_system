@@ -173,6 +173,7 @@ void ApprovalPanel::OnShow(wxShowEvent &event)
         filtered = false;
         outstandingLeavesButton->SetLabel("Filter Outstanding Leaves");
         std::string position = dm->getCurrentEmployee()->getPosition();
+        std::vector<std::shared_ptr<LeaveApplication>> leaveApplications = dm->getAllLeaveApplications();
         if (position == "Supervisor")
         {
             setLoggedInAsPosition(ROLE_SUPERVISOR);
@@ -184,6 +185,10 @@ void ApprovalPanel::OnShow(wxShowEvent &event)
         else
         {
             setLoggedInAsPosition(ROLE_NONE);
+        }
+        for (std::shared_ptr<LeaveApplication> leaveApplication : leaveApplications)
+        {
+            wxMessageBox(leaveApplication->getTaskType(), "Leave Application", wxOK | wxICON_INFORMATION);
         }
     }
     event.Skip(); // Ensure the default handling of the event
