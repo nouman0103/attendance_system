@@ -233,3 +233,16 @@ void DataManager::readLeaveApplication()
         employeeDict[employee.key()]->setLeaveApplication(leaves);
     }
 }
+
+std::vector<std::shared_ptr<LeaveApplication>> DataManager::getAllLeaveApplications()
+{
+    std::vector<std::shared_ptr<LeaveApplication>> allLeaves;
+    for (auto &employee : leavesDict)
+    {
+        for (auto &leave : *employee.second)
+        {
+            allLeaves.push_back(leave);
+        }
+    }
+    return allLeaves;
+}
