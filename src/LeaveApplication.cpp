@@ -117,9 +117,9 @@ json EarnedLeaveApplication::to_json()
 }
 
 
-bool OfficialLeaveApplication::approve(std::shared_ptr<Employee> approver)
+bool OfficialLeaveApplication::approve(Employee approver)
 {
-    if (!approver->getPosition().compare("Director") || !approver->getPosition().compare("Supervisor"))
+    if (!approver.getPosition().compare("Director") || !approver.getPosition().compare("Supervisor"))
     {
         return false;
     }
@@ -132,7 +132,7 @@ bool OfficialLeaveApplication::approve(std::shared_ptr<Employee> approver)
     return true;
 }
 
-bool OfficialLeaveApplication::reject(std::shared_ptr<Employee> approver)
+bool OfficialLeaveApplication::reject(Employee approver)
 {
     if (this->status == LeaveStatus::APPROVED)
     {
@@ -159,7 +159,7 @@ CasualLeaveApplication::CasualLeaveApplication(json j) : LeaveApplication(j)
 
 
 
-bool CasualLeaveApplication::approve(std::shared_ptr<Employee> approver)
+bool CasualLeaveApplication::approve(Employee approver)
 {
 
     if (this->status == LeaveStatus::REJECTED)
@@ -170,7 +170,7 @@ bool CasualLeaveApplication::approve(std::shared_ptr<Employee> approver)
     return true;
 }
 
-bool CasualLeaveApplication::reject(std::shared_ptr<Employee> approver)
+bool CasualLeaveApplication::reject(Employee approver)
 {
     if (this->status == LeaveStatus::APPROVED)
     {
@@ -195,9 +195,9 @@ EarnedLeaveApplication::EarnedLeaveApplication(json j) : LeaveApplication(j)
 
 
 
-bool EarnedLeaveApplication::approve(std::shared_ptr<Employee> approver)
+bool EarnedLeaveApplication::approve(Employee approver)
 {
-    if (!approver->getPosition().compare("Director"))
+    if (!approver.getPosition().compare("Director"))
     {
         return false;
     }
@@ -209,9 +209,9 @@ bool EarnedLeaveApplication::approve(std::shared_ptr<Employee> approver)
     return true;
 }
 
-bool EarnedLeaveApplication::reject(std::shared_ptr<Employee> approver)
+bool EarnedLeaveApplication::reject(Employee approver)
 {
-    if (!approver->getPosition().compare("Director"))
+    if (!approver.getPosition().compare("Director"))
     {
         return false;
     }
@@ -236,9 +236,9 @@ UnpaidLeaveApplication::UnpaidLeaveApplication(json j) : LeaveApplication(j)
 {
 }
 
-bool UnpaidLeaveApplication::approve(std::shared_ptr<Employee> approver)
+bool UnpaidLeaveApplication::approve(Employee approver)
 {
-    if (!approver->getPosition().compare("Director") || !approver->getPosition().compare("Supervisor"))
+    if (!approver.getPosition().compare("Director") || !approver.getPosition().compare("Supervisor"))
     {
         return false;
     }
@@ -251,7 +251,7 @@ bool UnpaidLeaveApplication::approve(std::shared_ptr<Employee> approver)
     return true;
 }
 
-bool UnpaidLeaveApplication::reject(std::shared_ptr<Employee> approver)
+bool UnpaidLeaveApplication::reject(Employee approver)
 {
     if (this->status == LeaveStatus::APPROVED)
     {
