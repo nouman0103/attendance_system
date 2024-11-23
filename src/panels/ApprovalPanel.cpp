@@ -122,8 +122,6 @@ void ApprovalPanel::AddHeaders(){
 }
 
 void ApprovalPanel::updateUI(){
-    filtered = false;
-    outstandingLeavesButton->SetLabel("Filter Outstanding Leaves");
     std::string position = dm->getCurrentEmployee()->getPosition();
     std::vector<std::shared_ptr<LeaveApplication>> leaveApplications = dm->getAllLeaveApplications();
     if (position == "Supervisor")
@@ -152,6 +150,11 @@ void ApprovalPanel::updateUI(){
     int i = 1;
     for (std::shared_ptr<LeaveApplication> leaveApplication : leaveApplications)
     {
+        if (filtered){
+            if (leaveApplication->getStatus() != LeaveStatus::PENDING){
+                continue;
+            }
+        }
         wxStaticText* data1 = new wxStaticText(scrolledWindow, wxID_ANY, std::to_string(i));
         wxStaticText* data2 = new wxStaticText(scrolledWindow, wxID_ANY, leaveApplication->getEmployee()->getName());
         wxStaticText* data3 = new wxStaticText(scrolledWindow, wxID_ANY, leaveApplication->getTaskType());
@@ -226,6 +229,8 @@ void ApprovalPanel::OnShow(wxShowEvent &event)
 {
     if (event.IsShown())
     {
+        filtered = false;
+        outstandingLeavesButton->SetLabel("Filter Outstanding Leaves");
         updateUI();            
     }
     event.Skip(); // Ensure the default handling of the event
@@ -235,26 +240,15 @@ void ApprovalPanel::filterOutstandingLeaves(wxCommandEvent &event)
 {
     if(!filtered)
     {
-        wxMessageBox("Filter Outstanding Leaves", "Filter Outstanding Leaves", wxOK | wxICON_INFORMATION);
         filtered = true;
         outstandingLeavesButton->SetLabel("Show All Leaves");
     }
     else
     {
-        wxMessageBox("Show All Leaves", "Show All Leaves", wxOK | wxICON_INFORMATION);
         filtered = false;
         outstandingLeavesButton->SetLabel("Filter Outstanding Leaves");
     }
-    // if (!filtered)
-    // get the current employee
-    // Employee *employee = dm->getCurrentEmployee();
-    // // get the outstanding leaves
-    // std::vector<Leave> outstandingLeaves = dm->getOutstandingLeaves(employee->getId());
-    // // display the outstanding leaves
-    // for (Leave leave : outstandingLeaves)
-    // {
-    //     std::cout << leave.toString() << std::endl;
-    // }
+    updateUI();
 }
 
 void ApprovalPanel::setLoggedInAsPosition(int position)
