@@ -102,11 +102,28 @@ LeavePanel::LeavePanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     // create a table to display leave history
     // format: Sr | Leave Type | Start Date | End Date | Reason | Status
         // Create a scrolled window
-    wxScrolledWindow* scrolledWindow = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxVSCROLL);
+    scrolledWindow = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxVSCROLL);
     scrolledWindow->SetScrollRate(5, 5);
     
     // Create a grid sizer
     gridSizer = new wxGridSizer(6, 5, 5);
+    
+    // Add data
+    
+    // Set the sizer for the scrolled window
+    scrolledWindow->SetSizer(gridSizer);
+    gridSizer->Fit(scrolledWindow);
+    
+    // Add the scrolled window to the main sizer
+    mainSizer->Add(scrolledWindow, 1, wxALL | wxEXPAND, 10);
+
+
+    SetSizer(mainSizer);
+
+    Bind(wxEVT_SHOW, &LeavePanel::OnShow, this);
+}
+
+void LeavePanel::AddGridHeaders(){
     wxStaticText* header1 = new wxStaticText(scrolledWindow, wxID_ANY, "Sr");
     wxStaticText* header2 = new wxStaticText(scrolledWindow, wxID_ANY, "Leave Type");
     wxStaticText* header3 = new wxStaticText(scrolledWindow, wxID_ANY, "Start Date");
@@ -132,67 +149,74 @@ LeavePanel::LeavePanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     gridSizer->Add(header5, 0, wxALIGN_CENTER);
     gridSizer->Add(header6, 0, wxALIGN_CENTER);
     
-    // Add data
+}
+
+void LeavePanel::UpdateUI(){
+    leaveType->SetSelection(0);
+    //Clear the form
+    startDate->SetValue(wxDateTime::Now());
+    endDate->SetValue(wxDateTime::Now());
+    reason->Clear();
+    // Clear the grid
+    gridSizer->Clear(true);
+
+    // Add the grid headers
+    AddGridHeaders();
+
+    // Get the leave applications
+    std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>> leaveApplications = dm->getCurrentEmployee()->getLeaveApplications();
+    // Add the leave applications to the grid
     
-    // Set the sizer for the scrolled window
+    if (leaveApplications)
+    {
+        int i = leaveApplications->size();
+        int j = 1;
+        for (auto it = leaveApplications->rbegin(); it != leaveApplications->rend(); ++it)
+        {
+            std::shared_ptr<LeaveApplication> leaveApplication = *it;
+            wxStaticText* sr = new wxStaticText(scrolledWindow, wxID_ANY, std::to_string(j));
+            wxStaticText* leaveType = new wxStaticText(scrolledWindow, wxID_ANY, leaveApplication->getTaskType());
+            wxStaticText* startDate = new wxStaticText(scrolledWindow, wxID_ANY, wxDateTime(leaveApplication->getStartDate()).FormatISODate());
+            wxStaticText* endDate = new wxStaticText(scrolledWindow, wxID_ANY, wxDateTime(leaveApplication->getEndDate()).FormatISODate());
+            wxStaticText* reason = new wxStaticText(scrolledWindow, wxID_ANY, leaveApplication->getReason());
+            wxStaticText* status = new wxStaticText(scrolledWindow, wxID_ANY, leaveApplication->getStatus() == LeaveStatus::PENDING ? "Pending" : leaveApplication->getStatus() == LeaveStatus::APPROVED ? "Approved" : "Rejected");
+            
+            gridSizer->Add(sr, 0, wxALIGN_CENTER);
+            gridSizer->Add(leaveType, 0, wxALIGN_CENTER);
+            gridSizer->Add(startDate, 0, wxALIGN_CENTER);
+            gridSizer->Add(endDate, 0, wxALIGN_CENTER);
+            gridSizer->Add(reason, 0, wxALIGN_CENTER);
+            gridSizer->Add(status, 0, wxALIGN_CENTER);
+            
+            i--;
+            j++;
+        }
+        if (leaveApplications->size() == 0)
+        {
+            wxStaticText* noData = new wxStaticText(scrolledWindow, wxID_ANY, "No data available.", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+            gridSizer->Add(noData, 0, wxALIGN_CENTER);
+        }
+    }
+    else
+    {
+        wxStaticText* noData = new wxStaticText(scrolledWindow, wxID_ANY, "No data available!", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+        gridSizer->Add(noData, 0, wxALIGN_CENTER);
+    }
+    // Update the sizer for the scrolled window and refresh layout
     scrolledWindow->SetSizer(gridSizer);
     gridSizer->Fit(scrolledWindow);
+    gridSizer->Layout();  // This ensures the grid layout is updated
+    scrolledWindow->Layout();  // Ensure the scrolled window itself is re-laid out
     
-    // Add the scrolled window to the main sizer
-    mainSizer->Add(scrolledWindow, 1, wxALL | wxEXPAND, 10);
-
-
-    SetSizer(mainSizer);
-
-    Bind(wxEVT_SHOW, &LeavePanel::OnShow, this);
+    // You can also call Fit() if needed, but Layout() should suffice for dynamic updates
+    Layout();  // Ensure the main sizer is re-laid out
 }
 
 void LeavePanel::OnShow(wxShowEvent &event)
 {
     if (event.IsShown())
     {
-        leaveType->SetSelection(0);
-        //Clear the form
-        startDate->SetValue(wxDateTime::Now());
-        endDate->SetValue(wxDateTime::Now());
-        reason->Clear();
-        // Clear the grid
-        // if (gridSizer)
-        // {
-        //     wxSizerItemList children = gridSizer->GetChildren();
-        //     for (wxSizerItem* child : children)
-        //     {
-        //         gridSizer->Detach(child->GetWindow());
-        //         child->GetWindow()->Destroy();
-        //     }
-        // }
-        // Get the leave applications
-        std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>> leaveApplications = dm->getCurrentEmployee()->getLeaveApplications();
-        // Add the leave applications to the grid
-        
-        if (leaveApplications)
-        {
-            int i = 1;
-            for (std::shared_ptr<LeaveApplication> leaveApplication : *leaveApplications)
-            {
-                wxMessageBox("Leave application found.", "Success", wxOK | wxICON_INFORMATION);
-                wxStaticText* sr = new wxStaticText(this, wxID_ANY, std::to_string(i));
-                wxStaticText* leaveType = new wxStaticText(this, wxID_ANY, leaveApplication->getTaskType());
-                wxStaticText* startDate = new wxStaticText(this, wxID_ANY, wxDateTime(leaveApplication->getStartDate()).FormatISODate());
-                wxStaticText* endDate = new wxStaticText(this, wxID_ANY, wxDateTime(leaveApplication->getEndDate()).FormatISODate());
-                wxStaticText* reason = new wxStaticText(this, wxID_ANY, leaveApplication->getReason());
-                wxStaticText* status = new wxStaticText(this, wxID_ANY, leaveApplication->getStatus() == LeaveStatus::PENDING ? "Pending" : leaveApplication->getStatus() == LeaveStatus::APPROVED ? "Approved" : "Rejected");
-                
-                gridSizer->Add(sr, 0, wxALIGN_CENTER);
-                gridSizer->Add(leaveType, 0, wxALIGN_CENTER);
-                gridSizer->Add(startDate, 0, wxALIGN_CENTER);
-                gridSizer->Add(endDate, 0, wxALIGN_CENTER);
-                gridSizer->Add(reason, 0, wxALIGN_CENTER);
-                gridSizer->Add(status, 0, wxALIGN_CENTER);
-                
-                i++;
-            }
-        }
+        UpdateUI();   
     }
     event.Skip(); // Ensure the default handling of the event
 }
@@ -229,21 +253,12 @@ void LeavePanel::OnSubmit(wxCommandEvent &event)
     if (leaveTypeValue.IsEmpty() || reasonValue.IsEmpty())
     {
         wxMessageBox("Please fill in all fields.", "Error", wxOK | wxICON_ERROR);
+        return;   
     }
     else if (startDateValue.IsLaterThan(endDateValue))
     {
         wxMessageBox("End date must be after start date.", "Error", wxOK | wxICON_ERROR);
-    }
-    else
-    {
-        // Submit the leave application
-        // show values in wxLogMessage
-        wxLogMessage("Leave Type: %s", leaveTypeValue);
-        wxLogMessage("Start Date: %s", startDateValue.FormatISODate());
-        wxLogMessage("End Date: %s", endDateValue.FormatISODate());
-        wxLogMessage("Reason: %s", reasonValue);
-
-        wxMessageBox("Leave application submitted successfully.", "Success", wxOK | wxICON_INFORMATION);
+        return;
     }
     /*leaveTypes.Add("Casual Leave");
     leaveTypes.Add("Earned Leave");
@@ -274,8 +289,11 @@ void LeavePanel::OnSubmit(wxCommandEvent &event)
     else
     {
         wxMessageBox("Please select a leave type.", "Error", wxOK | wxICON_ERROR);
-
+        return;
     }
+
+    wxMessageBox("Leave application submitted successfully.", "Success", wxOK | wxICON_INFORMATION);
+    UpdateUI();
 
 }
 

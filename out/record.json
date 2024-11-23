@@ -134,7 +134,26 @@
                 "type": 1
             }
         ],
-        "leave": [],
+        "leave": [
+            {
+                "applicationDate": 1732381073,
+                "approvalDate": 0,
+                "endDate": 1732302000,
+                "reason": "None",
+                "startDate": 1732302000,
+                "status": 0,
+                "taskType": "Official Leave"
+            },
+            {
+                "applicationDate": 1732381268,
+                "approvalDate": 0,
+                "endDate": 1732302000,
+                "reason": "Work",
+                "startDate": 1732302000,
+                "status": 0,
+                "taskType": "Casual Leave"
+            }
+        ],
         "leaveBalance": 0
     },
     "sup": {
