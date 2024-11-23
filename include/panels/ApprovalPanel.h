@@ -42,14 +42,29 @@ private:
     void OnShow(wxShowEvent &event);
     void OnViewReports(wxCommandEvent &event);
     void filterOutstandingLeaves(wxCommandEvent &event);
+    void AddHeaders();
+    void OnApprovalButton(wxCommandEvent &event);
+    void OnRejectButton(wxCommandEvent &event);
+    void updateUI();
     int loggedInAsPosition;
     bool filtered = false;
     wxButton *outstandingLeavesButton;
+    wxFlexGridSizer* gridSizer;
+    wxScrolledWindow* scrolledWindow;
 
 
     std::shared_ptr<DataManager> dm;
     wxDECLARE_EVENT_TABLE();
 };
 
+
+class EventData: public wxClientData
+{
+public:
+    EventData(std::shared_ptr<LeaveApplication> leaveApplication);
+    std::shared_ptr<LeaveApplication> getLeaveApplication();
+private:
+    std::shared_ptr<LeaveApplication> leaveApplication;
+};
 
 #endif // APPROVALPANEL_H

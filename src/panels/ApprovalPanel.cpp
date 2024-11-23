@@ -54,12 +54,30 @@ ApprovalPanel::ApprovalPanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     // create a table to display leave history
     // format: Sr | Leave Type | Start Date | End Date | Reason | Status
     // Create a scrolled window
-    wxScrolledWindow* scrolledWindow = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxVSCROLL);
+    scrolledWindow = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxVSCROLL);
     scrolledWindow->SetScrollRate(5, 5);
     
     // Create a grid sizer
-    wxFlexGridSizer* gridSizer = new wxFlexGridSizer(8, 3, 3);
+    gridSizer = new wxFlexGridSizer(8, 3, 3);
+    //AddHeaders();
+    AddHeaders();
+    
+    
+    // Set the sizer for the scrolled window
+    scrolledWindow->SetSizer(gridSizer);
+    gridSizer->Fit(scrolledWindow);
+    
+    // Add the scrolled window to the main sizer
+    mainSizer->Add(scrolledWindow, 1, wxALL | wxEXPAND, 10);
 
+
+    SetSizer(mainSizer);
+
+    Bind(wxEVT_SHOW, &ApprovalPanel::OnShow, this);
+
+}
+
+void ApprovalPanel::AddHeaders(){
     // Set growable columns
     gridSizer->AddGrowableCol(0, 1); // Sr
     gridSizer->AddGrowableCol(1, 1); // Employee
@@ -101,20 +119,47 @@ ApprovalPanel::ApprovalPanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     gridSizer->Add(header6, 0, wxALIGN_CENTER | wxEXPAND);
     gridSizer->Add(header7, 0, wxALIGN_CENTER | wxEXPAND);
     gridSizer->Add(header8, 0, wxALIGN_CENTER | wxEXPAND);
-    
-    // Add data
-    for (int i = 0; i < 10; i++)
+}
+
+void ApprovalPanel::updateUI(){
+    filtered = false;
+    outstandingLeavesButton->SetLabel("Filter Outstanding Leaves");
+    std::string position = dm->getCurrentEmployee()->getPosition();
+    std::vector<std::shared_ptr<LeaveApplication>> leaveApplications = dm->getAllLeaveApplications();
+    if (position == "Supervisor")
     {
-        wxStaticText* data1 = new wxStaticText(scrolledWindow, wxID_ANY, "1");
-        wxStaticText* data2 = new wxStaticText(scrolledWindow, wxID_ANY, "john");
-        wxStaticText* data3 = new wxStaticText(scrolledWindow, wxID_ANY, "Official Leave");
-        wxStaticText* data4 = new wxStaticText(scrolledWindow, wxID_ANY, "12/1/2021");
-        wxStaticText* data5 = new wxStaticText(scrolledWindow, wxID_ANY, "12/7/2021");
-        wxStaticText* data6 = new wxStaticText(scrolledWindow, wxID_ANY, "Vacation");
-        wxStaticText* data7 = new wxStaticText(scrolledWindow, wxID_ANY, "Pending");
-        // add two buttons for approve and reject
-        wxButton* approve = new wxButton(scrolledWindow, wxID_ANY, "Approve");
-        wxButton* reject = new wxButton(scrolledWindow, wxID_ANY, "Reject");
+        setLoggedInAsPosition(ROLE_SUPERVISOR);
+    }
+    else if (position == "Director")
+    {
+        setLoggedInAsPosition(ROLE_DIRETOR);
+    }
+    else
+    {
+        setLoggedInAsPosition(ROLE_NONE);
+    }
+    // Clear the grid sizer
+    gridSizer->Clear(true);
+    // Add the headers again
+    AddHeaders();
+
+    std::map<LeaveStatus, wxString> statusMap = {
+        {LeaveStatus::PENDING, "Pending"},
+        {LeaveStatus::APPROVED, "Approved"},
+        {LeaveStatus::REJECTED, "Rejected"}
+    };
+
+    int i = 1;
+    for (std::shared_ptr<LeaveApplication> leaveApplication : leaveApplications)
+    {
+        wxStaticText* data1 = new wxStaticText(scrolledWindow, wxID_ANY, std::to_string(i));
+        wxStaticText* data2 = new wxStaticText(scrolledWindow, wxID_ANY, leaveApplication->getEmployee()->getName());
+        wxStaticText* data3 = new wxStaticText(scrolledWindow, wxID_ANY, leaveApplication->getTaskType());
+        wxStaticText* data4 = new wxStaticText(scrolledWindow, wxID_ANY, wxDateTime(leaveApplication->getStartDate()).FormatISODate());
+        wxStaticText* data5 = new wxStaticText(scrolledWindow, wxID_ANY, wxDateTime(leaveApplication->getEndDate()).FormatISODate());
+        wxStaticText* data6 = new wxStaticText(scrolledWindow, wxID_ANY, leaveApplication->getReason());
+        wxStaticText* data7 = new wxStaticText(scrolledWindow, wxID_ANY, statusMap[leaveApplication->getStatus()]);
+                    
     
         data1->SetMaxSize(wxSize(30, -1));
         // Set max width for data5
@@ -146,50 +191,42 @@ ApprovalPanel::ApprovalPanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
         gridSizer->Add(data6, 0, wxALIGN_CENTER | wxEXPAND);
         gridSizer->Add(data7, 0, wxALIGN_CENTER | wxEXPAND);
         // create a single sizer for the buttons
-        wxBoxSizer* buttonSizer = new wxBoxSizer(wxHORIZONTAL);
-        buttonSizer->Add(approve, 0, wxALIGN_CENTER | wxEXPAND);
-        buttonSizer->Add(reject, 0, wxALIGN_CENTER | wxEXPAND);
-        gridSizer->Add(buttonSizer, 0, wxALIGN_CENTER | wxEXPAND);
+        if (leaveApplication->getStatus() == LeaveStatus::PENDING){ //&& !(getLoggedInAsPosition() == ROLE_SUPERVISOR && leaveApplication->getTaskType() == "Earned Leave")){
+            wxButton* approve = new wxButton(scrolledWindow, wxID_ANY, "Approve");
+            approve->SetClientData(new EventData(leaveApplication));
+            wxButton* reject = new wxButton(scrolledWindow, wxID_ANY, "Reject");
+            reject->SetClientData(new EventData(leaveApplication));
+            wxBoxSizer* buttonSizer = new wxBoxSizer(wxHORIZONTAL);
+            buttonSizer->Add(approve, 0, wxALIGN_CENTER | wxEXPAND);
+            buttonSizer->Add(reject, 0, wxALIGN_CENTER | wxEXPAND);
+            gridSizer->Add(buttonSizer, 0, wxALIGN_CENTER | wxEXPAND);
+
+            // Bind the buttons to their respective event handlers
+            approve->Bind(wxEVT_BUTTON, &ApprovalPanel::OnApprovalButton, this);
+            reject->Bind(wxEVT_BUTTON, &ApprovalPanel::OnRejectButton, this);
+        }
+        else{
+            wxStaticText* empty = new wxStaticText(scrolledWindow, wxID_ANY, "");
+            gridSizer->Add(empty, 0, wxALIGN_CENTER | wxEXPAND);
+        }
+        i++;
     }
-    
-    // Set the sizer for the scrolled window
+
+    // Update the sizer for the scrolled window and refresh layout
     scrolledWindow->SetSizer(gridSizer);
     gridSizer->Fit(scrolledWindow);
+    gridSizer->Layout();  // This ensures the grid layout is updated
+    scrolledWindow->Layout();  // Ensure the scrolled window itself is re-laid out
     
-    // Add the scrolled window to the main sizer
-    mainSizer->Add(scrolledWindow, 1, wxALL | wxEXPAND, 10);
-
-
-    SetSizer(mainSizer);
-
-    Bind(wxEVT_SHOW, &ApprovalPanel::OnShow, this);
-
+    // You can also call Fit() if needed, but Layout() should suffice for dynamic updates
+    Layout();  // Ensure the main sizer is re-laid out
 }
 
 void ApprovalPanel::OnShow(wxShowEvent &event)
 {
     if (event.IsShown())
     {
-        filtered = false;
-        outstandingLeavesButton->SetLabel("Filter Outstanding Leaves");
-        std::string position = dm->getCurrentEmployee()->getPosition();
-        std::vector<std::shared_ptr<LeaveApplication>> leaveApplications = dm->getAllLeaveApplications();
-        if (position == "Supervisor")
-        {
-            setLoggedInAsPosition(ROLE_SUPERVISOR);
-        }
-        else if (position == "Director")
-        {
-            setLoggedInAsPosition(ROLE_DIRETOR);
-        }
-        else
-        {
-            setLoggedInAsPosition(ROLE_NONE);
-        }
-        for (std::shared_ptr<LeaveApplication> leaveApplication : leaveApplications)
-        {
-            wxMessageBox(leaveApplication->getTaskType(), "Leave Application", wxOK | wxICON_INFORMATION);
-        }
+        updateUI();            
     }
     event.Skip(); // Ensure the default handling of the event
 }
@@ -250,6 +287,56 @@ void ApprovalPanel::OnViewReports(wxCommandEvent &event)
 }
 
 
+void ApprovalPanel::OnApprovalButton(wxCommandEvent &event){
+    wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
+    EventData* data = static_cast<EventData*>(button->GetClientData());
+    if (data) {
+        std::shared_ptr<LeaveApplication> leaveApplication = data->getLeaveApplication();
+        // apply for approval
+        bool approvalStatus = leaveApplication->approve(*dm->getCurrentEmployee());
+        wxMessageBox("Leave Type: " + leaveApplication->getTaskType() + ", Current Employee: " + dm->getCurrentEmployee()->getName(), "Approval", wxOK | wxICON_INFORMATION);
+        if (approvalStatus)
+        {
+            wxMessageBox("Leave Approved", "Approval", wxOK | wxICON_INFORMATION);
+            updateUI();
+        }
+        else
+        {
+            wxMessageBox("Leave Approval Failed", "Approval", wxOK | wxICON_ERROR);
+        }
+    } else {
+        wxMessageBox("Error: Client data is null", "Error", wxOK | wxICON_ERROR);
+    }
+}
+
+void ApprovalPanel::OnRejectButton(wxCommandEvent &event){
+    wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
+    EventData* data = static_cast<EventData*>(button->GetClientData());
+    if (data) {
+        std::shared_ptr<LeaveApplication> leaveApplication = data->getLeaveApplication();
+        // apply for rejection
+        bool rejectionStatus = leaveApplication->reject(*dm->getCurrentEmployee());
+        if (rejectionStatus)
+        {
+            wxMessageBox("Leave Rejected", "Rejection", wxOK | wxICON_INFORMATION);
+            updateUI();
+        }
+        else
+        {
+            wxMessageBox("Leave Rejection Failed", "Rejection", wxOK | wxICON_ERROR);
+        }
+    } else {
+        wxMessageBox("Error: Client data is null", "Error", wxOK | wxICON_ERROR);
+    }
+}
+
+EventData::EventData(std::shared_ptr<LeaveApplication> leaveApplication){
+    this->leaveApplication = leaveApplication;
+}
+
+std::shared_ptr<LeaveApplication> EventData::getLeaveApplication(){
+    return leaveApplication;
+}
 
 
 // ApprovalPanel.cpp
