@@ -73,6 +73,7 @@ AttendanceReportPanel::AttendanceReportPanel(wxWindow *parent, std::shared_ptr<D
     // Create a grid sizer
     gridSizer = new wxFlexGridSizer(5, 3, 3);
     setHeaders();
+
     
     
     
@@ -159,6 +160,8 @@ void AttendanceReportPanel::OnShow(wxShowEvent &event)
 {
     if (event.IsShown())
     {
+        // Update the UI
+        updateUI();
     }
     event.Skip(); // Ensure the default handling of the event
 }
