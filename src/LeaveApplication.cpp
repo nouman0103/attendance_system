@@ -119,7 +119,7 @@ json EarnedLeaveApplication::to_json()
 
 bool OfficialLeaveApplication::approve(Employee approver)
 {
-    if (!approver.getPosition().compare("Director") || !approver.getPosition().compare("Supervisor"))
+    if (approver.getPosition() != "Director" && approver.getPosition() != "Supervisor")
     {
         return false;
     }
@@ -134,6 +134,10 @@ bool OfficialLeaveApplication::approve(Employee approver)
 
 bool OfficialLeaveApplication::reject(Employee approver)
 {
+    if (approver.getPosition() != "Director" && approver.getPosition() != "Supervisor")
+    {
+        return false;
+    }
     if (this->status == LeaveStatus::APPROVED)
     {
         return false;
@@ -197,7 +201,7 @@ EarnedLeaveApplication::EarnedLeaveApplication(json j) : LeaveApplication(j)
 
 bool EarnedLeaveApplication::approve(Employee approver)
 {
-    if (!approver.getPosition().compare("Director"))
+    if (approver.getPosition() != "Director")
     {
         return false;
     }
@@ -211,7 +215,7 @@ bool EarnedLeaveApplication::approve(Employee approver)
 
 bool EarnedLeaveApplication::reject(Employee approver)
 {
-    if (!approver.getPosition().compare("Director"))
+    if (approver.getPosition() != "Director" && approver.getPosition() != "Supervisor")
     {
         return false;
     }
@@ -238,7 +242,7 @@ UnpaidLeaveApplication::UnpaidLeaveApplication(json j) : LeaveApplication(j)
 
 bool UnpaidLeaveApplication::approve(Employee approver)
 {
-    if (!approver.getPosition().compare("Director") || !approver.getPosition().compare("Supervisor"))
+    if (approver.getPosition() != "Director" && approver.getPosition() != "Supervisor")
     {
         return false;
     }

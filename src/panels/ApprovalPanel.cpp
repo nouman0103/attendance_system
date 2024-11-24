@@ -194,19 +194,28 @@ void ApprovalPanel::updateUI(){
         gridSizer->Add(data6, 0, wxALIGN_CENTER | wxEXPAND);
         gridSizer->Add(data7, 0, wxALIGN_CENTER | wxEXPAND);
         // create a single sizer for the buttons
-        if (leaveApplication->getStatus() == LeaveStatus::PENDING){ //&& !(getLoggedInAsPosition() == ROLE_SUPERVISOR && leaveApplication->getTaskType() == "Earned Leave")){
+        if (leaveApplication->getStatus() == LeaveStatus::PENDING){
             wxButton* approve = new wxButton(scrolledWindow, wxID_ANY, "Approve");
             approve->SetClientData(new EventData(leaveApplication));
             wxButton* reject = new wxButton(scrolledWindow, wxID_ANY, "Reject");
             reject->SetClientData(new EventData(leaveApplication));
             wxBoxSizer* buttonSizer = new wxBoxSizer(wxHORIZONTAL);
-            buttonSizer->Add(approve, 0, wxALIGN_CENTER | wxEXPAND);
-            buttonSizer->Add(reject, 0, wxALIGN_CENTER | wxEXPAND);
-            gridSizer->Add(buttonSizer, 0, wxALIGN_CENTER | wxEXPAND);
-
             // Bind the buttons to their respective event handlers
             approve->Bind(wxEVT_BUTTON, &ApprovalPanel::OnApprovalButton, this);
             reject->Bind(wxEVT_BUTTON, &ApprovalPanel::OnRejectButton, this);
+
+            if (!(loggedInAsPosition == ROLE_SUPERVISOR && leaveApplication->getTaskType() == "Earned Leave"))
+            {
+                buttonSizer->Add(approve, 0, wxALIGN_CENTER | wxEXPAND);
+            }
+            else{
+                // delete the approve button
+                delete approve;
+            }
+        
+            buttonSizer->Add(reject, 0, wxALIGN_CENTER | wxEXPAND);
+            gridSizer->Add(buttonSizer, 0, wxALIGN_CENTER | wxEXPAND);
+
         }
         else{
             wxStaticText* empty = new wxStaticText(scrolledWindow, wxID_ANY, "");
