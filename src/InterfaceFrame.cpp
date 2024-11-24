@@ -101,7 +101,7 @@ void InterfaceFrame::InitializeMenu()
     Bind(wxEVT_MENU, [=](wxCommandEvent &)
          { Close(true); }, wxID_EXIT);
     Bind(wxEVT_MENU, [=](wxCommandEvent &)
-         { wxMessageBox("Attendance and Leave Management System\nVersion 1.0",
+         { wxMessageBox("Attendance and Leave Management System\nDeveloped by:\nMian Abdullah, 22L-6937\nM. Nouman Iqbal, 22L-6671",
                         "About", wxOK | wxICON_INFORMATION); }, wxID_ABOUT);
     Bind(wxEVT_MENU, [=](wxCommandEvent &)
             {

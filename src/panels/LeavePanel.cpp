@@ -84,7 +84,7 @@ LeavePanel::LeavePanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     reasonLabel->SetMinSize(wxSize(100, -1)); // Set constant width for the label
     reasonSizer->Add(reasonLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, verticalSpacing);
     
-    reason = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE);
+    reason = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize);
     reasonSizer->Add(reason, 1, wxALL | wxEXPAND, verticalSpacing);
     mainSizer->Add(reasonSizer, 0, wxLEFT | wxRIGHT | wxEXPAND, verticalSpacing);
     
@@ -93,6 +93,11 @@ LeavePanel::LeavePanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     mainSizer->Add(submit, 0, wxALL | wxALIGN_CENTER, verticalSpacing);
     // Bind the button to its event handler
     submit->Bind(wxEVT_BUTTON, &LeavePanel::OnSubmit, this);
+
+    // add a label for leave balance
+    leaveBalance = new wxStaticText(this, wxID_ANY, "Leave Balance: Casual - 10, Earned - 20", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE);
+    mainSizer->Add(leaveBalance, 0, wxALL | wxEXPAND, 10);
+
 
 
     // add horizontal line

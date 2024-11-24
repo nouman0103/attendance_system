@@ -42,6 +42,7 @@ private:
     wxTextCtrl* reason;
     wxGridSizer* gridSizer;
     wxScrolledWindow* scrolledWindow;
+    wxStaticText *leaveBalance;
 
 
 
