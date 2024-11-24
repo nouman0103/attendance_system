@@ -51,10 +51,12 @@ AttendanceReportPanel::AttendanceReportPanel(wxWindow *parent, std::shared_ptr<D
     employees.Add("Jane Doe");
     employees.Add("Alice Doe");
     employees.Add("Bob Doe");
-    wxComboBox* employee = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, employees, wxCB_READONLY);
-    employeeSizer->Add(employee, 1, wxALL | wxEXPAND, 5);
-    employee->SetSelection(0);
+    employeeComboBox = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, employees, wxCB_READONLY);
+    employeeSizer->Add(employeeComboBox, 1, wxALL | wxEXPAND, 5);
+    employeeComboBox->SetSelection(0);
     mainSizer->Add(employeeSizer, 0, wxLEFT | wxRIGHT | wxEXPAND, 5);
+    // bind the combobox with onSelection
+    employeeComboBox->Bind(wxEVT_COMBOBOX, &AttendanceReportPanel::onSelection, this);
 
 
     // horizontal line
@@ -65,12 +67,30 @@ AttendanceReportPanel::AttendanceReportPanel(wxWindow *parent, std::shared_ptr<D
     // create a table to display leave history
     // format: Sr | Leave Type | Start Date | End Date | Reason | Status
     // Create a scrolled window
-    wxScrolledWindow* scrolledWindow = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxVSCROLL);
+    scrolledWindow = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxVSCROLL);
     scrolledWindow->SetScrollRate(5, 5);
     
     // Create a grid sizer
-    wxFlexGridSizer* gridSizer = new wxFlexGridSizer(5, 3, 3);
+    gridSizer = new wxFlexGridSizer(5, 3, 3);
+    setHeaders();
+    
+    
+    
+    
+    // Set the sizer for the scrolled window
+    scrolledWindow->SetSizer(gridSizer);
+    gridSizer->Fit(scrolledWindow);
+    
+    // Add the scrolled window to the main sizer
+    mainSizer->Add(scrolledWindow, 1, wxALL | wxEXPAND, 10);
 
+
+    SetSizer(mainSizer);
+
+    Bind(wxEVT_SHOW, &AttendanceReportPanel::OnShow, this);
+}
+
+void AttendanceReportPanel::setHeaders(){
     // Set growable columns
     gridSizer->AddGrowableCol(0, 1); // Sr
     gridSizer->AddGrowableCol(1, 1); // Employee
@@ -99,6 +119,14 @@ AttendanceReportPanel::AttendanceReportPanel(wxWindow *parent, std::shared_ptr<D
     gridSizer->Add(header3, 0, wxALIGN_CENTER | wxEXPAND);
     gridSizer->Add(header4, 0, wxALIGN_CENTER | wxEXPAND);
     gridSizer->Add(header5, 0, wxALIGN_CENTER | wxEXPAND);
+}
+
+void AttendanceReportPanel::updateUI(){
+    // clear
+    gridSizer->Clear(true);
+
+    // Add headers again
+    setHeaders();
     
     // Add data
     for (int i = 0; i < 10; i++)
@@ -117,18 +145,14 @@ AttendanceReportPanel::AttendanceReportPanel(wxWindow *parent, std::shared_ptr<D
         gridSizer->Add(data4, 0, wxALIGN_CENTER | wxEXPAND);
         gridSizer->Add(data5, 0, wxALIGN_CENTER | wxEXPAND);
     }
-    
-    // Set the sizer for the scrolled window
+
     scrolledWindow->SetSizer(gridSizer);
     gridSizer->Fit(scrolledWindow);
+    gridSizer->Layout();  // This ensures the grid layout is updated
+    scrolledWindow->Layout();  // Ensure the scrolled window itself is re-laid out
     
-    // Add the scrolled window to the main sizer
-    mainSizer->Add(scrolledWindow, 1, wxALL | wxEXPAND, 10);
-
-
-    SetSizer(mainSizer);
-
-    Bind(wxEVT_SHOW, &AttendanceReportPanel::OnShow, this);
+    // You can also call Fit() if needed, but Layout() should suffice for dynamic updates
+    Layout();
 }
 
 void AttendanceReportPanel::OnShow(wxShowEvent &event)
@@ -146,6 +170,19 @@ void AttendanceReportPanel::OnBack(wxCommandEvent &event)
     InterfaceFrame *frame = dynamic_cast<InterfaceFrame *>(simplebook->GetParent());
     // Show the approval panel
     frame->ShowPage(InterfaceFrame::PID_PAGE_APPROVAL);
+}
+
+void AttendanceReportPanel::onSelection(wxCommandEvent &event)
+{
+    int selection = employeeComboBox->GetSelection();
+    if (selection == 0)
+    {
+        wxMessageBox("Show all employees");
+    }
+    else
+    {
+        wxMessageBox("Show employee: " + employeeComboBox->GetString(selection));
+    }
 }
 
 // AttendanceReportPanel.cpp

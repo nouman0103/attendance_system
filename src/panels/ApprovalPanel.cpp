@@ -297,7 +297,6 @@ void ApprovalPanel::OnApprovalButton(wxCommandEvent &event){
         std::shared_ptr<LeaveApplication> leaveApplication = data->getLeaveApplication();
         // apply for approval
         bool approvalStatus = leaveApplication->approve(*dm->getCurrentEmployee());
-        wxMessageBox("Leave Type: " + leaveApplication->getTaskType() + ", Current Employee: " + dm->getCurrentEmployee()->getName(), "Approval", wxOK | wxICON_INFORMATION);
         if (approvalStatus)
         {
             wxMessageBox("Leave Approved", "Approval", wxOK | wxICON_INFORMATION);

@@ -32,6 +32,15 @@ private:
 
     void OnShow(wxShowEvent &event);
     void OnBack(wxCommandEvent &event);
+    void onSelection(wxCommandEvent &event);
+
+    void setHeaders();
+    void updateUI();
+
+
+    wxComboBox* employeeComboBox;
+    wxScrolledWindow* scrolledWindow;
+    wxFlexGridSizer* gridSizer;
 
 
     std::shared_ptr<DataManager> dm;
