@@ -269,15 +269,30 @@ void LeavePanel::OnSubmit(wxCommandEvent &event)
     leaveTypes.Add("Earned Leave");
     leaveTypes.Add("Official Leave");
     leaveTypes.Add("Unpaid Leave");*/
-    
-    if (leaveTypeValue == "Casual Leave" )
+    std::shared_ptr<LeaveBalance> leaveBalance = dm->getLeaveBalance(dm->getCurrentEmployee()->getName());
+    int year = startDateValue.GetYear();
+    int days = ceil((endDateValue.GetTicks() - startDateValue.GetTicks()) / (24 * 60 * 60)) + 1;
+    if (leaveTypeValue == "Casual Leave")
     {
-        std::shared_ptr<CasualLeaveApplication> casualLeaveApplication = std::make_shared<CasualLeaveApplication>(dm->getCurrentEmployee(), startDateValue.GetTicks(), endDateValue.GetTicks(), reasonValue.ToStdString(), wxDateTime::Now().GetTicks(), 0, LeaveStatus::PENDING);
+        if (leaveBalance->applyCasualLeave( days,year) == false)
+        {
+            wxMessageBox("Insufficient leave balance.", "Error", wxOK | wxICON_ERROR);
+            return;
+        }
+        
+        std::shared_ptr<CasualLeaveApplication> casualLeaveApplication = std::make_shared<CasualLeaveApplication>(dm->getCurrentEmployee(), startDateValue.GetTicks(), endDateValue.GetTicks(), reasonValue.ToStdString(), wxDateTime::Now().GetTicks(), 0, LeaveStatus::APPROVED);
+        
         dm->writeLeaveApplication(casualLeaveApplication);
+        
         
     }
     else if (leaveTypeValue == "Earned Leave")
     {
+        if (leaveBalance->applyEarnedLeave( days,year)== false)
+        {
+            wxMessageBox("Insufficient leave balance.", "Error", wxOK | wxICON_ERROR);
+            return;
+        }
         std::shared_ptr<EarnedLeaveApplication> earnedLeaveApplication = std::make_shared<EarnedLeaveApplication>(dm->getCurrentEmployee(), startDateValue.GetTicks(), endDateValue.GetTicks(), reasonValue.ToStdString(), wxDateTime::Now().GetTicks(), 0, LeaveStatus::PENDING);
         dm->writeLeaveApplication(earnedLeaveApplication);
     }

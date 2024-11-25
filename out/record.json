@@ -129,6 +129,24 @@
                 "startDate": 1732647600,
                 "status": 2,
                 "taskType": "Earned Leave"
+            },
+            {
+                "applicationDate": 1732562363,
+                "approvalDate": 0,
+                "endDate": 1732906800,
+                "reason": "123",
+                "startDate": 1732820400,
+                "status": 1,
+                "taskType": "Casual Leave"
+            },
+            {
+                "applicationDate": 1732562378,
+                "approvalDate": 0,
+                "endDate": 1733166000,
+                "reason": "123",
+                "startDate": 1732561200,
+                "status": 1,
+                "taskType": "Casual Leave"
             }
         ],
         "leaveBalance": 0

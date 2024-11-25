@@ -42,17 +42,7 @@ public:
     void readLeaveApplication();
     bool updateLeaveApplication(std::shared_ptr<Employee> employee);
     std::vector<std::shared_ptr<LeaveApplication>> getAllLeaveApplications();
-    // void writeLeaveBalance(LeaveBalance leaveBalance);
-    // std::vector<LeaveBalance> readLeaveBalance();
-    // void writeGuard(Guard guard);
-    // std::vector<Guard> readGuard();
-    // void writeSupervisor(Supervisor supervisor);
-    // std::vector<Supervisor> readSupervisor();
-    // void writeDirector(Director director);
-    // std::vector<Director> readDirector();
-    // void writeAttendance(Attendance attendance);
-    // std::vector<Attendance> readAttendance();
-    // void writeLeave(Leave leave);
-    // std::vector<Leave> readLeave();
+    std::shared_ptr<LeaveBalance> getLeaveBalance(std::string name);
+    
 };
-;
+
