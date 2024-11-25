@@ -74,7 +74,7 @@ AttendanceReportPanel::AttendanceReportPanel(wxWindow *parent, std::shared_ptr<D
     months.Add("November");
     months.Add("December");
 
-    wxComboBox* monthComboBox = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, months, wxCB_READONLY);
+    monthComboBox = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, months, wxCB_READONLY);
     monthYearSizer->Add(monthComboBox, 1, wxALL | wxEXPAND, 5);
     monthComboBox->SetSelection(0);
 
@@ -86,15 +86,30 @@ AttendanceReportPanel::AttendanceReportPanel(wxWindow *parent, std::shared_ptr<D
     years.Add("2022");
     years.Add("2023");
     years.Add("2024");
-    wxComboBox* yearComboBox = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, years, wxCB_READONLY);
+    years.Add("2025");
+    yearComboBox = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, years, wxCB_READONLY);
     monthYearSizer->Add(yearComboBox, 1, wxALL | wxEXPAND, 5);
     yearComboBox->SetSelection(0);
+
+    // set curreen month and year
+    wxDateTime now = wxDateTime::Now();
+    monthComboBox->SetSelection(now.GetMonth());
+    yearComboBox->SetSelection(now.GetYear() - 2021);
+
+    selectedMonth = now.GetMonth();
+    selectedYear = now.GetYear() - 2021;
+    
+    
 
     mainSizer->Add(monthYearSizer, 0, wxLEFT | wxRIGHT | wxEXPAND, 5);
 
     mainSizer->Add(employeeSizer, 0, wxLEFT | wxRIGHT | wxEXPAND, 5);
     // bind the combobox with onSelection
     employeeComboBox->Bind(wxEVT_COMBOBOX, &AttendanceReportPanel::onSelection, this);
+    // bind the combobox with onSelection
+    monthComboBox->Bind(wxEVT_COMBOBOX, &AttendanceReportPanel::onSelection, this);
+    // bind the combobox with onSelection
+    yearComboBox->Bind(wxEVT_COMBOBOX, &AttendanceReportPanel::onSelection, this);
 
 
     // horizontal line
@@ -170,23 +185,26 @@ void AttendanceReportPanel::updateUI(){
     // Add data
     // get all employees from the data manager
     std::shared_ptr<std::vector<Employee>> employees = dm->getEmployees();
+
+    wxString selectedEmployee = employeeComboBox->GetStringSelection();
     
     int i = 1;
-    // clear the combobox
-    employeeComboBox->Clear();
-    employeeComboBox->Append("Show All Employees");
-    employeeComboBox->SetSelection(0);
     for (Employee employee : *employees)
     {
-        // update the dropdown    
-        employeeComboBox->Append(employee.getName());
+        // update the dropdown
+        if(selectedEmployeeIndex != 0 && selectedEmployee != employee.getName()){
+            continue;
+        }
+
+
+
 
         // get current employyee
         std::shared_ptr<Employee> currentEmployee = dm->getEmployee(employee.getName());
         std::shared_ptr<LeaveBalance> leaveBalance = dm->getLeaveBalance(currentEmployee->getName());
         // get leave balance
-        int casualLeaveBalance = leaveBalance->getCasualLeave(2024);
-        int earnedLeaveBalance = leaveBalance->getEarnedLeave(2024);
+        int casualLeaveBalance = leaveBalance->getCasualLeave(selectedYear + 2021);
+        int earnedLeaveBalance = leaveBalance->getEarnedLeave(selectedYear + 2021);
         //Create a string to display the leave balance
         std::string leaveBalanceString = "Casual - " + std::to_string(casualLeaveBalance) + ", Earned - " + std::to_string(earnedLeaveBalance);
         time_t now = time(0);
@@ -196,7 +214,7 @@ void AttendanceReportPanel::updateUI(){
 
 
         // get attendance percentage
-        int attendancePercentage = currentEmployee->getAttendancePercentage(11, 2024);
+        int attendancePercentage = currentEmployee->getAttendancePercentage(selectedMonth+1, selectedYear + 2021);
 
         wxStaticText* data1 = new wxStaticText(scrolledWindow, wxID_ANY, std::to_string(i));
         wxStaticText* data2 = new wxStaticText(scrolledWindow, wxID_ANY, currentEmployee->getName());
@@ -229,6 +247,26 @@ void AttendanceReportPanel::OnShow(wxShowEvent &event)
 {
     if (event.IsShown())
     {
+        // reset selected employee index
+        selectedEmployeeIndex = 0;
+
+        // get current time
+        wxDateTime now = wxDateTime::Now();
+        // reset selected month
+        selectedMonth = now.GetMonth();
+        // reset selected year
+        selectedYear = now.GetYear() - 2021;
+
+        employeeComboBox->Clear();
+        employeeComboBox->Append("Show All Employees");
+        std::shared_ptr<std::vector<Employee>> employees = dm->getEmployees();
+        for (Employee employee : *employees)
+        {
+            employeeComboBox->Append(employee.getName());
+        }
+        employeeComboBox->SetSelection(0);
+
+
         // Update the UI
         updateUI();
     }
@@ -246,15 +284,10 @@ void AttendanceReportPanel::OnBack(wxCommandEvent &event)
 
 void AttendanceReportPanel::onSelection(wxCommandEvent &event)
 {
-    int selection = employeeComboBox->GetSelection();
-    if (selection == 0)
-    {
-        wxMessageBox("Show all employees");
-    }
-    else
-    {
-        wxMessageBox("Show employee: " + employeeComboBox->GetString(selection));
-    }
+    selectedEmployeeIndex = employeeComboBox->GetSelection();
+    selectedMonth = monthComboBox->GetSelection();
+    selectedYear = yearComboBox->GetSelection();
+    updateUI();
 }
 
 // AttendanceReportPanel.cpp

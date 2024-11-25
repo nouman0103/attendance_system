@@ -39,8 +39,15 @@ private:
 
 
     wxComboBox* employeeComboBox;
+    wxComboBox* yearComboBox;
+    wxComboBox* monthComboBox;
     wxScrolledWindow* scrolledWindow;
     wxFlexGridSizer* gridSizer;
+
+    int selectedEmployeeIndex = 0;
+    int selectedMonth = 0;
+    int selectedYear = 0;
+
 
 
     std::shared_ptr<DataManager> dm;

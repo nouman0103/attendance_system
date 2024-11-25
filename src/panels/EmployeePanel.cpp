@@ -114,11 +114,30 @@ void EmployeePanel::OnShow(wxShowEvent &event)
         
         time_t now = time(0);
 
+        // month date range
+        wxDateTime monthStart = wxDateTime::Now();
+        monthStart.SetHour(0);
+        monthStart.SetMinute(0);
+        monthStart.SetSecond(0);
+        monthStart.SetDay(1);
+
+        // month end
+        // std::time_t get_end_of_month(std::time_t timestamp)
+        time_t monthEnd = get_end_of_month(now);
+        // convert to wxDateTime
+        wxDateTime monthEndWx = wxDateTime(monthEnd);
+    
+
+        month_dateRangeText->SetLabelText(monthStart.Format("%d/%m/%Y") + " - " + monthEndWx.Format("%d/%m/%Y"));
+
+
         m_barGraphWeekly->SetData(hours, leaveCount["Casual Leave"], leaveCount["Earned Leave"], leaveCount["Official Leave"]);
         hours = current_employee->getAttendanceRecord()->getHourWorkInMonth(now);
         leaveCount = current_employee->getLeaveInMonth(now);
         // set bar Data
         m_barGraphMonthly->SetData(hours, leaveCount["Casual Leave"], leaveCount["Earned Leave"], leaveCount["Official Leave"]);
+
+
     }
     event.Skip(); // Ensure the default handling of the event
 }
