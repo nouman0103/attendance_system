@@ -44,6 +44,8 @@ public:
     std::shared_ptr<AttendanceRecord> getAttendanceRecord();
     friend std::ostream &operator<<(std::ostream &out, const Employee &employee);
     json to_json();
+    std::map<std::string,int> getLeaveInWeek(time_t weekstart);
+    std::map<std::string,int> getLeaveInMonth(time_t monthstart);
 
 private:
     std::string position;

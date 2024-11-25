@@ -107,9 +107,9 @@ void EmployeePanel::OnShow(wxShowEvent &event)
         dateRangeText->SetLabelText(weekStart.Format("%d/%m/%Y") + " - " + weekEnd.Format("%d/%m/%Y"));
         // dateRangeText->SetLabel("12/1/2021 - 12/7/2021");
         int hours = current_employee->getAttendanceRecord()->getHourWorkInWeek(weekStart.GetTicks());
-
+        std::map<std::string,int> leaveCount = current_employee->getLeaveInWeek(weekStart.GetTicks());
         // set bar Data
-        m_barGraphWeekly->SetData(hours, 0, 0, 0);
+        m_barGraphWeekly->SetData(hours, leaveCount["Casual Leave"], leaveCount["Earned Leave"], leaveCount["Official Leave"]);
     }
     event.Skip(); // Ensure the default handling of the event
 }

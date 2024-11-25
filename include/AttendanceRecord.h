@@ -15,6 +15,7 @@ public:
     Attendance getLastStatus() const;
     time_t getLastTime() const;
     int getHourWorkInWeek(time_t weekstart);
+    int getHourWorkInMonth(time_t monthstart);
 
 private:
     std::vector<AttendanceEntry> attendances;
