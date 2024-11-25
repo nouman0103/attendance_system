@@ -9,7 +9,7 @@ wxEND_EVENT_TABLE()
 HorizontalBar::HorizontalBar(wxWindow* parent, int duration)
     : wxPanel(parent, wxFULL_REPAINT_ON_RESIZE), m_presentHours(0), m_casualLeaveHours(0), m_earnedLeaveHours(0), m_officialLeaveHours(0)
 {
-    SetMinSize(wxSize(400, 120));
+    SetMinSize(wxSize(400, 100));
     this->duration = duration;
 
     m_presentBrush = wxBrush(wxColour(76, 251, 126)); // Green
