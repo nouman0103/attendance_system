@@ -3,6 +3,7 @@
 #include "AttendanceRecord.h"
 #include "AttendanceEntry.h"
 #include "LeaveApplication.h"
+#include "LeaveBalance.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -21,6 +22,7 @@ private:
     std::vector<AttendanceRecord> attendanceRecords;
     std::map<std::string, std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>>> leavesDict;
     std::shared_ptr<Employee> currentEmployee;
+    std::map<std::string,std::shared_ptr<LeaveBalance>> leaveBalances;
 
 
     // std::vector<LeaveBalance> leaveBalances;
