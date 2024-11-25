@@ -183,6 +183,16 @@ void AttendanceReportPanel::updateUI(){
 
         // get current employyee
         std::shared_ptr<Employee> currentEmployee = dm->getEmployee(employee.getName());
+        std::shared_ptr<LeaveBalance> leaveBalance = dm->getLeaveBalance(currentEmployee->getName());
+        // get leave balance
+        int casualLeaveBalance = leaveBalance->getCasualLeave(2024);
+        int earnedLeaveBalance = leaveBalance->getEarnedLeave(2024);
+        //Create a string to display the leave balance
+        std::string leaveBalanceString = "Casual - " + std::to_string(casualLeaveBalance) + ", Earned - " + std::to_string(earnedLeaveBalance);
+        time_t now = time(0);
+
+        // get pending leave applications
+        int pendingLeaveApplications = currentEmployee->getPendingLeaves(now);
 
 
         // get attendance percentage
@@ -191,8 +201,8 @@ void AttendanceReportPanel::updateUI(){
         wxStaticText* data1 = new wxStaticText(scrolledWindow, wxID_ANY, std::to_string(i));
         wxStaticText* data2 = new wxStaticText(scrolledWindow, wxID_ANY, currentEmployee->getName());
         wxStaticText* data3 = new wxStaticText(scrolledWindow, wxID_ANY, std::to_string(attendancePercentage) + "%");
-        wxStaticText* data4 = new wxStaticText(scrolledWindow, wxID_ANY, "10");
-        wxStaticText* data5 = new wxStaticText(scrolledWindow, wxID_ANY, "11");
+        wxStaticText* data4 = new wxStaticText(scrolledWindow, wxID_ANY, std::to_string(pendingLeaveApplications));
+        wxStaticText* data5 = new wxStaticText(scrolledWindow, wxID_ANY, leaveBalanceString);
     
         data1->SetMaxSize(wxSize(30, -1));
         

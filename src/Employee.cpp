@@ -166,3 +166,15 @@ int Employee::getAttendancePercentage(int month, int year){
 
     return (total_work_days * 100) / (total_days - weekends);
 }
+
+int Employee::getPendingLeaves(time_t monthstart) {
+    int count = 0;
+    monthstart = get_start_of_month(monthstart);
+    time_t monthend = get_end_of_month(monthstart);
+    for (std::shared_ptr<LeaveApplication> leaveApplication : *leaveApplications) {
+        if (leaveApplication->getStatus() == LeaveStatus::PENDING && leaveApplication->getStartDate() >= monthstart && leaveApplication->getEndDate() < monthend) {
+            count++;
+        }
+    }
+    return count;
+}

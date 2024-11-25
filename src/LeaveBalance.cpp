@@ -18,12 +18,12 @@ LeaveBalance::LeaveBalance(std::map<int, int> casualLeave, std::map<int, int> ea
 
 int LeaveBalance::getCasualLeave(int year)
 {
-    return casualLeave[year];
+    return MAX_CASUAL_LEAVE- casualLeave[year];
 }
 
 int LeaveBalance::getEarnedLeave(int year)
 {
-    return earnedLeave[year];
+    return MAX_EARNED_LEAVE- earnedLeave[year];
 }
 
 void LeaveBalance::setCasualLeave(int casualLeave, int year)

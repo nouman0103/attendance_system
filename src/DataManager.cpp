@@ -265,3 +265,9 @@ std::vector<std::shared_ptr<LeaveApplication>> DataManager::getAllLeaveApplicati
     }
     return allLeaves;
 }
+
+
+std::shared_ptr<LeaveBalance> DataManager::getLeaveBalance(std::string name)
+{
+    return leaveBalances[name];
+}
