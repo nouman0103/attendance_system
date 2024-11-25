@@ -60,6 +60,10 @@ EmployeePanel::EmployeePanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     title2->SetFont(wxFont(16, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
     mainSizer->Add(title2, 0, wxALL | wxEXPAND, 10);
 
+    month_dateRangeText = new wxStaticText(this, wxID_ANY, "12/1/2021 - 12/7/2021", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    mainSizer->Add(month_dateRangeText, 0, wxALL | wxALIGN_CENTER, 10);
+
+
     // add a horizontal bar with duration of 30
     m_barGraphMonthly = new HorizontalBar(this, 30);
     mainSizer->Add(m_barGraphMonthly, 0, wxALL | wxEXPAND, 10);

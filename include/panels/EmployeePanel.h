@@ -25,6 +25,7 @@ private:
     HorizontalBar* m_barGraphWeekly;
     HorizontalBar* m_barGraphMonthly;
     wxStaticText* dateRangeText;
+    wxStaticText* month_dateRangeText;
 
 
     wxDECLARE_EVENT_TABLE();
