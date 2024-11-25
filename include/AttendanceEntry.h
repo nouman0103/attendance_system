@@ -20,3 +20,4 @@ private:
     Attendance type;
     time_t time;
 };
+

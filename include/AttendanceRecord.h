@@ -21,3 +21,5 @@ private:
     std::vector<AttendanceEntry> attendances;
     std::shared_ptr<Employee> employee;
 };
+std::time_t get_start_of_month(std::time_t timestamp);
+std::time_t get_end_of_month(std::time_t timestamp);

@@ -4,6 +4,7 @@
 #include <iostream>
 #include "DataManager.h"
 #include <wx/statline.h> // Include wxStaticLine header
+#include "AttendanceRecord.h"
 // Include other dashboards as needed
 
 BEGIN_EVENT_TABLE(EmployeePanel, wxPanel)
@@ -106,7 +107,14 @@ void EmployeePanel::OnShow(wxShowEvent &event)
         int hours = current_employee->getAttendanceRecord()->getHourWorkInWeek(weekStart.GetTicks());
         std::map<std::string, int> leaveCount = current_employee->getLeaveInWeek(weekStart.GetTicks());
         // set bar Data
+        
+        time_t now = time(0);
+
         m_barGraphWeekly->SetData(hours, leaveCount["Casual Leave"], leaveCount["Earned Leave"], leaveCount["Official Leave"]);
+        hours = current_employee->getAttendanceRecord()->getHourWorkInMonth(now);
+        leaveCount = current_employee->getLeaveInMonth(now);
+        // set bar Data
+        m_barGraphMonthly->SetData(hours, leaveCount["Casual Leave"], leaveCount["Earned Leave"], leaveCount["Official Leave"]);
     }
     event.Skip(); // Ensure the default handling of the event
 }
@@ -124,6 +132,7 @@ void EmployeePanel::OnPrevWeek(wxCommandEvent &event)
     weekStart = weekStart.Subtract(wxTimeSpan(7 * 24, 0, 0, 0));
     weekEnd = weekEnd.Subtract(wxTimeSpan(7 * 24, 0, 0, 0));
     dateRangeText->SetLabelText(weekStart.Format("%d/%m/%Y") + " - " + weekEnd.Format("%d/%m/%Y"));
+    std::shared_ptr<Employee> current_employee = dm->getCurrentEmployee();
     int hours = current_employee->getAttendanceRecord()->getHourWorkInWeek(weekStart.GetTicks());
     std::map<std::string, int> leaveCount = current_employee->getLeaveInWeek(weekStart.GetTicks());
     // set bar Data
@@ -135,6 +144,8 @@ void EmployeePanel::OnNextWeek(wxCommandEvent &event)
     weekStart = weekStart.Add(wxTimeSpan(7 * 24, 0, 0, 0));
     weekEnd = weekEnd.Add(wxTimeSpan(7 * 24, 0, 0, 0));
     dateRangeText->SetLabelText(weekStart.Format("%d/%m/%Y") + " - " + weekEnd.Format("%d/%m/%Y"));
+
+    std::shared_ptr<Employee> current_employee = dm->getCurrentEmployee();
     int hours = current_employee->getAttendanceRecord()->getHourWorkInWeek(weekStart.GetTicks());
     std::map<std::string, int> leaveCount = current_employee->getLeaveInWeek(weekStart.GetTicks());
     // set bar Data
