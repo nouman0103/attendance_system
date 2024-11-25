@@ -233,6 +233,25 @@ void DataManager::readLeaveApplication()
         employeeDict[employee.key()]->setLeaveApplication(leaves);
     }
 }
+bool DataManager::updateLeaveApplication(std::shared_ptr<Employee> employee)
+{
+    std::ifstream read("record.json");
+    json j;
+    read >> j;
+    read.close();
+    std::string name = employee->getName();
+    json record = j[name];
+    record["leave"] = json::array();
+    for (auto &leave : *employee->getLeaveApplications())
+    {
+        record["leave"].push_back(leave->to_json());
+    }
+    j[name] = record;
+    std::ofstream write("record.json");
+    write << j.dump(4);
+    write.close();
+    return true;
+}
 
 std::vector<std::shared_ptr<LeaveApplication>> DataManager::getAllLeaveApplications()
 {

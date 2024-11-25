@@ -295,9 +295,10 @@ void ApprovalPanel::OnApprovalButton(wxCommandEvent &event){
     EventData* data = static_cast<EventData*>(button->GetClientData());
     if (data) {
         std::shared_ptr<LeaveApplication> leaveApplication = data->getLeaveApplication();
+        
         // apply for approval
         bool approvalStatus = leaveApplication->approve(*dm->getCurrentEmployee());
-        if (approvalStatus)
+        if (approvalStatus && dm->updateLeaveApplication(leaveApplication->getEmployee()))
         {
             wxMessageBox("Leave Approved", "Approval", wxOK | wxICON_INFORMATION);
             updateUI();
@@ -318,7 +319,7 @@ void ApprovalPanel::OnRejectButton(wxCommandEvent &event){
         std::shared_ptr<LeaveApplication> leaveApplication = data->getLeaveApplication();
         // apply for rejection
         bool rejectionStatus = leaveApplication->reject(*dm->getCurrentEmployee());
-        if (rejectionStatus)
+        if (rejectionStatus && dm->updateLeaveApplication(leaveApplication->getEmployee()))
         {
             wxMessageBox("Leave Rejected", "Rejection", wxOK | wxICON_INFORMATION);
             updateUI();

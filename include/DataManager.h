@@ -38,6 +38,7 @@ public:
     void readAttendanceRecord();
     void writeLeaveApplication(std::shared_ptr<LeaveApplication> leaveApplication);
     void readLeaveApplication();
+    bool updateLeaveApplication(std::shared_ptr<Employee> employee);
     std::vector<std::shared_ptr<LeaveApplication>> getAllLeaveApplications();
     // void writeLeaveBalance(LeaveBalance leaveBalance);
     // std::vector<LeaveBalance> readLeaveBalance();
