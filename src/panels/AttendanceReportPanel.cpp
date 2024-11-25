@@ -51,7 +51,7 @@ AttendanceReportPanel::AttendanceReportPanel(wxWindow *parent, std::shared_ptr<D
     employees.Add("Jane Doe");
     employees.Add("Alice Doe");
     employees.Add("Bob Doe");
-    employeeComboBox = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, employees, wxCB_READONLY);
+    employeeComboBox = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, employees);
     employeeSizer->Add(employeeComboBox, 1, wxALL | wxEXPAND, 5);
     employeeComboBox->SetSelection(0);
 
@@ -110,6 +110,8 @@ AttendanceReportPanel::AttendanceReportPanel(wxWindow *parent, std::shared_ptr<D
     monthComboBox->Bind(wxEVT_COMBOBOX, &AttendanceReportPanel::onSelection, this);
     // bind the combobox with onSelection
     yearComboBox->Bind(wxEVT_COMBOBOX, &AttendanceReportPanel::onSelection, this);
+    // bind autocomplete with onSelection
+    employeeComboBox->Bind(wxEVT_TEXT, &AttendanceReportPanel::onSelection, this);
 
 
     // horizontal line
@@ -187,12 +189,16 @@ void AttendanceReportPanel::updateUI(){
     std::shared_ptr<std::vector<Employee>> employees = dm->getEmployees();
 
     wxString selectedEmployee = employeeComboBox->GetStringSelection();
+    wxString typedEmployee = employeeComboBox->GetValue();
     
     int i = 1;
     for (Employee employee : *employees)
     {
         // update the dropdown
-        if(selectedEmployeeIndex != 0 && selectedEmployee != employee.getName()){
+        if(selectedEmployeeIndex > 0 && selectedEmployee != employee.getName()){
+            continue;
+        }
+        else if (selectedEmployeeIndex == -1 && typedEmployee != employee.getName() && typedEmployee != "Show All Employees"){
             continue;
         }
 
@@ -264,6 +270,8 @@ void AttendanceReportPanel::OnShow(wxShowEvent &event)
         {
             employeeComboBox->Append(employee.getName());
         }
+        employeeComboBox->AutoComplete(employeeComboBox->GetStrings());
+
         employeeComboBox->SetSelection(0);
 
 
@@ -284,7 +292,14 @@ void AttendanceReportPanel::OnBack(wxCommandEvent &event)
 
 void AttendanceReportPanel::onSelection(wxCommandEvent &event)
 {
+    if (selectedEmployeeIndex != employeeComboBox->GetSelection() && employeeComboBox->GetSelection() == -1)
+    {
+        selectedEmployeeIndex = -1;
+        return;
+    }
     selectedEmployeeIndex = employeeComboBox->GetSelection();
+    wxString text = employeeComboBox->GetValue();
+
     selectedMonth = monthComboBox->GetSelection();
     selectedYear = yearComboBox->GetSelection();
     updateUI();

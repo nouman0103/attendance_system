@@ -169,45 +169,30 @@ void LeavePanel::UpdateUI()
     AddGridHeaders();
 
     // Get the leave applications
-    std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>> leaveApplications = dm->getCurrentEmployee()->getLeaveApplications();
-    // Add the leave applications to the grid
+    auto leaveApplications = dm->getCurrentEmployee()->getLeaveApplications();
 
-    if (leaveApplications)
+    if (leaveApplications && !leaveApplications->empty())
     {
-        int i = leaveApplications->size();
+        gridSizer->SetRows(leaveApplications->size() + 1); // +1 for headers
+
         int j = 1;
-        for (auto it = leaveApplications->rbegin(); it != leaveApplications->rend(); ++it)
+        for (auto it = leaveApplications->rbegin(); it != leaveApplications->rend(); ++it, ++j)
         {
-            std::shared_ptr<LeaveApplication> leaveApplication = *it;
-            wxStaticText *sr = new wxStaticText(scrolledWindow, wxID_ANY, std::to_string(j));
-            wxStaticText *leaveType = new wxStaticText(scrolledWindow, wxID_ANY, leaveApplication->getTaskType());
-            wxStaticText *startDate = new wxStaticText(scrolledWindow, wxID_ANY, wxDateTime(leaveApplication->getStartDate()).FormatISODate());
-            wxStaticText *endDate = new wxStaticText(scrolledWindow, wxID_ANY, wxDateTime(leaveApplication->getEndDate()).FormatISODate());
-            wxStaticText *reason = new wxStaticText(scrolledWindow, wxID_ANY, leaveApplication->getReason());
-            wxStaticText *status = new wxStaticText(scrolledWindow, wxID_ANY, leaveApplication->getStatus() == LeaveStatus::PENDING ? "Pending" : leaveApplication->getStatus() == LeaveStatus::APPROVED ? "Approved"
-                                                                                                                                                                                                         : "Rejected");
-
-            gridSizer->Add(sr, 0, wxALIGN_CENTER);
-            gridSizer->Add(leaveType, 0, wxALIGN_CENTER);
-            gridSizer->Add(startDate, 0, wxALIGN_CENTER);
-            gridSizer->Add(endDate, 0, wxALIGN_CENTER);
-            gridSizer->Add(reason, 0, wxALIGN_CENTER);
-            gridSizer->Add(status, 0, wxALIGN_CENTER);
-
-            i--;
-            j++;
-        }
-        if (leaveApplications->size() == 0)
-        {
-            wxStaticText *noData = new wxStaticText(scrolledWindow, wxID_ANY, "No data available.", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-            gridSizer->Add(noData, 0, wxALIGN_CENTER);
+            auto leaveApplication = *it;
+            gridSizer->Add(new wxStaticText(scrolledWindow, wxID_ANY, std::to_string(j)), 0, wxALIGN_CENTER);
+            gridSizer->Add(new wxStaticText(scrolledWindow, wxID_ANY, leaveApplication->getTaskType()), 0, wxALIGN_CENTER);
+            gridSizer->Add(new wxStaticText(scrolledWindow, wxID_ANY, wxDateTime(leaveApplication->getStartDate()).FormatISODate()), 0, wxALIGN_CENTER);
+            gridSizer->Add(new wxStaticText(scrolledWindow, wxID_ANY, wxDateTime(leaveApplication->getEndDate()).FormatISODate()), 0, wxALIGN_CENTER);
+            gridSizer->Add(new wxStaticText(scrolledWindow, wxID_ANY, leaveApplication->getReason()), 0, wxALIGN_CENTER);
+            gridSizer->Add(new wxStaticText(scrolledWindow, wxID_ANY, leaveApplication->getStatus() == LeaveStatus::PENDING ? "Pending" : leaveApplication->getStatus() == LeaveStatus::APPROVED ? "Approved" : "Rejected"), 0, wxALIGN_CENTER);
         }
     }
     else
     {
-        wxStaticText *noData = new wxStaticText(scrolledWindow, wxID_ANY, "No data available!", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-        gridSizer->Add(noData, 0, wxALIGN_CENTER);
+        gridSizer->SetRows(2); // 1 for headers, 1 for no data message
+        gridSizer->Add(new wxStaticText(scrolledWindow, wxID_ANY, "No data available!", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER), 0, wxALIGN_CENTER);
     }
+
     // Update the sizer for the scrolled window and refresh layout
     scrolledWindow->SetSizer(gridSizer);
     gridSizer->Fit(scrolledWindow);
@@ -217,7 +202,6 @@ void LeavePanel::UpdateUI()
     // You can also call Fit() if needed, but Layout() should suffice for dynamic updates
     Layout(); // Ensure the main sizer is re-laid out
 }
-
 void LeavePanel::OnShow(wxShowEvent &event)
 {
     if (event.IsShown())
