@@ -143,5 +143,26 @@ json Employee::to_json() {
 
 
 int Employee::getAttendancePercentage(int month, int year){
-    return attendanceRecord->getAttendancePercentage(month, year);
+    std::tm time_in = {0, 0, 0, 1, month - 1, year - 1900};
+    time_t monthstart = get_start_of_month(std::mktime(&time_in));
+    time_t monthend = get_end_of_month(monthstart);
+    int total_work_days = attendanceRecord->getHourWorkInMonth(monthstart) / 8;
+    int total_days = (monthend - monthstart) / (24 * 60 * 60);
+    int weekends = 0;
+
+    for (time_t t = monthstart; t < monthend; t += 24 * 60 * 60) {
+        std::tm* time_info = std::localtime(&t);
+        if (time_info->tm_wday == 0 || time_info->tm_wday == 6) {
+            weekends++;
+        }
+    }
+
+    // account for leaves
+    std::map<std::string, int> leaveCount = getLeaveInMonth(monthstart);
+    total_work_days += leaveCount["Casual Leave"] / 8;
+    total_work_days += leaveCount["Earned Leave"] / 8;
+    total_work_days += leaveCount["Official Leave"] / 8;
+    total_work_days += leaveCount["Unpaid Leave"] / 8;
+
+    return (total_work_days * 100) / (total_days - weekends);
 }

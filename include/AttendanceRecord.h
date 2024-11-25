@@ -16,7 +16,6 @@ public:
     time_t getLastTime() const;
     int getHourWorkInWeek(time_t weekstart);
     int getHourWorkInMonth(time_t monthstart);
-    int getAttendancePercentage(int month, int year);
 
 private:
     std::vector<AttendanceEntry> attendances;

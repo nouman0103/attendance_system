@@ -90,6 +90,11 @@ int AttendanceRecord::getHourWorkInMonth(time_t monthstart)
     time_t monthend = get_end_of_month(monthstart);
     time_t last_checkin = -1;
 
+    if (attendances.empty())
+    {
+        return 0;
+    }
+
     for (auto &attendance : attendances)
     {
         if (attendance.getTimestamp() >= monthstart && attendance.getTimestamp() < monthend)
@@ -111,7 +116,3 @@ int AttendanceRecord::getHourWorkInMonth(time_t monthstart)
     return total;
 }
 
-
-int AttendanceRecord::getAttendancePercentage(int month, int year){
-    return 81;
-}

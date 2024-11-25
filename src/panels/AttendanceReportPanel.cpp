@@ -54,6 +54,44 @@ AttendanceReportPanel::AttendanceReportPanel(wxWindow *parent, std::shared_ptr<D
     employeeComboBox = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, employees, wxCB_READONLY);
     employeeSizer->Add(employeeComboBox, 1, wxALL | wxEXPAND, 5);
     employeeComboBox->SetSelection(0);
+
+    // add month and year selector
+    wxBoxSizer* monthYearSizer = new wxBoxSizer(wxHORIZONTAL);
+    wxStaticText* monthLabel = new wxStaticText(this, wxID_ANY, "Month:");
+    monthLabel->SetMinSize(wxSize(100, -1)); // Set constant width for the label
+    monthYearSizer->Add(monthLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
+    wxArrayString months;
+    months.Add("January");
+    months.Add("February");
+    months.Add("March");
+    months.Add("April");
+    months.Add("May");
+    months.Add("June");
+    months.Add("July");
+    months.Add("August");
+    months.Add("September");
+    months.Add("October");
+    months.Add("November");
+    months.Add("December");
+
+    wxComboBox* monthComboBox = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, months, wxCB_READONLY);
+    monthYearSizer->Add(monthComboBox, 1, wxALL | wxEXPAND, 5);
+    monthComboBox->SetSelection(0);
+
+    wxStaticText* yearLabel = new wxStaticText(this, wxID_ANY, "Year:");
+    yearLabel->SetMinSize(wxSize(100, -1)); // Set constant width for the label
+    monthYearSizer->Add(yearLabel, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
+    wxArrayString years;
+    years.Add("2021");
+    years.Add("2022");
+    years.Add("2023");
+    years.Add("2024");
+    wxComboBox* yearComboBox = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, years, wxCB_READONLY);
+    monthYearSizer->Add(yearComboBox, 1, wxALL | wxEXPAND, 5);
+    yearComboBox->SetSelection(0);
+
+    mainSizer->Add(monthYearSizer, 0, wxLEFT | wxRIGHT | wxEXPAND, 5);
+
     mainSizer->Add(employeeSizer, 0, wxLEFT | wxRIGHT | wxEXPAND, 5);
     // bind the combobox with onSelection
     employeeComboBox->Bind(wxEVT_COMBOBOX, &AttendanceReportPanel::onSelection, this);
@@ -132,20 +170,26 @@ void AttendanceReportPanel::updateUI(){
     // Add data
     // get all employees from the data manager
     std::shared_ptr<std::vector<Employee>> employees = dm->getEmployees();
+    
     int i = 1;
     // clear the combobox
     employeeComboBox->Clear();
     employeeComboBox->Append("Show All Employees");
+    employeeComboBox->SetSelection(0);
     for (Employee employee : *employees)
     {
         // update the dropdown    
         employeeComboBox->Append(employee.getName());
 
+        // get current employyee
+        std::shared_ptr<Employee> currentEmployee = dm->getEmployee(employee.getName());
+
+
         // get attendance percentage
-        int attendancePercentage = employee.getAttendancePercentage(11, 2024);
+        int attendancePercentage = currentEmployee->getAttendancePercentage(11, 2024);
 
         wxStaticText* data1 = new wxStaticText(scrolledWindow, wxID_ANY, std::to_string(i));
-        wxStaticText* data2 = new wxStaticText(scrolledWindow, wxID_ANY, employee.getName());
+        wxStaticText* data2 = new wxStaticText(scrolledWindow, wxID_ANY, currentEmployee->getName());
         wxStaticText* data3 = new wxStaticText(scrolledWindow, wxID_ANY, std::to_string(attendancePercentage) + "%");
         wxStaticText* data4 = new wxStaticText(scrolledWindow, wxID_ANY, "10");
         wxStaticText* data5 = new wxStaticText(scrolledWindow, wxID_ANY, "11");
