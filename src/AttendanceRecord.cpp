@@ -105,3 +105,8 @@ int AttendanceRecord::getHourWorkInMonth(time_t monthstart)
     }
     return total;
 }
+
+
+int AttendanceRecord::getAttendancePercentage(int month, int year){
+    return 81;
+}

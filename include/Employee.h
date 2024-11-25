@@ -42,6 +42,7 @@ public:
     std::string getPosition();
     void setAttendanceRecord(std::shared_ptr<AttendanceRecord> attendanceRecord);
     std::shared_ptr<AttendanceRecord> getAttendanceRecord();
+    int getAttendancePercentage(int month, int year);
     friend std::ostream &operator<<(std::ostream &out, const Employee &employee);
     json to_json();
     std::map<std::string,int> getLeaveInWeek(time_t weekstart);

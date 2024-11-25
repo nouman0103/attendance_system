@@ -140,3 +140,8 @@ json Employee::to_json() {
     j["position"] = position;
     return j;
 }
+
+
+int Employee::getAttendancePercentage(int month, int year){
+    return attendanceRecord->getAttendancePercentage(month, year);
+}

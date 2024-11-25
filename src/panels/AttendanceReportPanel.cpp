@@ -130,11 +130,23 @@ void AttendanceReportPanel::updateUI(){
     setHeaders();
     
     // Add data
-    for (int i = 0; i < 10; i++)
+    // get all employees from the data manager
+    std::shared_ptr<std::vector<Employee>> employees = dm->getEmployees();
+    int i = 1;
+    // clear the combobox
+    employeeComboBox->Clear();
+    employeeComboBox->Append("Show All Employees");
+    for (Employee employee : *employees)
     {
-        wxStaticText* data1 = new wxStaticText(scrolledWindow, wxID_ANY, "1");
-        wxStaticText* data2 = new wxStaticText(scrolledWindow, wxID_ANY, "john");
-        wxStaticText* data3 = new wxStaticText(scrolledWindow, wxID_ANY, "80%");
+        // update the dropdown    
+        employeeComboBox->Append(employee.getName());
+
+        // get attendance percentage
+        int attendancePercentage = employee.getAttendancePercentage(11, 2024);
+
+        wxStaticText* data1 = new wxStaticText(scrolledWindow, wxID_ANY, std::to_string(i));
+        wxStaticText* data2 = new wxStaticText(scrolledWindow, wxID_ANY, employee.getName());
+        wxStaticText* data3 = new wxStaticText(scrolledWindow, wxID_ANY, std::to_string(attendancePercentage) + "%");
         wxStaticText* data4 = new wxStaticText(scrolledWindow, wxID_ANY, "10");
         wxStaticText* data5 = new wxStaticText(scrolledWindow, wxID_ANY, "11");
     
@@ -145,8 +157,11 @@ void AttendanceReportPanel::updateUI(){
         gridSizer->Add(data3, 0, wxALIGN_CENTER | wxEXPAND);
         gridSizer->Add(data4, 0, wxALIGN_CENTER | wxEXPAND);
         gridSizer->Add(data5, 0, wxALIGN_CENTER | wxEXPAND);
+        i++;
     }
 
+    
+    
     scrolledWindow->SetSizer(gridSizer);
     gridSizer->Fit(scrolledWindow);
     gridSizer->Layout();  // This ensures the grid layout is updated
