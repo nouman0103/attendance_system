@@ -59,13 +59,10 @@ EmployeePanel::EmployeePanel(wxWindow *parent, std::shared_ptr<DataManager> dm)
     title2->SetFont(wxFont(16, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
     mainSizer->Add(title2, 0, wxALL | wxEXPAND, 10);
 
-
     // add a horizontal bar with duration of 30
     m_barGraphMonthly = new HorizontalBar(this, 30);
     mainSizer->Add(m_barGraphMonthly, 0, wxALL | wxEXPAND, 10);
     m_barGraphMonthly->SetData(70, 8, 3, 0);
-
-
 
     // add a horizontal separator
     mainSizer->Add(new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL), 0, wxEXPAND | wxALL, 5);
@@ -94,20 +91,20 @@ void EmployeePanel::OnShow(wxShowEvent &event)
         weekStart.SetHour(0);
         weekStart.SetMinute(0);
         weekStart.SetSecond(0);
-        
+
         // Get the current day of the week
         int day_of_week = weekStart.GetWeekDay();
         // Subtract the current day of the week to get the start of the week
-        weekStart=  weekStart.Subtract(wxTimeSpan((day_of_week-1)*24, 0, 0, 0));
+        weekStart = weekStart.Subtract(wxTimeSpan((day_of_week - 1) * 24, 0, 0, 0));
         weekEnd = weekStart;
         // Add the remaining days to get the end of the week
-        weekEnd =  weekEnd.Add(wxTimeSpan(7*23, 59, 59, 59));
-        
+        weekEnd = weekEnd.Add(wxTimeSpan(7 * 23, 59, 59, 59));
+
         // Set the date range text
         dateRangeText->SetLabelText(weekStart.Format("%d/%m/%Y") + " - " + weekEnd.Format("%d/%m/%Y"));
         // dateRangeText->SetLabel("12/1/2021 - 12/7/2021");
         int hours = current_employee->getAttendanceRecord()->getHourWorkInWeek(weekStart.GetTicks());
-        std::map<std::string,int> leaveCount = current_employee->getLeaveInWeek(weekStart.GetTicks());
+        std::map<std::string, int> leaveCount = current_employee->getLeaveInWeek(weekStart.GetTicks());
         // set bar Data
         m_barGraphWeekly->SetData(hours, leaveCount["Casual Leave"], leaveCount["Earned Leave"], leaveCount["Official Leave"]);
     }
@@ -127,8 +124,10 @@ void EmployeePanel::OnPrevWeek(wxCommandEvent &event)
     weekStart = weekStart.Subtract(wxTimeSpan(7 * 24, 0, 0, 0));
     weekEnd = weekEnd.Subtract(wxTimeSpan(7 * 24, 0, 0, 0));
     dateRangeText->SetLabelText(weekStart.Format("%d/%m/%Y") + " - " + weekEnd.Format("%d/%m/%Y"));
-    int hours = dm->getCurrentEmployee()->getAttendanceRecord()->getHourWorkInWeek(weekStart.GetTicks());
-    m_barGraphWeekly->SetData(hours, 0, 0, 0);
+    int hours = current_employee->getAttendanceRecord()->getHourWorkInWeek(weekStart.GetTicks());
+    std::map<std::string, int> leaveCount = current_employee->getLeaveInWeek(weekStart.GetTicks());
+    // set bar Data
+    m_barGraphWeekly->SetData(hours, leaveCount["Casual Leave"], leaveCount["Earned Leave"], leaveCount["Official Leave"]);
 }
 
 void EmployeePanel::OnNextWeek(wxCommandEvent &event)
@@ -136,6 +135,8 @@ void EmployeePanel::OnNextWeek(wxCommandEvent &event)
     weekStart = weekStart.Add(wxTimeSpan(7 * 24, 0, 0, 0));
     weekEnd = weekEnd.Add(wxTimeSpan(7 * 24, 0, 0, 0));
     dateRangeText->SetLabelText(weekStart.Format("%d/%m/%Y") + " - " + weekEnd.Format("%d/%m/%Y"));
-    int hours = dm->getCurrentEmployee()->getAttendanceRecord()->getHourWorkInWeek(weekStart.GetTicks());
-    m_barGraphWeekly->SetData(hours, 0, 0, 0);
+    int hours = current_employee->getAttendanceRecord()->getHourWorkInWeek(weekStart.GetTicks());
+    std::map<std::string, int> leaveCount = current_employee->getLeaveInWeek(weekStart.GetTicks());
+    // set bar Data
+    m_barGraphWeekly->SetData(hours, leaveCount["Casual Leave"], leaveCount["Earned Leave"], leaveCount["Official Leave"]);
 }
