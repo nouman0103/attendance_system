@@ -47,6 +47,8 @@ public:
     json to_json();
     std::map<std::string,int> getLeaveInWeek(time_t weekstart);
     std::map<std::string,int> getLeaveInMonth(time_t monthstart);
+    int getPendingLeaves(time_t monthstart);
+
 
 private:
     std::string position;
