@@ -1,5 +1,5 @@
 {
-    "count": 4,
+    "count": 5,
     "employees": [
         {
             "id": 1,
@@ -24,6 +24,12 @@
             "name": "sup",
             "password": "abc",
             "position": "Supervisor"
+        },
+        {
+            "id": 5,
+            "name": "mian",
+            "password": "mian",
+            "position": "Director"
         }
     ]
 }

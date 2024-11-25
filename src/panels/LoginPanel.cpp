@@ -125,6 +125,11 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
             wxMessageBox("Login successful!", "Success", wxOK | wxICON_INFORMATION);
             frame->updateStatusBar(username + " logged in as " + role, 1);
         }
+        else if(role=="Director"){
+            simplebook->SetSelection(InterfaceFrame::PID_PAGE_APPROVAL);
+            wxMessageBox("Login successful!", "Success", wxOK | wxICON_INFORMATION);
+            frame->updateStatusBar(username + " logged in as " + role, 1);
+        }
         else {
             wxMessageBox("Failed to login! Please ensure your input details are correct.", "Error", wxOK | wxICON_ERROR);
         }
