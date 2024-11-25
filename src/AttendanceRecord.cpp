@@ -78,6 +78,11 @@ std::time_t get_end_of_month(std::time_t timestamp) {
     return next_month - 1;      // Subtract one second for the last moment of the current month
 }
 
+int get_year(std::time_t timestamp) {
+    std::tm* time_info = std::localtime(&timestamp);
+    return time_info->tm_year + 1900;
+}
+
 int AttendanceRecord::getHourWorkInMonth(time_t monthstart)
 {
     int total = 0;

@@ -24,3 +24,4 @@ private:
 };
 std::time_t get_start_of_month(std::time_t timestamp);
 std::time_t get_end_of_month(std::time_t timestamp);
+int get_year(std::time_t timestamp);

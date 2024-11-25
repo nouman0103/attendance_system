@@ -194,42 +194,44 @@ void DataManager::readLeaveApplication()
     for (auto &employee : j.items())
     {
         std::string name = employee.key();
+        std::map<int, int> casualLeave;
+        std::map<int, int> earnedLeave;
         std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>> leaves = std::make_shared<std::vector<std::shared_ptr<LeaveApplication>>>();
         for (auto &leave : employee.value()["leave"])
         {
             if (leave["taskType"] == "Casual Leave")
             {
                 std::shared_ptr<CasualLeaveApplication> a = std::make_shared<CasualLeaveApplication>(
-                   employeeDict[employee.key()], leave["startDate"], leave["endDate"], leave["reason"], leave["applicationDate"], leave["approvalDate"], leave["status"]
-                    );
+                    employeeDict[employee.key()], leave["startDate"], leave["endDate"], leave["reason"], leave["applicationDate"], leave["approvalDate"], leave["status"]);
+                casualLeave[get_year(leave["startDate"].get<int>())] += ceil((leave["endDate"].get<int>() - leave["startDate"].get<int>()) / (24 * 60 * 60)) + 1;
                 leaves->push_back(a);
             }
             else if (leave["taskType"] == "Earned Leave")
             {
                 std::shared_ptr<EarnedLeaveApplication> a = std::make_shared<EarnedLeaveApplication>(
-                    employeeDict[employee.key()], leave["startDate"], leave["endDate"], leave["reason"], leave["applicationDate"], leave["approvalDate"], leave["status"]
-                    );
+                    employeeDict[employee.key()], leave["startDate"], leave["endDate"], leave["reason"], leave["applicationDate"], leave["approvalDate"], leave["status"]);
+                earnedLeave[get_year(leave["startDate"].get<int>())] += ceil((leave["endDate"].get<int>() - leave["startDate"].get<int>()) / (24 * 60 * 60)) + 1;
                 leaves->push_back(a);
             }
             else if (leave["taskType"] == "Official Leave")
             {
                 std::shared_ptr<OfficialLeaveApplication> a = std::make_shared<OfficialLeaveApplication>(
-                    employeeDict[employee.key()], leave["startDate"], leave["endDate"], leave["reason"], leave["applicationDate"], leave["approvalDate"], leave["status"]
-                );
+                    employeeDict[employee.key()], leave["startDate"], leave["endDate"], leave["reason"], leave["applicationDate"], leave["approvalDate"], leave["status"]);
                 leaves->push_back(a);
             }
             else if (leave["taskType"] == "Unpaid Leave")
             {
                 std::shared_ptr<UnpaidLeaveApplication> a = std::make_shared<UnpaidLeaveApplication>(
-                    employeeDict[employee.key()], leave["startDate"], leave["endDate"], leave["reason"], leave["applicationDate"], leave["approvalDate"], leave["status"]
-                );
+                    employeeDict[employee.key()], leave["startDate"], leave["endDate"], leave["reason"], leave["applicationDate"], leave["approvalDate"], leave["status"]);
                 leaves->push_back(a);
             }
         }
         // leaveApplications.push_back(LeaveApplication(employeeDict[employee.key()], leaves));
         leavesDict[employee.key()] = leaves;
         employeeDict[employee.key()]->setLeaveApplication(leaves);
+        leaveBalances[employee.key()] = std::make_shared<LeaveBalance>(casualLeave, earnedLeave);
     }
+    return;
 }
 bool DataManager::updateLeaveApplication(std::shared_ptr<Employee> employee)
 {

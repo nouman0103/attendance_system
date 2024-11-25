@@ -9,6 +9,11 @@ LeaveBalance::LeaveBalance()
     casualLeave[year] = 0;
     earnedLeave[year] = 0;
 }
+LeaveBalance::LeaveBalance(std::map<int, int> casualLeave, std::map<int, int> earnedLeave)
+{
+    this->casualLeave = casualLeave;
+    this->earnedLeave = earnedLeave;
+}
 
 
 int LeaveBalance::getCasualLeave(int year)
@@ -29,6 +34,15 @@ void LeaveBalance::setCasualLeave(int casualLeave, int year)
 void LeaveBalance::setEarnedLeave(int earnedLeave, int year)
 {
     this->earnedLeave[year] = earnedLeave;
+}
+void LeaveBalance::setCasualLeave(std::map<int, int> casualLeave)
+{
+    this->casualLeave = casualLeave;
+}
+
+void LeaveBalance::setEarnedLeave(std::map<int, int> earnedLeave)
+{
+    this->earnedLeave = earnedLeave;
 }
 
 bool LeaveBalance::applyCasualLeave(int days, int year)
