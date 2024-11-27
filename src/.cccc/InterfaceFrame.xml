@@ -29,7 +29,7 @@
 <name>InitializeMenu()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/InterfaceFrame.cpp" line="68" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\InterfaceFrame.cpp" line="68" />
 </extent>
 <lines_of_code value="40" level="1" />
 <McCabes_cyclomatic_complexity value="3" level="0" />
@@ -41,7 +41,7 @@
 <name>InitializeStatusBar()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/InterfaceFrame.cpp" line="129" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\InterfaceFrame.cpp" line="129" />
 </extent>
 <lines_of_code value="6" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
@@ -53,7 +53,7 @@
 <name>InterfaceFrame(const wxString &amp;)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/InterfaceFrame.cpp" line="10" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\InterfaceFrame.cpp" line="10" />
 </extent>
 <lines_of_code value="27" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
@@ -65,7 +65,7 @@
 <name>ShowPage(int)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/InterfaceFrame.cpp" line="147" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\InterfaceFrame.cpp" line="147" />
 </extent>
 <lines_of_code value="3" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
@@ -77,7 +77,7 @@
 <name>updateStatusBar(const wxString &amp;,int)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/InterfaceFrame.cpp" line="136" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\InterfaceFrame.cpp" line="136" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
@@ -97,11 +97,11 @@
 <concrete>false</concrete>
 <extent>
 <description>pass by reference</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/InterfaceFrame.cpp" line="10" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\InterfaceFrame.cpp" line="10" />
 </extent>
 <extent>
 <description>pass by reference</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/InterfaceFrame.cpp" line="136" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\InterfaceFrame.cpp" line="136" />
 </extent>
 </supplier_module>
 </module>

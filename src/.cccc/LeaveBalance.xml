@@ -6,10 +6,10 @@
 <lines_of_code_per_member_function value="******" level="0" />
 <McCabes_cyclomatic_complexity value="11" level="0" />
 <McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
-<lines_of_code value="2" level="0" />
+<lines_of_code value="16" level="0" />
 <lines_of_code_per_member_function value="********" level="2" />
-<lines_of_code_per_line_of_comment value="31.500" level="2" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="5.500" level="1" />
+<lines_of_code_per_line_of_comment value="3.937" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.687" level="0" />
 <weighted_methods_per_class_unity value="10" level="0" />
 <weighted_methods_per_class_visibility value="0" level="0" />
 <depth_of_inheritance_tree value="0" level="0" />
@@ -29,11 +29,11 @@
 <name>LeaveBalance()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveBalance.cpp" line="3" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveBalance.cpp" line="3" />
 </extent>
 <lines_of_code value="8" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
-<lines_of_comment value="1" level="0" />
+<lines_of_comment value="2" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -41,11 +41,11 @@
 <name>LeaveBalance(map,map)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveBalance.cpp" line="12" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveBalance.cpp" line="13" />
 </extent>
 <lines_of_code value="5" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -53,23 +53,23 @@
 <name>applyCasualLeave(int,int)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveBalance.cpp" line="48" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveBalance.cpp" line="56" />
 </extent>
 <lines_of_code value="17" level="0" />
 <McCabes_cyclomatic_complexity value="6" level="0" />
-<lines_of_comment value="1" level="0" />
+<lines_of_comment value="5" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="6.000" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="1.200" level="0" />
 </member_function>
 <member_function>
 <name>applyEarnedLeave(int,int)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveBalance.cpp" line="67" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveBalance.cpp" line="80" />
 </extent>
 <lines_of_code value="9" level="0" />
 <McCabes_cyclomatic_complexity value="3" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="2" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -77,11 +77,11 @@
 <name>getCasualLeave(int)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveBalance.cpp" line="19" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveBalance.cpp" line="21" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -89,11 +89,11 @@
 <name>getEarnedLeave(int)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveBalance.cpp" line="24" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveBalance.cpp" line="27" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -101,11 +101,11 @@
 <name>setCasualLeave(int,int)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveBalance.cpp" line="29" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveBalance.cpp" line="33" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -113,11 +113,11 @@
 <name>setCasualLeave(map)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveBalance.cpp" line="38" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveBalance.cpp" line="44" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -125,11 +125,11 @@
 <name>setEarnedLeave(int,int)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveBalance.cpp" line="34" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveBalance.cpp" line="39" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -137,11 +137,11 @@
 <name>setEarnedLeave(map)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveBalance.cpp" line="43" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveBalance.cpp" line="50" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -157,19 +157,19 @@
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveBalance.cpp" line="12" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveBalance.cpp" line="13" />
 </extent>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveBalance.cpp" line="12" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveBalance.cpp" line="13" />
 </extent>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveBalance.cpp" line="38" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveBalance.cpp" line="44" />
 </extent>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveBalance.cpp" line="43" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveBalance.cpp" line="50" />
 </extent>
 </supplier_module>
 </module>

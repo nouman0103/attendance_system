@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module ApprovalPanel-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="205" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="21" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
+<lines_of_code value="34" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="6.029" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.618" level="0" />
+<weighted_methods_per_class_unity value="9" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="2" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>AddHeaders()</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="80" />
+</extent>
+<lines_of_code value="35" level="1" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="11" level="0" />
+<lines_of_code_per_line_of_comment value="3.182" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>OnApprovalButton(wxCommandEvent &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="293" />
+</extent>
+<lines_of_code value="19" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>OnRejectButton(wxCommandEvent &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="315" />
+</extent>
+<lines_of_code value="19" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>OnShow(wxShowEvent &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="237" />
+</extent>
+<lines_of_code value="10" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>OnViewReports(wxCommandEvent &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="273" />
+</extent>
+<lines_of_code value="12" level="0" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<lines_of_comment value="5" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>filterOutstandingLeaves(wxCommandEvent &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="248" />
+</extent>
+<lines_of_code value="14" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getLoggedInAsPosition()</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="268" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setLoggedInAsPosition(int)</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="263" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>updateUI()</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="124" />
+</extent>
+<lines_of_code value="88" level="1" />
+<McCabes_cyclomatic_complexity value="10" level="0" />
+<lines_of_comment value="15" level="0" />
+<lines_of_code_per_line_of_comment value="5.867" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.667" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>ApprovalPanel</name>
+<client_module>
+</client_module>
+<supplier_module>
+<name>wxCommandEvent</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="248" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="273" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="293" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="315" />
+</extent>
+<name>wxShowEvent</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="237" />
+</extent>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

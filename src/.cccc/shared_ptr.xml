@@ -14,7 +14,7 @@
 <weighted_methods_per_class_visibility value="0" level="0" />
 <depth_of_inheritance_tree value="0" level="0" />
 <number_of_children value="0" level="0" />
-<coupling_between_objects value="11" level="0" />
+<coupling_between_objects value="12" level="0" />
 <IF4 value="0" level="0" />
 <IF4_per_member_function value="********" level="0" />
 <IF4_visible value="0" level="0" />
@@ -35,93 +35,100 @@
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/AttendanceRecord.cpp" line="3" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\AttendanceRecord.cpp" line="3" />
 </extent>
 <name>CasualLeaveApplication</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="156" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="175" />
 </extent>
 <name>DataManager</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/DataManager.cpp" line="102" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="118" />
 </extent>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/DataManager.cpp" line="162" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="187" />
 </extent>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/DataManager.cpp" line="236" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="274" />
 </extent>
 <name>Director</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Director.cpp" line="11" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Director.cpp" line="11" />
 </extent>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Director.cpp" line="16" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Director.cpp" line="16" />
 </extent>
 <name>EarnedLeaveApplication</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="192" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="217" />
 </extent>
 <name>Employee</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Employee.cpp" line="60" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="67" />
+</extent>
+<name>EventData</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="336" />
 </extent>
 <name>Guard</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Guard.cpp" line="18" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Guard.cpp" line="22" />
 </extent>
 <name>LeaveApplication</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="3" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="3" />
 </extent>
 <name>OfficialLeaveApplication</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="61" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="70" />
 </extent>
 <name>Superviser</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Superviser.cpp" line="12" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Superviser.cpp" line="12" />
 </extent>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Superviser.cpp" line="17" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Superviser.cpp" line="17" />
 </extent>
 <name>UnpaidLeaveApplication</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="235" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="267" />
 </extent>
 </client_module>
 <supplier_module>

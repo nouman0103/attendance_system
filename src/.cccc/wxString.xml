@@ -35,11 +35,11 @@
 <concrete>false</concrete>
 <extent>
 <description>pass by reference</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/InterfaceFrame.cpp" line="10" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\InterfaceFrame.cpp" line="10" />
 </extent>
 <extent>
 <description>pass by reference</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/InterfaceFrame.cpp" line="136" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\InterfaceFrame.cpp" line="136" />
 </extent>
 </client_module>
 <supplier_module>

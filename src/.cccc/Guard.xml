@@ -6,10 +6,10 @@
 <lines_of_code_per_member_function value="******" level="0" />
 <McCabes_cyclomatic_complexity value="17" level="0" />
 <McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
-<lines_of_code value="4" level="0" />
+<lines_of_code value="11" level="0" />
 <lines_of_code_per_member_function value="********" level="2" />
-<lines_of_code_per_line_of_comment value="11.250" level="1" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="4.250" level="0" />
+<lines_of_code_per_line_of_comment value="4.091" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="1.545" level="0" />
 <weighted_methods_per_class_unity value="5" level="0" />
 <weighted_methods_per_class_visibility value="0" level="0" />
 <depth_of_inheritance_tree value="0" level="0" />
@@ -29,11 +29,11 @@
 <name>Guard(...)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Guard.cpp" line="3" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Guard.cpp" line="3" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -41,11 +41,11 @@
 <name>Guard(Employee)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Guard.cpp" line="7" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Guard.cpp" line="8" />
 </extent>
 <lines_of_code value="3" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -53,11 +53,11 @@
 <name>Guard(json)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Guard.cpp" line="10" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Guard.cpp" line="12" />
 </extent>
 <lines_of_code value="3" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -65,23 +65,23 @@
 <name>markAttendance(shared_ptr,AttendanceEntry)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Guard.cpp" line="18" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Guard.cpp" line="22" />
 </extent>
 <lines_of_code value="32" level="1" />
 <McCabes_cyclomatic_complexity value="17" level="1" />
-<lines_of_comment value="4" level="0" />
-<lines_of_code_per_line_of_comment value="8.000" level="1" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="4.250" level="0" />
+<lines_of_comment value="7" level="0" />
+<lines_of_code_per_line_of_comment value="4.571" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="2.429" level="0" />
 </member_function>
 <member_function>
 <name>~Guard()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Guard.cpp" line="14" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Guard.cpp" line="17" />
 </extent>
 <lines_of_code value="3" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -97,28 +97,28 @@
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Guard.cpp" line="18" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Guard.cpp" line="22" />
 </extent>
 <name>Employee</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Guard.cpp" line="7" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Guard.cpp" line="8" />
 </extent>
 <name>json</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Guard.cpp" line="10" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Guard.cpp" line="12" />
 </extent>
 <name>shared_ptr</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Guard.cpp" line="18" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Guard.cpp" line="22" />
 </extent>
 </supplier_module>
 </module>

@@ -6,10 +6,10 @@
 <lines_of_code_per_member_function value="******" level="0" />
 <McCabes_cyclomatic_complexity value="13" level="0" />
 <McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
-<lines_of_code value="0" level="0" />
-<lines_of_code_per_member_function value="********" level="0" />
-<lines_of_code_per_line_of_comment value="******" level="2" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="2" />
+<lines_of_code value="8" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="6.000" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="1.625" level="0" />
 <weighted_methods_per_class_unity value="6" level="0" />
 <weighted_methods_per_class_visibility value="0" level="0" />
 <depth_of_inheritance_tree value="0" level="0" />
@@ -29,11 +29,11 @@
 <name>EarnedLeaveApplication(json)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="196" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="222" />
 </extent>
 <lines_of_code value="3" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -41,11 +41,11 @@
 <name>EarnedLeaveApplication(shared_ptr,time_t,time_t,string,time_t,time_t,LeaveStatus)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="192" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="217" />
 </extent>
 <lines_of_code value="3" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -53,23 +53,23 @@
 <name>approve(Employee)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="202" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="229" />
 </extent>
 <lines_of_code value="13" level="0" />
 <McCabes_cyclomatic_complexity value="5" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="2" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="2.500" level="0" />
 </member_function>
 <member_function>
 <name>getTaskType()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="230" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="261" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -77,23 +77,23 @@
 <name>reject(Employee)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="216" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="245" />
 </extent>
 <lines_of_code value="13" level="0" />
 <McCabes_cyclomatic_complexity value="6" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="2" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="2" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="3.000" level="0" />
 </member_function>
 <member_function>
 <name>to_json()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="106" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="120" />
 </extent>
 <lines_of_code value="12" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -109,58 +109,58 @@
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="202" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="229" />
 </extent>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="216" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="245" />
 </extent>
 <name>LeaveStatus</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="192" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="217" />
 </extent>
 <name>json</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="196" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="222" />
 </extent>
 <name>shared_ptr</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="192" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="217" />
 </extent>
 <name>string</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="192" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="217" />
 </extent>
 <name>time_t</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="192" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="217" />
 </extent>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="192" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="217" />
 </extent>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="192" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="217" />
 </extent>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="192" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="217" />
 </extent>
 </supplier_module>
 </module>

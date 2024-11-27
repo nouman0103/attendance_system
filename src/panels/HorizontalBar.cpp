@@ -9,9 +9,10 @@ wxEND_EVENT_TABLE()
 HorizontalBar::HorizontalBar(wxWindow* parent, int duration)
     : wxPanel(parent, wxFULL_REPAINT_ON_RESIZE), m_presentHours(0), m_casualLeaveHours(0), m_earnedLeaveHours(0), m_officialLeaveHours(0)
 {
+    // Set the minimum size of the panel
     SetMinSize(wxSize(400, 100));
     this->duration = duration;
-
+    // Set the colors for the different types of leave
     m_presentBrush = wxBrush(wxColour(76, 251, 126)); // Green
     m_casualLeaveBrush = wxBrush(wxColour(14,165,226)); // Blue
     m_earnedLeaveBrush = wxBrush(wxColour(26, 77, 186)); // Blue
@@ -22,6 +23,7 @@ HorizontalBar::HorizontalBar(wxWindow* parent, int duration)
 
 void HorizontalBar::SetData(int presentHours, int casualLeaveHours, int earnedLeaveHours, int officialLeaveHours)
 {
+    // Set the data for the bar
     m_presentHours = presentHours;
     m_casualLeaveHours = casualLeaveHours;
     m_earnedLeaveHours = earnedLeaveHours;
@@ -37,13 +39,14 @@ void HorizontalBar::OnSize(wxSizeEvent& event)
 
 void HorizontalBar::OnPaint(wxPaintEvent& event)
 {
+    // Create a device context
     wxPaintDC dc(this);
     // clear existing content
     dc.Clear();
-
+    // Get the size of the panel
     wxSize size = GetClientSize();
     
-
+    // Calculate the total hours
     int durationHours = (duration / 7) * 40;
     int totalHours = std::max(durationHours, m_presentHours+m_casualLeaveHours+m_earnedLeaveHours+m_officialLeaveHours);
     int barWidth = size.GetWidth();
@@ -55,6 +58,8 @@ void HorizontalBar::OnPaint(wxPaintEvent& event)
     int earnedLeaveWidth = (m_earnedLeaveHours * barWidth) / totalHours;
     int officialLeaveWidth = (m_officialLeaveHours * barWidth) / totalHours;
 
+
+    // Draw the background
 
     dc.SetBrush(m_notMarkedBrush);
     dc.DrawRectangle(0, 0, barWidth, barHeight);
@@ -86,13 +91,14 @@ void HorizontalBar::OnPaint(wxPaintEvent& event)
     int labelX = 30;
     int labelSpacing = 35;
 
+    // create the labels
     std::string presentLabel = std::to_string(m_presentHours) + " Hrs Present";
     std::string casualLeaveLabel = std::to_string(m_casualLeaveHours) + " Hrs Casual Leave";
     std::string earnedLeaveLabel = std::to_string(m_earnedLeaveHours) + " Hrs Earned Leave";
     std::string officialLeaveLabel = std::to_string(m_officialLeaveHours) + " Hrs Official Leave";
     std::string notMarkedLabel = std::to_string(std::max(totalHours - m_presentHours - m_casualLeaveHours - m_earnedLeaveHours - m_officialLeaveHours,0)) + " Hrs Not Marked";
 
-
+    // draw the present label
     dc.SetBrush(m_presentBrush);
     dc.DrawCircle(dotX, dotY, dotSize);
     dc.DrawText(presentLabel, labelX, labelY);
@@ -102,8 +108,7 @@ void HorizontalBar::OnPaint(wxPaintEvent& event)
 
     labelX += textWidth + labelSpacing;
 
-
-
+    // draw the casual leave label
     dc.SetBrush(m_casualLeaveBrush);
     dc.DrawCircle(labelX, dotY, dotSize);
     dc.DrawText(casualLeaveLabel, labelX + 20, labelY);
@@ -117,6 +122,8 @@ void HorizontalBar::OnPaint(wxPaintEvent& event)
         labelY += 20;
         dotY += 20;
     }
+
+    // draw the earned leave label
 
     dc.SetBrush(m_earnedLeaveBrush);
     dc.DrawCircle(labelX, dotY, dotSize);
@@ -132,6 +139,8 @@ void HorizontalBar::OnPaint(wxPaintEvent& event)
         dotY += 20;
     }
 
+    // draw the official leave label
+
     dc.SetBrush(m_officialLeaveBrush);
     dc.DrawCircle(labelX, dotY, dotSize);
     dc.DrawText(officialLeaveLabel, labelX + 20, labelY);
@@ -145,6 +154,9 @@ void HorizontalBar::OnPaint(wxPaintEvent& event)
         labelY += 20;
         dotY += 20;
     }
+
+    // draw the not marked label
+
 
     dc.SetBrush(m_notMarkedBrush);
     dc.DrawCircle(labelX, dotY, dotSize);

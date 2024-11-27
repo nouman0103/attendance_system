@@ -6,10 +6,10 @@
 <lines_of_code_per_member_function value="******" level="0" />
 <McCabes_cyclomatic_complexity value="5" level="0" />
 <McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
-<lines_of_code value="1" level="0" />
+<lines_of_code value="7" level="0" />
 <lines_of_code_per_member_function value="********" level="2" />
-<lines_of_code_per_line_of_comment value="27.000" level="1" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="5.000" level="0" />
+<lines_of_code_per_line_of_comment value="3.857" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.714" level="0" />
 <weighted_methods_per_class_unity value="6" level="0" />
 <weighted_methods_per_class_visibility value="0" level="0" />
 <depth_of_inheritance_tree value="0" level="0" />
@@ -29,11 +29,11 @@
 <name>AttendanceEntry(string,Attendance,time_t)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/AttendanceEntry.cpp" line="4" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\AttendanceEntry.cpp" line="4" />
 </extent>
 <lines_of_code value="5" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -41,11 +41,11 @@
 <name>getID()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/AttendanceEntry.cpp" line="11" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\AttendanceEntry.cpp" line="12" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -53,11 +53,11 @@
 <name>getTime()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/AttendanceEntry.cpp" line="21" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\AttendanceEntry.cpp" line="24" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -65,11 +65,11 @@
 <name>getTimestamp()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/AttendanceEntry.cpp" line="26" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\AttendanceEntry.cpp" line="30" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -77,11 +77,11 @@
 <name>getType()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/AttendanceEntry.cpp" line="16" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\AttendanceEntry.cpp" line="18" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -89,11 +89,11 @@
 <name>to_json()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/AttendanceEntry.cpp" line="31" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\AttendanceEntry.cpp" line="36" />
 </extent>
 <lines_of_code value="6" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
-<lines_of_comment value="1" level="0" />
+<lines_of_comment value="2" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -107,21 +107,21 @@
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/AttendanceRecord.cpp" line="6" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\AttendanceRecord.cpp" line="6" />
 </extent>
 <name>DataManager</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/DataManager.cpp" line="114" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="132" />
 </extent>
 <name>Guard</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Guard.cpp" line="18" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Guard.cpp" line="22" />
 </extent>
 </client_module>
 <supplier_module>
@@ -130,21 +130,21 @@
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/AttendanceEntry.cpp" line="4" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\AttendanceEntry.cpp" line="4" />
 </extent>
 <name>string</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/AttendanceEntry.cpp" line="4" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\AttendanceEntry.cpp" line="4" />
 </extent>
 <name>time_t</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/AttendanceEntry.cpp" line="4" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\AttendanceEntry.cpp" line="4" />
 </extent>
 </supplier_module>
 </module>

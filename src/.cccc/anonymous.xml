@@ -2,15 +2,15 @@
 <!--Detailed report on module anonymous-->
 <CCCC_Project>
 <module_summary>
-<lines_of_code value="29" level="0" />
+<lines_of_code value="385" level="0" />
 <lines_of_code_per_member_function value="******" level="0" />
-<McCabes_cyclomatic_complexity value="5" level="0" />
+<McCabes_cyclomatic_complexity value="6" level="0" />
 <McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
-<lines_of_code value="5" level="0" />
+<lines_of_code value="162" level="0" />
 <lines_of_code_per_member_function value="********" level="2" />
-<lines_of_code_per_line_of_comment value="5.800" level="0" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="1.000" level="0" />
-<weighted_methods_per_class_unity value="6" level="0" />
+<lines_of_code_per_line_of_comment value="2.377" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.037" level="0" />
+<weighted_methods_per_class_unity value="14" level="0" />
 <weighted_methods_per_class_visibility value="0" level="0" />
 <depth_of_inheritance_tree value="0" level="0" />
 <number_of_children value="0" level="0" />
@@ -26,14 +26,26 @@
 </module_detail>
 <procedural_detail>
 <member_function>
+<name>BEGIN_EVENT_TABLE(EmployeePanel,wxPanel)</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\EmployeePanel.cpp" line="10" />
+</extent>
+<lines_of_code value="42" level="1" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="14" level="0" />
+<lines_of_code_per_line_of_comment value="3.000" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
 <name>get_end_of_month(time_t)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/AttendanceRecord.cpp" line="70" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\AttendanceRecord.cpp" line="83" />
 </extent>
 <lines_of_code value="10" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
-<lines_of_comment value="3" level="0" />
+<lines_of_comment value="4" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -41,11 +53,11 @@
 <name>get_start_of_month(time_t)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/AttendanceRecord.cpp" line="61" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\AttendanceRecord.cpp" line="72" />
 </extent>
 <lines_of_code value="8" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
-<lines_of_comment value="2" level="0" />
+<lines_of_comment value="3" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -53,11 +65,11 @@
 <name>get_year(time_t)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/AttendanceRecord.cpp" line="81" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\AttendanceRecord.cpp" line="96" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -65,11 +77,11 @@
 <name>operator &lt;&lt;(ostream &amp;,const Employee &amp;)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Employee.cpp" line="129" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="146" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
@@ -77,19 +89,103 @@
 <name>operator &lt;&lt;(ostream &amp;,const User &amp;)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/User.cpp" line="47" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\User.cpp" line="55" />
 </extent>
 <lines_of_code value="3" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>wxBEGIN_EVENT_TABLE(AdminPanel,wxPanel)</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\AdminPanel.cpp" line="9" />
+</extent>
+<lines_of_code value="39" level="1" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="15" level="0" />
+<lines_of_code_per_line_of_comment value="2.600" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>wxBEGIN_EVENT_TABLE(ApprovalPanel,wxPanel)</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="11" />
+</extent>
+<lines_of_code value="30" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="20" level="0" />
+<lines_of_code_per_line_of_comment value="1.500" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>wxBEGIN_EVENT_TABLE(AttendanceReportPanel,wxPanel)</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\AttendanceReportPanel.cpp" line="11" />
+</extent>
+<lines_of_code value="83" level="1" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="28" level="0" />
+<lines_of_code_per_line_of_comment value="2.964" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>wxBEGIN_EVENT_TABLE(GuardPanel,wxPanel)</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\GuardPanel.cpp" line="9" />
+</extent>
+<lines_of_code value="47" level="1" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="18" level="0" />
+<lines_of_code_per_line_of_comment value="2.611" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>wxBEGIN_EVENT_TABLE(HorizontalBar,wxPanel)</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\HorizontalBar.cpp" line="4" />
+</extent>
+<lines_of_code value="15" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="7" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>wxBEGIN_EVENT_TABLE(LeavePanel,wxPanel)</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\LeavePanel.cpp" line="11" />
+</extent>
+<lines_of_code value="66" level="1" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="32" level="0" />
+<lines_of_code_per_line_of_comment value="2.062" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>wxBEGIN_EVENT_TABLE(LoginPanel,wxPanel)</name>
+<extent>
+<description>definition</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\LoginPanel.cpp" line="7" />
+</extent>
+<lines_of_code value="34" level="1" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="18" level="0" />
+<lines_of_code_per_line_of_comment value="1.889" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
 <member_function>
 <name>wxIMPLEMENT_APP(Window)</name>
 <extent>
 <description>declaration</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/main.cpp" line="5" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\main.cpp" line="5" />
 </extent>
 <lines_of_code value="0" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />

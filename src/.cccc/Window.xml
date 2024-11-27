@@ -29,7 +29,7 @@
 <name>OnExit()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Window.cpp" line="22" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Window.cpp" line="22" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
@@ -41,7 +41,7 @@
 <name>OnInit()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Window.cpp" line="5" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Window.cpp" line="5" />
 </extent>
 <lines_of_code value="7" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />

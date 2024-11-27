@@ -1,27 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Report on software metrics-->
 <CCCC_Project>
-<timestamp>Tue Nov 26 01:41:05 2024
+<timestamp>Wed Nov 27 15:15:50 2024
 </timestamp>
 <project_summary>
-<number_of_modules value="26" level="0" />
-<lines_of_code value="980" level="0" />
-<lines_of_code_per_module value="37.692" level="0" />
-<McCabes_cyclomatic_complexity value="185" level="0" />
-<McCabes_cyclomatic_complexity_per_module value="7.115" level="0" />
-<lines_of_comment value="98" level="0" />
-<lines_of_comment_per_module value="3.769" level="0" />
-<lines_of_code_per_line_of_comment value="10.000" level="1" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="1.888" level="0" />
+<number_of_modules value="39" level="0" />
+<lines_of_code value="2125" level="0" />
+<lines_of_code_per_module value="54.487" level="0" />
+<McCabes_cyclomatic_complexity value="270" level="0" />
+<McCabes_cyclomatic_complexity_per_module value="6.923" level="0" />
+<lines_of_comment value="615" level="0" />
+<lines_of_comment_per_module value="15.769" level="0" />
+<lines_of_code_per_line_of_comment value="3.455" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.439" level="0" />
 <IF4 value="657" level="0" />
-<IF4_per_module value="25.269" level="0" />
+<IF4_per_module value="16.846" level="0" />
 <IF4_visible value="657" level="0" />
-<IF4_visible_per_module value="25.269" level="0" />
+<IF4_visible_per_module value="16.846" level="0" />
 <IF4_concrete value="657" level="0" />
-<IF4_concrete value="25.269" level="0" />
-<rejected_lines_of_code value="31" level="0" />
+<IF4_concrete value="16.846" level="0" />
+<rejected_lines_of_code value="39" level="0" />
 </project_summary>
 <procedural_summary>
+<module>
+<name>AdminPanel</name>
+<lines_of_code value="43" level="0" />
+<McCabes_cyclomatic_complexity value="7" level="0" />
+<lines_of_comment value="10" level="0" />
+<lines_of_code_per_line_of_comment value="4.300" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.700" level="0" />
+</module>
+<module>
+<name>ApprovalPanel</name>
+<lines_of_code value="205" level="0" />
+<McCabes_cyclomatic_complexity value="21" level="0" />
+<lines_of_comment value="34" level="0" />
+<lines_of_code_per_line_of_comment value="6.029" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.618" level="0" />
+</module>
 <module>
 <name>Attendance</name>
 <lines_of_code value="0" level="0" />
@@ -34,33 +50,41 @@
 <name>AttendanceEntry</name>
 <lines_of_code value="27" level="0" />
 <McCabes_cyclomatic_complexity value="5" level="0" />
-<lines_of_comment value="1" level="0" />
-<lines_of_code_per_line_of_comment value="27.000" level="1" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="5.000" level="0" />
+<lines_of_comment value="7" level="0" />
+<lines_of_code_per_line_of_comment value="3.857" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.714" level="0" />
 </module>
 <module>
 <name>AttendanceRecord</name>
 <lines_of_code value="82" level="0" />
 <McCabes_cyclomatic_complexity value="23" level="0" />
-<lines_of_comment value="0" level="0" />
-<lines_of_code_per_line_of_comment value="******" level="2" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="2" />
+<lines_of_comment value="15" level="0" />
+<lines_of_code_per_line_of_comment value="5.467" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="1.533" level="0" />
+</module>
+<module>
+<name>AttendanceReportPanel</name>
+<lines_of_code value="105" level="0" />
+<McCabes_cyclomatic_complexity value="11" level="0" />
+<lines_of_comment value="29" level="0" />
+<lines_of_code_per_line_of_comment value="3.621" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.379" level="0" />
 </module>
 <module>
 <name>CasualLeaveApplication</name>
 <lines_of_code value="40" level="0" />
 <McCabes_cyclomatic_complexity value="8" level="0" />
-<lines_of_comment value="0" level="0" />
-<lines_of_code_per_line_of_comment value="******" level="2" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="2" />
+<lines_of_comment value="8" level="0" />
+<lines_of_code_per_line_of_comment value="5.000" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="1.000" level="0" />
 </module>
 <module>
 <name>DataManager</name>
 <lines_of_code value="201" level="0" />
 <McCabes_cyclomatic_complexity value="26" level="0" />
-<lines_of_comment value="21" level="0" />
-<lines_of_code_per_line_of_comment value="9.571" level="1" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="1.238" level="0" />
+<lines_of_comment value="63" level="0" />
+<lines_of_code_per_line_of_comment value="3.190" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.413" level="0" />
 </module>
 <module>
 <name>Director</name>
@@ -74,25 +98,57 @@
 <name>EarnedLeaveApplication</name>
 <lines_of_code value="48" level="0" />
 <McCabes_cyclomatic_complexity value="13" level="0" />
-<lines_of_comment value="0" level="0" />
-<lines_of_code_per_line_of_comment value="******" level="2" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="2" />
+<lines_of_comment value="8" level="0" />
+<lines_of_code_per_line_of_comment value="6.000" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="1.625" level="0" />
 </module>
 <module>
 <name>Employee</name>
 <lines_of_code value="124" level="0" />
 <McCabes_cyclomatic_complexity value="24" level="0" />
-<lines_of_comment value="11" level="0" />
-<lines_of_code_per_line_of_comment value="11.273" level="1" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="2.182" level="0" />
+<lines_of_comment value="30" level="0" />
+<lines_of_code_per_line_of_comment value="4.133" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.800" level="0" />
+</module>
+<module>
+<name>EmployeePanel</name>
+<lines_of_code value="62" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="16" level="0" />
+<lines_of_code_per_line_of_comment value="3.875" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</module>
+<module>
+<name>EventData</name>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </module>
 <module>
 <name>Guard</name>
 <lines_of_code value="45" level="0" />
 <McCabes_cyclomatic_complexity value="17" level="0" />
-<lines_of_comment value="4" level="0" />
-<lines_of_code_per_line_of_comment value="11.250" level="1" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="4.250" level="0" />
+<lines_of_comment value="11" level="0" />
+<lines_of_code_per_line_of_comment value="4.091" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="1.545" level="0" />
+</module>
+<module>
+<name>GuardPanel</name>
+<lines_of_code value="53" level="0" />
+<McCabes_cyclomatic_complexity value="6" level="0" />
+<lines_of_comment value="22" level="0" />
+<lines_of_code_per_line_of_comment value="2.409" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.273" level="0" />
+</module>
+<module>
+<name>HorizontalBar</name>
+<lines_of_code value="91" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="21" level="0" />
+<lines_of_code_per_line_of_comment value="4.333" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </module>
 <module>
 <name>InterfaceFrame</name>
@@ -106,17 +162,25 @@
 <name>LeaveApplication</name>
 <lines_of_code value="48" level="0" />
 <McCabes_cyclomatic_complexity value="7" level="0" />
-<lines_of_comment value="0" level="0" />
-<lines_of_code_per_line_of_comment value="******" level="2" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="2" />
+<lines_of_comment value="9" level="0" />
+<lines_of_code_per_line_of_comment value="5.333" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.778" level="0" />
 </module>
 <module>
 <name>LeaveBalance</name>
 <lines_of_code value="63" level="0" />
 <McCabes_cyclomatic_complexity value="11" level="0" />
-<lines_of_comment value="2" level="0" />
-<lines_of_code_per_line_of_comment value="31.500" level="2" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="5.500" level="1" />
+<lines_of_comment value="16" level="0" />
+<lines_of_code_per_line_of_comment value="3.937" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.687" level="0" />
+</module>
+<module>
+<name>LeavePanel</name>
+<lines_of_code value="143" level="0" />
+<McCabes_cyclomatic_complexity value="22" level="0" />
+<lines_of_comment value="23" level="0" />
+<lines_of_code_per_line_of_comment value="6.217" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.957" level="0" />
 </module>
 <module>
 <name>LeaveStatus</name>
@@ -127,12 +191,20 @@
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </module>
 <module>
+<name>LoginPanel</name>
+<lines_of_code value="72" level="0" />
+<McCabes_cyclomatic_complexity value="12" level="0" />
+<lines_of_comment value="43" level="0" />
+<lines_of_code_per_line_of_comment value="1.674" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.279" level="0" />
+</module>
+<module>
 <name>OfficialLeaveApplication</name>
 <lines_of_code value="48" level="0" />
 <McCabes_cyclomatic_complexity value="14" level="0" />
-<lines_of_comment value="0" level="0" />
-<lines_of_code_per_line_of_comment value="******" level="2" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="2" />
+<lines_of_comment value="8" level="0" />
+<lines_of_code_per_line_of_comment value="6.000" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="1.750" level="0" />
 </module>
 <module>
 <name>Superviser</name>
@@ -146,17 +218,17 @@
 <name>UnpaidLeaveApplication</name>
 <lines_of_code value="43" level="0" />
 <McCabes_cyclomatic_complexity value="11" level="0" />
-<lines_of_comment value="0" level="0" />
-<lines_of_code_per_line_of_comment value="******" level="2" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="2" />
+<lines_of_comment value="8" level="0" />
+<lines_of_code_per_line_of_comment value="5.375" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="1.375" level="0" />
 </module>
 <module>
 <name>User</name>
-<lines_of_code value="32" level="0" />
+<lines_of_code value="33" level="0" />
 <McCabes_cyclomatic_complexity value="7" level="0" />
-<lines_of_comment value="1" level="0" />
-<lines_of_code_per_line_of_comment value="32.000" level="2" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="7.000" level="1" />
+<lines_of_comment value="8" level="0" />
+<lines_of_code_per_line_of_comment value="4.125" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.875" level="0" />
 </module>
 <module>
 <name>Window</name>
@@ -168,11 +240,11 @@
 </module>
 <module>
 <name>anonymous</name>
-<lines_of_code value="29" level="0" />
-<McCabes_cyclomatic_complexity value="5" level="0" />
-<lines_of_comment value="5" level="0" />
-<lines_of_code_per_line_of_comment value="5.800" level="0" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="1.000" level="0" />
+<lines_of_code value="385" level="0" />
+<McCabes_cyclomatic_complexity value="6" level="0" />
+<lines_of_comment value="162" level="0" />
+<lines_of_code_per_line_of_comment value="2.377" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.037" level="0" />
 </module>
 <module>
 <name>json</name>
@@ -223,6 +295,38 @@
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </module>
 <module>
+<name>wxCommandEvent</name>
+<lines_of_code value="0" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</module>
+<module>
+<name>wxPaintEvent</name>
+<lines_of_code value="0" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</module>
+<module>
+<name>wxShowEvent</name>
+<lines_of_code value="0" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</module>
+<module>
+<name>wxSizeEvent</name>
+<lines_of_code value="0" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</module>
+<module>
 <name>wxString</name>
 <lines_of_code value="0" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
@@ -232,6 +336,22 @@
 </module>
 </procedural_summary>
 <oo_design>
+<module>
+<name>AdminPanel</name>
+<weighted_methods_per_class_unity value="4" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="2" level="0" />
+</module>
+<module>
+<name>ApprovalPanel</name>
+<weighted_methods_per_class_unity value="9" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="2" level="0" />
+</module>
 <module>
 <name>Attendance</name>
 <weighted_methods_per_class_unity value="0" level="0" />
@@ -255,6 +375,14 @@
 <depth_of_inheritance_tree value="0" level="0" />
 <number_of_children value="0" level="0" />
 <coupling_between_objects value="4" level="0" />
+</module>
+<module>
+<name>AttendanceReportPanel</name>
+<weighted_methods_per_class_unity value="5" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="2" level="0" />
 </module>
 <module>
 <name>CasualLeaveApplication</name>
@@ -297,12 +425,44 @@
 <coupling_between_objects value="10" level="0" />
 </module>
 <module>
+<name>EmployeePanel</name>
+<weighted_methods_per_class_unity value="5" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="2" level="0" />
+</module>
+<module>
+<name>EventData</name>
+<weighted_methods_per_class_unity value="2" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="1" level="0" />
+</module>
+<module>
 <name>Guard</name>
 <weighted_methods_per_class_unity value="5" level="0" />
 <weighted_methods_per_class_visibility value="0" level="0" />
 <depth_of_inheritance_tree value="0" level="0" />
 <number_of_children value="0" level="0" />
 <coupling_between_objects value="4" level="0" />
+</module>
+<module>
+<name>GuardPanel</name>
+<weighted_methods_per_class_unity value="3" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="2" level="0" />
+</module>
+<module>
+<name>HorizontalBar</name>
+<weighted_methods_per_class_unity value="3" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="2" level="0" />
 </module>
 <module>
 <name>InterfaceFrame</name>
@@ -329,12 +489,28 @@
 <coupling_between_objects value="1" level="0" />
 </module>
 <module>
+<name>LeavePanel</name>
+<weighted_methods_per_class_unity value="5" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="2" level="0" />
+</module>
+<module>
 <name>LeaveStatus</name>
 <weighted_methods_per_class_unity value="0" level="0" />
 <weighted_methods_per_class_visibility value="0" level="0" />
 <depth_of_inheritance_tree value="0" level="0" />
 <number_of_children value="0" level="0" />
 <coupling_between_objects value="5" level="0" />
+</module>
+<module>
+<name>LoginPanel</name>
+<weighted_methods_per_class_unity value="4" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="2" level="0" />
 </module>
 <module>
 <name>OfficialLeaveApplication</name>
@@ -378,7 +554,7 @@
 </module>
 <module>
 <name>anonymous</name>
-<weighted_methods_per_class_unity value="6" level="0" />
+<weighted_methods_per_class_unity value="14" level="0" />
 <weighted_methods_per_class_visibility value="0" level="0" />
 <depth_of_inheritance_tree value="0" level="0" />
 <number_of_children value="0" level="0" />
@@ -406,7 +582,7 @@
 <weighted_methods_per_class_visibility value="0" level="0" />
 <depth_of_inheritance_tree value="0" level="0" />
 <number_of_children value="0" level="0" />
-<coupling_between_objects value="11" level="0" />
+<coupling_between_objects value="12" level="0" />
 </module>
 <module>
 <name>string</name>
@@ -433,6 +609,38 @@
 <coupling_between_objects value="1" level="0" />
 </module>
 <module>
+<name>wxCommandEvent</name>
+<weighted_methods_per_class_unity value="0" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="7" level="0" />
+</module>
+<module>
+<name>wxPaintEvent</name>
+<weighted_methods_per_class_unity value="0" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="1" level="0" />
+</module>
+<module>
+<name>wxShowEvent</name>
+<weighted_methods_per_class_unity value="0" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="7" level="0" />
+</module>
+<module>
+<name>wxSizeEvent</name>
+<weighted_methods_per_class_unity value="0" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="1" level="0" />
+</module>
+<module>
 <name>wxString</name>
 <weighted_methods_per_class_unity value="0" level="0" />
 <weighted_methods_per_class_visibility value="0" level="0" />
@@ -442,6 +650,30 @@
 </module>
 </oo_design>
 <structural_summary>
+<module>
+<name>AdminPanel</name>
+<fan_out_visible value="0" level="0" />
+<fan_out_concrete value="0" level="0" />
+<fan_out value="0" level="0" />
+<fan_in_visible value="2" level="0" />
+<fan_in_concrete value="0" level="0" />
+<fan_in value="2" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4 value="0" level="0" />
+</module>
+<module>
+<name>ApprovalPanel</name>
+<fan_out_visible value="0" level="0" />
+<fan_out_concrete value="0" level="0" />
+<fan_out value="0" level="0" />
+<fan_in_visible value="2" level="0" />
+<fan_in_concrete value="0" level="0" />
+<fan_in value="2" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4 value="0" level="0" />
+</module>
 <module>
 <name>Attendance</name>
 <fan_out_visible value="1" level="0" />
@@ -474,6 +706,18 @@
 <fan_in_visible value="4" level="0" />
 <fan_in_concrete value="4" level="0" />
 <fan_in value="4" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4 value="0" level="0" />
+</module>
+<module>
+<name>AttendanceReportPanel</name>
+<fan_out_visible value="0" level="0" />
+<fan_out_concrete value="0" level="0" />
+<fan_out value="0" level="0" />
+<fan_in_visible value="2" level="0" />
+<fan_in_concrete value="0" level="0" />
+<fan_in value="2" level="0" />
 <IF4_visible value="0" level="0" />
 <IF4_concrete value="0" level="0" />
 <IF4 value="0" level="0" />
@@ -539,6 +783,30 @@
 <IF4 value="576" level="1" />
 </module>
 <module>
+<name>EmployeePanel</name>
+<fan_out_visible value="0" level="0" />
+<fan_out_concrete value="0" level="0" />
+<fan_out value="0" level="0" />
+<fan_in_visible value="2" level="0" />
+<fan_in_concrete value="0" level="0" />
+<fan_in value="2" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4 value="0" level="0" />
+</module>
+<module>
+<name>EventData</name>
+<fan_out_visible value="0" level="0" />
+<fan_out_concrete value="0" level="0" />
+<fan_out value="0" level="0" />
+<fan_in_visible value="1" level="0" />
+<fan_in_concrete value="1" level="0" />
+<fan_in value="1" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4 value="0" level="0" />
+</module>
+<module>
 <name>Guard</name>
 <fan_out_visible value="0" level="0" />
 <fan_out_concrete value="0" level="0" />
@@ -546,6 +814,30 @@
 <fan_in_visible value="4" level="0" />
 <fan_in_concrete value="4" level="0" />
 <fan_in value="4" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4 value="0" level="0" />
+</module>
+<module>
+<name>GuardPanel</name>
+<fan_out_visible value="0" level="0" />
+<fan_out_concrete value="0" level="0" />
+<fan_out value="0" level="0" />
+<fan_in_visible value="2" level="0" />
+<fan_in_concrete value="0" level="0" />
+<fan_in value="2" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4 value="0" level="0" />
+</module>
+<module>
+<name>HorizontalBar</name>
+<fan_out_visible value="0" level="0" />
+<fan_out_concrete value="0" level="0" />
+<fan_out value="0" level="0" />
+<fan_in_visible value="2" level="0" />
+<fan_in_concrete value="0" level="0" />
+<fan_in value="2" level="0" />
 <IF4_visible value="0" level="0" />
 <IF4_concrete value="0" level="0" />
 <IF4 value="0" level="0" />
@@ -587,6 +879,18 @@
 <IF4 value="0" level="0" />
 </module>
 <module>
+<name>LeavePanel</name>
+<fan_out_visible value="0" level="0" />
+<fan_out_concrete value="0" level="0" />
+<fan_out value="0" level="0" />
+<fan_in_visible value="2" level="0" />
+<fan_in_concrete value="0" level="0" />
+<fan_in value="2" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4 value="0" level="0" />
+</module>
+<module>
 <name>LeaveStatus</name>
 <fan_out_visible value="5" level="0" />
 <fan_out_concrete value="5" level="0" />
@@ -594,6 +898,18 @@
 <fan_in_visible value="0" level="0" />
 <fan_in_concrete value="0" level="0" />
 <fan_in value="0" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4 value="0" level="0" />
+</module>
+<module>
+<name>LoginPanel</name>
+<fan_out_visible value="0" level="0" />
+<fan_out_concrete value="0" level="0" />
+<fan_out value="0" level="0" />
+<fan_in_visible value="2" level="0" />
+<fan_in_concrete value="0" level="0" />
+<fan_in value="2" level="0" />
 <IF4_visible value="0" level="0" />
 <IF4_concrete value="0" level="0" />
 <IF4 value="0" level="0" />
@@ -696,9 +1012,9 @@
 </module>
 <module>
 <name>shared_ptr</name>
-<fan_out_visible value="11" level="1" />
-<fan_out_concrete value="11" level="1" />
-<fan_out value="11" level="0" />
+<fan_out_visible value="12" level="1" />
+<fan_out_concrete value="12" level="1" />
+<fan_out value="12" level="0" />
 <fan_in_visible value="0" level="0" />
 <fan_in_concrete value="0" level="0" />
 <fan_in value="0" level="0" />
@@ -743,6 +1059,54 @@
 <IF4 value="0" level="0" />
 </module>
 <module>
+<name>wxCommandEvent</name>
+<fan_out_visible value="7" level="1" />
+<fan_out_concrete value="0" level="0" />
+<fan_out value="7" level="0" />
+<fan_in_visible value="0" level="0" />
+<fan_in_concrete value="0" level="0" />
+<fan_in value="0" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4 value="0" level="0" />
+</module>
+<module>
+<name>wxPaintEvent</name>
+<fan_out_visible value="1" level="0" />
+<fan_out_concrete value="0" level="0" />
+<fan_out value="1" level="0" />
+<fan_in_visible value="0" level="0" />
+<fan_in_concrete value="0" level="0" />
+<fan_in value="0" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4 value="0" level="0" />
+</module>
+<module>
+<name>wxShowEvent</name>
+<fan_out_visible value="7" level="1" />
+<fan_out_concrete value="0" level="0" />
+<fan_out value="7" level="0" />
+<fan_in_visible value="0" level="0" />
+<fan_in_concrete value="0" level="0" />
+<fan_in value="0" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4 value="0" level="0" />
+</module>
+<module>
+<name>wxSizeEvent</name>
+<fan_out_visible value="1" level="0" />
+<fan_out_concrete value="0" level="0" />
+<fan_out value="1" level="0" />
+<fan_in_visible value="0" level="0" />
+<fan_in_concrete value="0" level="0" />
+<fan_in value="0" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4 value="0" level="0" />
+</module>
+<module>
 <name>wxString</name>
 <fan_out_visible value="1" level="0" />
 <fan_out_concrete value="0" level="0" />
@@ -758,105 +1122,161 @@
 <other_extents>
 <rejected_extent>
 <name>&lt;file scope items&gt;</name>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/AttendanceEntry.cpp" line="1" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\AttendanceEntry.cpp" line="1" />
 <lines_of_code value="0" level="0" />
 <lines_of_comment value="0" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
 </rejected_extent>
 <rejected_extent>
 <name>&lt;file scope items&gt;</name>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/AttendanceRecord.cpp" line="1" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\AttendanceRecord.cpp" line="1" />
 <lines_of_code value="1" level="0" />
 <lines_of_comment value="0" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
 </rejected_extent>
 <rejected_extent>
 <name>std :: shared_ptr </name>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/DataManager.cpp" line="97" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="112" />
 <lines_of_code value="4" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
 </rejected_extent>
 <rejected_extent>
 <name>std :: vector </name>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/DataManager.cpp" line="256" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="299" />
 <lines_of_code value="12" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="2" level="0" />
 <McCabes_cyclomatic_complexity value="3" level="0" />
 </rejected_extent>
 <rejected_extent>
 <name>&lt;file scope items&gt;</name>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Director.cpp" line="1" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Director.cpp" line="1" />
 <lines_of_code value="1" level="0" />
 <lines_of_comment value="0" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
 </rejected_extent>
 <rejected_extent>
 <name>std :: shared_ptr </name>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Employee.cpp" line="47" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="51" />
 <lines_of_code value="4" level="0" />
-<lines_of_comment value="0" level="0" />
+<lines_of_comment value="1" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
 </rejected_extent>
 <rejected_extent>
 <name>&lt;file scope items&gt;</name>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Employee.cpp" line="1" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="1" />
 <lines_of_code value="1" level="0" />
 <lines_of_comment value="0" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
 </rejected_extent>
 <rejected_extent>
 <name>&lt;file scope items&gt;</name>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Guard.cpp" line="1" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Guard.cpp" line="1" />
 <lines_of_code value="1" level="0" />
 <lines_of_comment value="0" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
 </rejected_extent>
 <rejected_extent>
 <name>&lt;file scope items&gt;</name>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/InterfaceFrame.cpp" line="1" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\InterfaceFrame.cpp" line="1" />
 <lines_of_code value="1" level="0" />
 <lines_of_comment value="1" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
 </rejected_extent>
 <rejected_extent>
 <name>&lt;file scope items&gt;</name>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveApplication.cpp" line="1" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="1" />
 <lines_of_code value="1" level="0" />
 <lines_of_comment value="0" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
 </rejected_extent>
 <rejected_extent>
 <name>&lt;file scope items&gt;</name>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/LeaveBalance.cpp" line="1" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveBalance.cpp" line="1" />
 <lines_of_code value="1" level="0" />
 <lines_of_comment value="0" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
 </rejected_extent>
 <rejected_extent>
 <name>&lt;file scope items&gt;</name>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/main.cpp" line="1" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\main.cpp" line="1" />
 <lines_of_code value="1" level="0" />
 <lines_of_comment value="0" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
 </rejected_extent>
 <rejected_extent>
 <name>&lt;file scope items&gt;</name>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Superviser.cpp" line="1" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Superviser.cpp" line="1" />
 <lines_of_code value="1" level="0" />
 <lines_of_comment value="0" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
 </rejected_extent>
 <rejected_extent>
 <name>&lt;file scope items&gt;</name>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/User.cpp" line="1" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\User.cpp" line="1" />
 <lines_of_code value="1" level="0" />
 <lines_of_comment value="0" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
 </rejected_extent>
 <rejected_extent>
 <name>&lt;file scope items&gt;</name>
-<source_reference file="C:/Users/nouma/Downloads/attendance_system/src/Window.cpp" line="1" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Window.cpp" line="1" />
+<lines_of_code value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+</rejected_extent>
+<rejected_extent>
+<name>&lt;file scope items&gt;</name>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\AdminPanel.cpp" line="1" />
+<lines_of_code value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+</rejected_extent>
+<rejected_extent>
+<name>&lt;file scope items&gt;</name>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\ApprovalPanel.cpp" line="1" />
+<lines_of_code value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+</rejected_extent>
+<rejected_extent>
+<name>&lt;file scope items&gt;</name>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\AttendanceReportPanel.cpp" line="1" />
+<lines_of_code value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+</rejected_extent>
+<rejected_extent>
+<name>&lt;file scope items&gt;</name>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\EmployeePanel.cpp" line="1" />
+<lines_of_code value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+</rejected_extent>
+<rejected_extent>
+<name>&lt;file scope items&gt;</name>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\GuardPanel.cpp" line="1" />
+<lines_of_code value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+</rejected_extent>
+<rejected_extent>
+<name>&lt;file scope items&gt;</name>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\HorizontalBar.cpp" line="1" />
+<lines_of_code value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+</rejected_extent>
+<rejected_extent>
+<name>&lt;file scope items&gt;</name>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\LeavePanel.cpp" line="1" />
+<lines_of_code value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+</rejected_extent>
+<rejected_extent>
+<name>&lt;file scope items&gt;</name>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\LoginPanel.cpp" line="1" />
 <lines_of_code value="1" level="0" />
 <lines_of_comment value="1" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
