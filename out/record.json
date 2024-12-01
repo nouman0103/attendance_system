@@ -160,6 +160,45 @@
         ],
         "leaveBalance": 0
     },
+    "abd": {
+        "attendance": [],
+        "leave": [
+            {
+                "applicationDate": 1733065953,
+                "approvalDate": 0,
+                "endDate": 1733079600,
+                "reason": "123",
+                "startDate": 1732993200,
+                "status": 1,
+                "taskType": "Casual Leave"
+            }
+        ],
+        "leaveBalance": 0
+    },
+    "aed": {
+        "attendance": [],
+        "leave": [
+            {
+                "applicationDate": 1733066169,
+                "approvalDate": 0,
+                "endDate": 1733079600,
+                "reason": "test",
+                "startDate": 1732993200,
+                "status": 1,
+                "taskType": "Casual Leave"
+            },
+            {
+                "applicationDate": 1733068023,
+                "approvalDate": 0,
+                "endDate": 1735671600,
+                "reason": "test",
+                "startDate": 1735585200,
+                "status": 1,
+                "taskType": "Casual Leave"
+            }
+        ],
+        "leaveBalance": 0
+    },
     "john": {
         "attendance": [
             {
@@ -209,6 +248,21 @@
     "sup": {
         "attendance": [],
         "leave": [],
+        "leaveBalance": 0
+    },
+    "zain": {
+        "attendance": [],
+        "leave": [
+            {
+                "applicationDate": 1733065814,
+                "approvalDate": 0,
+                "endDate": 1733079600,
+                "reason": "123",
+                "startDate": 1732993200,
+                "status": 1,
+                "taskType": "Casual Leave"
+            }
+        ],
         "leaveBalance": 0
     }
 }

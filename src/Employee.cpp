@@ -76,7 +76,7 @@ std::shared_ptr<AttendanceRecord> Employee::getAttendanceRecord() {
 
 std::map<std::string,int> Employee::getLeaveInWeek(time_t weekstart) {
     // getLeaveInWeek: Get the leave details for the week
-    time_t weekend = weekstart + 7 * 24 * 60 * 60;
+    time_t weekend = weekstart + 7 * 24 * 60 * 60 - 1;
     std::map<std::string,int> leaveCount;
     leaveCount["Official Leave"] = 0;
     leaveCount["Casual Leave"] = 0;
@@ -94,6 +94,31 @@ std::map<std::string,int> Employee::getLeaveInWeek(time_t weekstart) {
             //Count the number of days
             leaveCount[leaveApplication->getTaskType()] += ceil((leaveApplication->getEndDate() - leaveApplication->getStartDate()) / (24 * 60 * 60)) + 1;
         }
+        // else if (leaveApplication->getStartDate() >= weekstart &&   leaveApplication->getEndDate() > weekend) {
+        //     //Count the number of days
+        //     leaveCount[leaveApplication->getTaskType()] += ceil((weekend - leaveApplication->getStartDate()) / (24 * 60 * 60)) + 1;
+        // }
+        
+        else if (leaveApplication->getStartDate() < weekstart && leaveApplication->getEndDate() > weekend) {
+            //Count the number of days
+            leaveCount[leaveApplication->getTaskType()] += ceil((weekend - weekstart) / (24 * 60 * 60)) + 1;
+        }
+        else if (leaveApplication->getStartDate() <= weekstart && leaveApplication->getEndDate() >= weekstart) {
+            if (leaveApplication->getEndDate() < weekend) {
+                //Count the number of days
+                leaveCount[leaveApplication->getTaskType()] += ceil((leaveApplication->getEndDate() - weekstart) / (24 * 60 * 60)) + 1;
+            }
+            else {
+                //Count the number of days
+                leaveCount[leaveApplication->getTaskType()] += ceil((weekend - weekstart) / (24 * 60 * 60)) + 1;
+            }
+        }
+        else if (leaveApplication->getStartDate() < weekend && leaveApplication->getEndDate() > weekend) {
+            //Count the number of days
+            leaveCount[leaveApplication->getTaskType()] += ceil((weekend - leaveApplication->getStartDate()) / (24 * 60 * 60)) + 1;
+        }
+
+
         
     }
     //Multiply by 8 to get hours of leave
@@ -129,6 +154,20 @@ std::map<std::string,int> Employee::getLeaveInMonth(time_t monthstart) {
 
         }
         else if (leaveApplication->getStartDate() < monthstart && leaveApplication->getEndDate() > monthend) {
+            //Count the number of days
+            leaveCount[leaveApplication->getTaskType()] += ceil((monthend - monthstart) / (24 * 60 * 60)) + 1;
+        }
+        else if (leaveApplication->getStartDate() <= monthstart && leaveApplication->getEndDate() >= monthstart) {
+            if (leaveApplication->getEndDate() < monthend) {
+                //Count the number of days
+                leaveCount[leaveApplication->getTaskType()] += ceil((leaveApplication->getEndDate() - monthstart) / (24 * 60 * 60)) + 1;
+            }
+            else {
+                //Count the number of days
+                leaveCount[leaveApplication->getTaskType()] += ceil((monthend - monthstart) / (24 * 60 * 60)) + 1;
+            }
+        }
+        else if (leaveApplication->getStartDate() < monthend && leaveApplication->getEndDate() > monthend) {
             //Count the number of days
             leaveCount[leaveApplication->getTaskType()] += ceil((monthend - leaveApplication->getStartDate()) / (24 * 60 * 60)) + 1;
         }

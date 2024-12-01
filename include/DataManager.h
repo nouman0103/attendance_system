@@ -19,17 +19,16 @@ private:
     std::vector<Employee> employees;
     // Dictory of employees id and password
     std::map<std::string, std::shared_ptr<Employee>> employeeDict;
-    std::vector<AttendanceRecord> attendanceRecords;
     std::map<std::string, std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>>> leavesDict;
     std::shared_ptr<Employee> currentEmployee;
-    std::map<std::string,std::shared_ptr<LeaveBalance>> leaveBalances;
+    std::map<std::string,std::shared_ptr<LeaveBalance>> leaveBalances; 
 
 
     // std::vector<LeaveBalance> leaveBalances;
 
 public:
     DataManager();
-    bool writeEmployee(Employee employee);
+    bool writeEmployee(std::shared_ptr<Employee> employee);
     void updateEmployees();
     bool setEmployee(std::shared_ptr<Employee> employee);
     std::shared_ptr<Employee> getCurrentEmployee();

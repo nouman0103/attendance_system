@@ -16,10 +16,10 @@ DataManager::DataManager()
     // readLeaveBalance();
     readLeaveApplication();
 }
-bool DataManager::writeEmployee(Employee employee)
+bool DataManager::writeEmployee(std::shared_ptr<Employee> employee)
 {
     // Check if employee already exists
-    if (employeeDict.find(employee.getName()) != employeeDict.end())
+    if (employeeDict.find(employee->getName()) != employeeDict.end())
     {
         return false;
     }
@@ -35,15 +35,16 @@ bool DataManager::writeEmployee(Employee employee)
     read.close();
     // add the new employee to the json file
 
-    json employeeJson = employee.to_json();
+    json employeeJson = employee->to_json();
     int newID = j["count"].get<int>() + 1;
     employeeJson["id"] = newID;
     j["count"] = newID;
     j["employees"].push_back(employeeJson);
-    employee.setID(newID);
-    employees.push_back(employee);
-    employeeDict[employee.getName()] = std::make_shared<Employee>(employees.back());
-
+    employee->setID(newID);
+    employees.push_back(*employee);
+    employeeDict[employee->getName()] = employee;
+    leaveBalances[employee->getName()] = std::make_shared<LeaveBalance>();
+    leavesDict[employee->getName()] = employee->getLeaveApplications();
     // write the json file
 
     std::ofstream write("employee.json");
@@ -62,9 +63,9 @@ bool DataManager::writeEmployee(Employee employee)
     */
     json record;
     attendance >> record;
-    record[employee.getName()]["attendance"] = json::array();
-    record[employee.getName()]["leave"] = json::array();
-    record[employee.getName()]["leaveBalance"] = 0;
+    record[employee->getName()]["attendance"] = json::array();
+    record[employee->getName()]["leave"] = json::array();
+    record[employee->getName()]["leaveBalance"] = 0;
     attendance.close();
 
     // write the attendance record
@@ -167,8 +168,8 @@ void DataManager::readAttendanceRecord()
             attendances.push_back(a);
         }
         // add the attendance record to the list
-        attendanceRecords.push_back(AttendanceRecord(employeeDict[employee.key()], attendances));
-        employeeDict[employee.key()]->setAttendanceRecord(std::make_shared<AttendanceRecord>(attendanceRecords.back()));
+        std::shared_ptr<AttendanceRecord> record = std::make_shared<AttendanceRecord>(employeeDict[employee.key()], attendances);
+        employeeDict[employee.key()]->setAttendanceRecord(record);
 
         // attendanceRecords.push_back(record);
     }
@@ -310,7 +311,6 @@ std::vector<std::shared_ptr<LeaveApplication>> DataManager::getAllLeaveApplicati
     }
     return allLeaves;
 }
-
 
 std::shared_ptr<LeaveBalance> DataManager::getLeaveBalance(std::string name)
 {

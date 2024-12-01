@@ -129,7 +129,15 @@ void AdminPanel::OnAddUser(wxCommandEvent& event)
 
     // add the user to the database
     // DataManager dm;
-    Employee newEmployee(userName.ToStdString(), 0, password.ToStdString(), userType.ToStdString(), nullptr, nullptr);
+    std::shared_ptr<Employee> newEmployee = std::make_shared<Employee>(userName.ToStdString(), 0, password.ToStdString(), userType.ToStdString(), nullptr, nullptr);
+    std::shared_ptr<AttendanceRecord> attendanceRecord = std::make_shared<AttendanceRecord>(newEmployee, std::vector<AttendanceEntry>());
+    std::shared_ptr<std::vector<std::shared_ptr<LeaveApplication>>> leaveApplications = std::make_shared<std::vector<std::shared_ptr<LeaveApplication>>>();
+    
+    newEmployee->setAttendanceRecord(attendanceRecord);
+    newEmployee->setLeaveApplication(leaveApplications);
+
+
+
     // dm.writeEmployee(newEmployee);
     bool success = dm->writeEmployee(newEmployee);
     if (!success) {
