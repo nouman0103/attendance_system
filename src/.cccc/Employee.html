@@ -8,15 +8,15 @@ Detailed report on module Employee
 <TR>
 <TH BGCOLOR="AQUA" WIDTH=70%>Metric</TH><TH BGCOLOR="AQUA" WIDTH=10%>Tag</TH><TH BGCOLOR="AQUA" WIDTH=10%>Overall</TH><TH BGCOLOR="AQUA" WIDTH=10%>Per Function</TH></TR>
 <TR>
-<TD>Lines of Code</TD><TD>LOC</TD><TD ALIGN=RIGHT>   124</TD><TD ALIGN=RIGHT>******</TD></TR>
+<TD>Lines of Code</TD><TD>LOC</TD><TD ALIGN=RIGHT>   149</TD><TD ALIGN=RIGHT>******</TD></TR>
 <TR>
-<TD>McCabe's Cyclomatic Number</TD><TD>MVG</TD><TD ALIGN=RIGHT>    24</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
+<TD>McCabe's Cyclomatic Number</TD><TD>MVG</TD><TD ALIGN=RIGHT>    36</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
 <TR>
-<TD>Lines of Comment</TD><TD>COM</TD><TD ALIGN=RIGHT>    30</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>********</STRONG></TD></TR>
+<TD>Lines of Comment</TD><TD>COM</TD><TD ALIGN=RIGHT>    41</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>********</STRONG></TD></TR>
 <TR>
-<TD>LOC/COM</TD><TD>L_C</TD><TD ALIGN=RIGHT> 4.133</TD><TD>&nbsp;</TD></TR>
+<TD>LOC/COM</TD><TD>L_C</TD><TD ALIGN=RIGHT> 3.634</TD><TD>&nbsp;</TD></TR>
 <TR>
-<TD>MVG/COM</TD><TD>M_C</TD><TD ALIGN=RIGHT> 0.800</TD><TD>&nbsp;</TD></TR>
+<TD>MVG/COM</TD><TD>M_C</TD><TD ALIGN=RIGHT> 0.878</TD><TD>&nbsp;</TD></TR>
 <TR>
 <TD>Weighted Methods per Class ( &nbsp;weighting = unity&nbsp;)</TD><TD>WMC1</TD><TD ALIGN=RIGHT>    17</TD><TD>&nbsp;</TD></TR>
 <TR>
@@ -26,13 +26,13 @@ Detailed report on module Employee
 <TR>
 <TD>Number of Children</TD><TD>NOC</TD><TD ALIGN=RIGHT>     0</TD><TD>&nbsp;</TD></TR>
 <TR>
-<TD>Coupling between objects</TD><TD>CBO</TD><TD ALIGN=RIGHT>    10</TD><TD>&nbsp;</TD></TR>
+<TD>Coupling between objects</TD><TD>CBO</TD><TD ALIGN=RIGHT>     9</TD><TD>&nbsp;</TD></TR>
 <TR>
-<TD>Information Flow measure ( &nbsp;inclusive&nbsp;)</TD><TD>IF4</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>   576</EM></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>********</STRONG></TD></TR>
+<TD>Information Flow measure ( &nbsp;inclusive&nbsp;)</TD><TD>IF4</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>   400</EM></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>********</STRONG></TD></TR>
 <TR>
-<TD>Information Flow measure ( &nbsp;visible&nbsp;)</TD><TD>IF4v</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>   576</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>********</STRONG></TD></TR>
+<TD>Information Flow measure ( &nbsp;visible&nbsp;)</TD><TD>IF4v</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>   400</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>********</STRONG></TD></TR>
 <TR>
-<TD>Information Flow measure ( &nbsp;concrete&nbsp;)</TD><TD>IF4c</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>   576</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>********</STRONG></TD></TR>
+<TD>Information Flow measure ( &nbsp;concrete&nbsp;)</TD><TD>IF4c</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>   400</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>********</STRONG></TD></TR>
 </TABLE>
 <H2><A NAME="modext">Definitions and Declarations</A></H2>
 <TABLE BORDER WIDTH=100%><TR>
@@ -68,7 +68,7 @@ definition &nbsp;
 <TR>
 <TD>getAttendancePercentage( &nbsp;int, &nbsp;int&nbsp;)<BR>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       163">C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:163</A></CODE><BR>
+<CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       202">C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:202</A></CODE><BR>
 <BR>
 </TD><TD ALIGN=RIGHT>    20</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>10.000</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR>
@@ -80,19 +80,19 @@ definition &nbsp;
 <TR>
 <TD>getLeaveInMonth( &nbsp;time_t&nbsp;)<BR>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       107">C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:107</A></CODE><BR>
+<CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       132">C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:132</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>    26</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT> 3.250</TD><TD ALIGN=RIGHT> 0.875</TD></TR>
+</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    37</EM></TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    12</EM></TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT> 3.364</TD><TD ALIGN=RIGHT> 1.091</TD></TR>
 <TR>
 <TD>getLeaveInWeek( &nbsp;time_t&nbsp;)<BR>
 definition &nbsp;
 <CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:        77">C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:77</A></CODE><BR>
 <BR>
-</TD><TD ALIGN=RIGHT>    22</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT> 3.667</TD><TD ALIGN=RIGHT> 0.833</TD></TR>
+</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    36</EM></TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    12</EM></TD><TD ALIGN=RIGHT>    14</TD><TD ALIGN=RIGHT> 2.571</TD><TD ALIGN=RIGHT> 0.857</TD></TR>
 <TR>
 <TD>getPendingLeaves( &nbsp;time_t&nbsp;)<BR>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       189">C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:189</A></CODE><BR>
+<CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       228">C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:228</A></CODE><BR>
 <BR>
 </TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT> 5.000</TD></TR>
 <TR>
@@ -122,7 +122,7 @@ definition &nbsp;
 <TR>
 <TD>to_json( &nbsp;&nbsp;)<BR>
 definition &nbsp;
-<CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       155">C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:155</A></CODE><BR>
+<CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       194">C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:194</A></CODE><BR>
 <BR>
 </TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
 <TR>
@@ -155,11 +155,6 @@ pass by value &nbsp;
 <CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp:       187">C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp:187</A></CODE><BR>
 pass by value &nbsp;
 <CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp:       199">C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp:199</A></CODE><BR>
-<BR>
-<BR>
-DataManager [CV] <BR>
-pass by value &nbsp;
-<CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:        19">C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:19</A></CODE><BR>
 <BR>
 <BR>
 EarnedLeaveApplication [CV] <BR>
@@ -210,9 +205,9 @@ time_t [CV] <BR>
 pass by value &nbsp;
 <CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:        77">C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:77</A></CODE><BR>
 pass by value &nbsp;
-<CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       107">C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:107</A></CODE><BR>
+<CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       132">C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:132</A></CODE><BR>
 pass by value &nbsp;
-<CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       189">C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:189</A></CODE><BR>
+<CODE><A HREF="cccc_src.html#C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       228">C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:228</A></CODE><BR>
 <BR>
 <BR>
 &nbsp;

@@ -2,13 +2,13 @@
 <!--Detailed report on module AdminPanel-->
 <CCCC_Project>
 <module_summary>
-<lines_of_code value="43" level="0" />
+<lines_of_code value="47" level="0" />
 <lines_of_code_per_member_function value="******" level="0" />
 <McCabes_cyclomatic_complexity value="7" level="0" />
 <McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
 <lines_of_code value="10" level="0" />
 <lines_of_code_per_member_function value="********" level="2" />
-<lines_of_code_per_line_of_comment value="4.300" level="0" />
+<lines_of_code_per_line_of_comment value="4.700" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="0.700" level="0" />
 <weighted_methods_per_class_unity value="4" level="0" />
 <weighted_methods_per_class_visibility value="0" level="0" />
@@ -31,10 +31,10 @@
 <description>definition</description>
 <source_reference file="C:\Users\nouma\Downloads\attendance_system\src\panels\AdminPanel.cpp" line="115" />
 </extent>
-<lines_of_code value="20" level="0" />
+<lines_of_code value="24" level="0" />
 <McCabes_cyclomatic_complexity value="5" level="0" />
 <lines_of_comment value="6" level="0" />
-<lines_of_code_per_line_of_comment value="3.333" level="0" />
+<lines_of_code_per_line_of_comment value="4.000" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="0.833" level="0" />
 </member_function>
 <member_function>

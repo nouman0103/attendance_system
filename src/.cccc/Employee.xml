@@ -2,24 +2,24 @@
 <!--Detailed report on module Employee-->
 <CCCC_Project>
 <module_summary>
-<lines_of_code value="124" level="0" />
+<lines_of_code value="149" level="0" />
 <lines_of_code_per_member_function value="******" level="0" />
-<McCabes_cyclomatic_complexity value="24" level="0" />
+<McCabes_cyclomatic_complexity value="36" level="0" />
 <McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
-<lines_of_code value="30" level="0" />
+<lines_of_code value="41" level="0" />
 <lines_of_code_per_member_function value="********" level="2" />
-<lines_of_code_per_line_of_comment value="4.133" level="0" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="0.800" level="0" />
+<lines_of_code_per_line_of_comment value="3.634" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.878" level="0" />
 <weighted_methods_per_class_unity value="17" level="0" />
 <weighted_methods_per_class_visibility value="0" level="0" />
 <depth_of_inheritance_tree value="0" level="0" />
 <number_of_children value="0" level="0" />
-<coupling_between_objects value="10" level="0" />
-<IF4 value="576" level="1" />
+<coupling_between_objects value="9" level="0" />
+<IF4 value="400" level="1" />
 <IF4_per_member_function value="********" level="2" />
-<IF4_visible value="576" level="2" />
+<IF4_visible value="400" level="2" />
 <IF4_visible_per_member_function value="********" level="2" />
-<IF4_concrete value="576" level="2" />
+<IF4_concrete value="400" level="2" />
 <IF4_concrete_per_member_function value="********" level="2" />
 </module_summary>
 <module_detail>
@@ -77,7 +77,7 @@
 <name>getAttendancePercentage(int,int)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="163" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="202" />
 </extent>
 <lines_of_code value="20" level="0" />
 <McCabes_cyclomatic_complexity value="4" level="0" />
@@ -101,13 +101,13 @@
 <name>getLeaveInMonth(time_t)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="107" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="132" />
 </extent>
-<lines_of_code value="26" level="0" />
-<McCabes_cyclomatic_complexity value="7" level="0" />
-<lines_of_comment value="8" level="0" />
-<lines_of_code_per_line_of_comment value="3.250" level="0" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="0.875" level="0" />
+<lines_of_code value="37" level="1" />
+<McCabes_cyclomatic_complexity value="12" level="1" />
+<lines_of_comment value="11" level="0" />
+<lines_of_code_per_line_of_comment value="3.364" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="1.091" level="0" />
 </member_function>
 <member_function>
 <name>getLeaveInWeek(time_t)</name>
@@ -115,17 +115,17 @@
 <description>definition</description>
 <source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="77" />
 </extent>
-<lines_of_code value="22" level="0" />
-<McCabes_cyclomatic_complexity value="5" level="0" />
-<lines_of_comment value="6" level="0" />
-<lines_of_code_per_line_of_comment value="3.667" level="0" />
-<McCabes_cyclomatic_complexity_per_line_of_comment value="0.833" level="0" />
+<lines_of_code value="36" level="1" />
+<McCabes_cyclomatic_complexity value="12" level="1" />
+<lines_of_comment value="14" level="0" />
+<lines_of_code_per_line_of_comment value="2.571" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.857" level="0" />
 </member_function>
 <member_function>
 <name>getPendingLeaves(time_t)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="189" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="228" />
 </extent>
 <lines_of_code value="10" level="0" />
 <McCabes_cyclomatic_complexity value="5" level="0" />
@@ -185,7 +185,7 @@
 <name>to_json()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="155" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="194" />
 </extent>
 <lines_of_code value="5" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
@@ -244,13 +244,6 @@
 <extent>
 <description>pass by value</description>
 <source_reference file="C:\Users\nouma\Downloads\attendance_system\src\LeaveApplication.cpp" line="199" />
-</extent>
-<name>DataManager</name>
-<visible>true</visible>
-<concrete>true</concrete>
-<extent>
-<description>pass by value</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="19" />
 </extent>
 <name>EarnedLeaveApplication</name>
 <visible>true</visible>
@@ -324,11 +317,11 @@
 </extent>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="107" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="132" />
 </extent>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="189" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp" line="228" />
 </extent>
 </supplier_module>
 </module>

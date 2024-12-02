@@ -2,19 +2,19 @@
 <!--Detailed report on module DataManager-->
 <CCCC_Project>
 <module_summary>
-<lines_of_code value="201" level="0" />
+<lines_of_code value="203" level="0" />
 <lines_of_code_per_member_function value="******" level="0" />
 <McCabes_cyclomatic_complexity value="26" level="0" />
 <McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
 <lines_of_code value="63" level="0" />
 <lines_of_code_per_member_function value="********" level="2" />
-<lines_of_code_per_line_of_comment value="3.190" level="0" />
+<lines_of_code_per_line_of_comment value="3.222" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="0.413" level="0" />
 <weighted_methods_per_class_unity value="11" level="0" />
 <weighted_methods_per_class_visibility value="0" level="0" />
 <depth_of_inheritance_tree value="0" level="0" />
 <number_of_children value="0" level="0" />
-<coupling_between_objects value="4" level="0" />
+<coupling_between_objects value="3" level="0" />
 <IF4 value="0" level="0" />
 <IF4_per_member_function value="********" level="0" />
 <IF4_visible value="0" level="0" />
@@ -41,7 +41,7 @@
 <name>getCurrentEmployee()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="126" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="127" />
 </extent>
 <lines_of_code value="4" level="0" />
 <McCabes_cyclomatic_complexity value="1" level="0" />
@@ -53,7 +53,7 @@
 <name>getEmployee(string)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="177" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="178" />
 </extent>
 <lines_of_code value="8" level="0" />
 <McCabes_cyclomatic_complexity value="3" level="0" />
@@ -65,7 +65,7 @@
 <name>readAttendanceRecord()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="150" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="151" />
 </extent>
 <lines_of_code value="19" level="0" />
 <McCabes_cyclomatic_complexity value="2" level="0" />
@@ -77,7 +77,7 @@
 <name>readLeaveApplication()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="207" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="208" />
 </extent>
 <lines_of_code value="47" level="1" />
 <McCabes_cyclomatic_complexity value="7" level="0" />
@@ -89,7 +89,7 @@
 <name>setEmployee(shared_ptr)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="118" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="119" />
 </extent>
 <lines_of_code value="7" level="0" />
 <McCabes_cyclomatic_complexity value="3" level="0" />
@@ -101,7 +101,7 @@
 <name>updateEmployees()</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="79" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="80" />
 </extent>
 <lines_of_code value="24" level="0" />
 <McCabes_cyclomatic_complexity value="3" level="0" />
@@ -113,7 +113,7 @@
 <name>updateLeaveApplication(shared_ptr)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="274" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="275" />
 </extent>
 <lines_of_code value="19" level="0" />
 <McCabes_cyclomatic_complexity value="2" level="0" />
@@ -125,7 +125,7 @@
 <name>writeAttendanceRecord(AttendanceEntry)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="132" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="133" />
 </extent>
 <lines_of_code value="14" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
@@ -134,22 +134,22 @@
 <McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
 </member_function>
 <member_function>
-<name>writeEmployee(Employee)</name>
+<name>writeEmployee(shared_ptr)</name>
 <extent>
 <description>definition</description>
 <source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="19" />
 </extent>
-<lines_of_code value="38" level="1" />
+<lines_of_code value="40" level="1" />
 <McCabes_cyclomatic_complexity value="5" level="0" />
 <lines_of_comment value="13" level="0" />
-<lines_of_code_per_line_of_comment value="2.923" level="0" />
+<lines_of_code_per_line_of_comment value="3.077" level="0" />
 <McCabes_cyclomatic_complexity_per_line_of_comment value="0.385" level="0" />
 </member_function>
 <member_function>
 <name>writeLeaveApplication(shared_ptr)</name>
 <extent>
 <description>definition</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="187" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="188" />
 </extent>
 <lines_of_code value="15" level="0" />
 <McCabes_cyclomatic_complexity value="0" level="0" />
@@ -169,36 +169,33 @@
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="132" />
-</extent>
-<name>Employee</name>
-<visible>true</visible>
-<concrete>true</concrete>
-<extent>
-<description>pass by value</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="19" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="133" />
 </extent>
 <name>shared_ptr</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="118" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="19" />
 </extent>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="187" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="119" />
 </extent>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="274" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="188" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="275" />
 </extent>
 <name>string</name>
 <visible>true</visible>
 <concrete>true</concrete>
 <extent>
 <description>pass by value</description>
-<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="177" />
+<source_reference file="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp" line="178" />
 </extent>
 </supplier_module>
 </module>

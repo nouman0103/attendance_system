@@ -212,10 +212,10 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // readLeaveBalance( &nbsp;&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    readLeaveApplication( &nbsp;&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:        19">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;19&nbsp;&nbsp;</A>bool DataManager::writeEmployee( &nbsp;Employee employee&nbsp;)<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:        19">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;19&nbsp;&nbsp;</A>bool DataManager::writeEmployee( &nbsp;std::shared_ptr&lt;Employee&gt; employee&nbsp;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // Check if employee already exists<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    if ( &nbsp;employeeDict.find( &nbsp;employee.getName( &nbsp;&nbsp;)&nbsp;) != employeeDict.end( &nbsp;&nbsp;)&nbsp;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    if ( &nbsp;employeeDict.find( &nbsp;employee-&gt;getName( &nbsp;&nbsp;)&nbsp;) != employeeDict.end( &nbsp;&nbsp;)&nbsp;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    {<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        return false;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    }<BR>
@@ -231,15 +231,16 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    read.close( &nbsp;&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // add the new employee to the json file<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    json employeeJson = employee.to_json( &nbsp;&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    json employeeJson = employee-&gt;to_json( &nbsp;&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    int newID = j["count"].get&lt;int&gt;( &nbsp;&nbsp;) + 1;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    employeeJson["id"] = newID;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    j["count"] = newID;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    j["employees"].push_back( &nbsp;employeeJson&nbsp;);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    employee.setID( &nbsp;newID&nbsp;);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    employees.push_back( &nbsp;employee&nbsp;);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    employeeDict[employee.getName( &nbsp;&nbsp;)] = std::make_shared&lt;Employee&gt;( &nbsp;employees.back( &nbsp;&nbsp;)&nbsp;);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    employee-&gt;setID( &nbsp;newID&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    employees.push_back( &nbsp;*employee&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    employeeDict[employee-&gt;getName( &nbsp;&nbsp;)] = employee;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    leaveBalances[employee-&gt;getName( &nbsp;&nbsp;)] = std::make_shared&lt;LeaveBalance&gt;( &nbsp;&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    leavesDict[employee-&gt;getName( &nbsp;&nbsp;)] = employee-&gt;getLeaveApplications( &nbsp;&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // write the json file<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    std::ofstream write( &nbsp;"employee.json"&nbsp;);<BR>
@@ -258,9 +259,9 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    */<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    json record;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    attendance &gt;&gt; record;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    record[employee.getName( &nbsp;&nbsp;)]["attendance"] = json::array( &nbsp;&nbsp;);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    record[employee.getName( &nbsp;&nbsp;)]["leave"] = json::array( &nbsp;&nbsp;);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    record[employee.getName( &nbsp;&nbsp;)]["leaveBalance"] = 0;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    record[employee-&gt;getName( &nbsp;&nbsp;)]["attendance"] = json::array( &nbsp;&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    record[employee-&gt;getName( &nbsp;&nbsp;)]["leave"] = json::array( &nbsp;&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    record[employee-&gt;getName( &nbsp;&nbsp;)]["leaveBalance"] = 0;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    attendance.close( &nbsp;&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // write the attendance record<BR>
@@ -272,7 +273,7 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    return true;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:        79">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;79&nbsp;&nbsp;</A>void DataManager::updateEmployees( &nbsp;&nbsp;)<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:        80">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;80&nbsp;&nbsp;</A>void DataManager::updateEmployees( &nbsp;&nbsp;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // read the json file<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    std::ifstream read;<BR>
@@ -305,13 +306,13 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    return;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       112">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;112&nbsp;&nbsp;</A>std::shared_ptr&lt;std::vector&lt;Employee&gt;&gt; DataManager::getEmployees( &nbsp;&nbsp;)<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       113">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;113&nbsp;&nbsp;</A>std::shared_ptr&lt;std::vector&lt;Employee&gt;&gt; DataManager::getEmployees( &nbsp;&nbsp;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // return the list of employees<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    return std::make_shared&lt;std::vector&lt;Employee&gt;&gt;( &nbsp;employees&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       118">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;118&nbsp;&nbsp;</A>bool DataManager::setEmployee( &nbsp;std::shared_ptr&lt;Employee&gt; employee&nbsp;)<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       119">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;119&nbsp;&nbsp;</A>bool DataManager::setEmployee( &nbsp;std::shared_ptr&lt;Employee&gt; employee&nbsp;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // set the current employee<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    currentEmployee = employee;<BR>
@@ -319,13 +320,13 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        return true;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    return false;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       126">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;126&nbsp;&nbsp;</A>std::shared_ptr&lt;Employee&gt; DataManager::getCurrentEmployee( &nbsp;&nbsp;)<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       127">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;127&nbsp;&nbsp;</A>std::shared_ptr&lt;Employee&gt; DataManager::getCurrentEmployee( &nbsp;&nbsp;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // return the current employee<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    return currentEmployee;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       132">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;132&nbsp;&nbsp;</A>void DataManager::writeAttendanceRecord( &nbsp;AttendanceEntry attendanceEntry&nbsp;)<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       133">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;133&nbsp;&nbsp;</A>void DataManager::writeAttendanceRecord( &nbsp;AttendanceEntry attendanceEntry&nbsp;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // read the json file<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    std::ifstream read( &nbsp;"record.json"&nbsp;);<BR>
@@ -343,7 +344,7 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    write.close( &nbsp;&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       150">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;150&nbsp;&nbsp;</A>void DataManager::readAttendanceRecord( &nbsp;&nbsp;)<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       151">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;151&nbsp;&nbsp;</A>void DataManager::readAttendanceRecord( &nbsp;&nbsp;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // read the json file<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    std::ifstream read( &nbsp;"record.json"&nbsp;);<BR>
@@ -363,14 +364,14 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            attendances.push_back( &nbsp;a&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        }<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        // add the attendance record to the list<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        attendanceRecords.push_back( &nbsp;AttendanceRecord( &nbsp;employeeDict[employee.key( &nbsp;&nbsp;)], &nbsp; attendances&nbsp;)&nbsp;);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        employeeDict[employee.key( &nbsp;&nbsp;)]-&gt;setAttendanceRecord( &nbsp;std::make_shared&lt;AttendanceRecord&gt;( &nbsp;attendanceRecords.back( &nbsp;&nbsp;)&nbsp;)&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        std::shared_ptr&lt;AttendanceRecord&gt; record = std::make_shared&lt;AttendanceRecord&gt;( &nbsp;employeeDict[employee.key( &nbsp;&nbsp;)], &nbsp; attendances&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        employeeDict[employee.key( &nbsp;&nbsp;)]-&gt;setAttendanceRecord( &nbsp;record&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        // attendanceRecords.push_back( &nbsp;record&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    }<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       177">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;177&nbsp;&nbsp;</A>std::shared_ptr&lt;Employee&gt; DataManager::getEmployee( &nbsp;std::string name&nbsp;)<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       178">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;178&nbsp;&nbsp;</A>std::shared_ptr&lt;Employee&gt; DataManager::getEmployee( &nbsp;std::string name&nbsp;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // return the employee object<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    if ( &nbsp;employeeDict.find( &nbsp;name&nbsp;) == employeeDict.end( &nbsp;&nbsp;)&nbsp;)<BR>
@@ -380,7 +381,7 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    return employeeDict[name];<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       187">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;187&nbsp;&nbsp;</A>void DataManager::writeLeaveApplication( &nbsp;std::shared_ptr&lt;LeaveApplication&gt; leaveApplication&nbsp;)<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       188">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;188&nbsp;&nbsp;</A>void DataManager::writeLeaveApplication( &nbsp;std::shared_ptr&lt;LeaveApplication&gt; leaveApplication&nbsp;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // read the json file<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    std::ifstream read( &nbsp;"record.json"&nbsp;);<BR>
@@ -400,7 +401,7 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    leavesDict[name]-&gt;push_back( &nbsp;leaveApplication&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       207">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;207&nbsp;&nbsp;</A>void DataManager::readLeaveApplication( &nbsp;&nbsp;)<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       208">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;208&nbsp;&nbsp;</A>void DataManager::readLeaveApplication( &nbsp;&nbsp;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // read the json file<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    std::ifstream read( &nbsp;"record.json"&nbsp;);<BR>
@@ -467,7 +468,7 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    }<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    return;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       274">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;274&nbsp;&nbsp;</A>bool DataManager::updateLeaveApplication( &nbsp;std::shared_ptr&lt;Employee&gt; employee&nbsp;)<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       275">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;275&nbsp;&nbsp;</A>bool DataManager::updateLeaveApplication( &nbsp;std::shared_ptr&lt;Employee&gt; employee&nbsp;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // read the json file<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    std::ifstream read( &nbsp;"record.json"&nbsp;);<BR>
@@ -492,7 +493,7 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    return true;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       299">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;299&nbsp;&nbsp;</A>std::vector&lt;std::shared_ptr&lt;LeaveApplication&gt;&gt; DataManager::getAllLeaveApplications( &nbsp;&nbsp;)<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\DataManager.cpp:       300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;300&nbsp;&nbsp;</A>std::vector&lt;std::shared_ptr&lt;LeaveApplication&gt;&gt; DataManager::getAllLeaveApplications( &nbsp;&nbsp;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // return the list of leave applications<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    std::vector&lt;std::shared_ptr&lt;LeaveApplication&gt;&gt; allLeaves;<BR>
@@ -506,7 +507,6 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    }<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    return allLeaves;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::shared_ptr&lt;LeaveBalance&gt; DataManager::getLeaveBalance( &nbsp;std::string name&nbsp;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
@@ -616,7 +616,7 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
 <A NAME="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:        77">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;77&nbsp;&nbsp;</A>std::map&lt;std::string, &nbsp;int&gt; Employee::getLeaveInWeek( &nbsp;time_t weekstart&nbsp;) {<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // getLeaveInWeek: Get the leave details for the week<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    time_t weekend = weekstart + 7 * 24 * 60 * 60;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    time_t weekend = weekstart + 7 * 24 * 60 * 60 - 1;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    std::map&lt;std::string, &nbsp;int&gt; leaveCount;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    leaveCount["Official Leave"] = 0;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    leaveCount["Casual Leave"] = 0;<BR>
@@ -634,6 +634,31 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            //Count the number of days<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            leaveCount[leaveApplication-&gt;getTaskType( &nbsp;&nbsp;)] += ceil( &nbsp;( &nbsp;leaveApplication-&gt;getEndDate( &nbsp;&nbsp;) - leaveApplication-&gt;getStartDate( &nbsp;&nbsp;)&nbsp;) / ( &nbsp;24 * 60 * 60&nbsp;)&nbsp;) + 1;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        // else if ( &nbsp;leaveApplication-&gt;getStartDate( &nbsp;&nbsp;) &gt;= weekstart &amp;&amp;   leaveApplication-&gt;getEndDate( &nbsp;&nbsp;) &gt; weekend&nbsp;) {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        //     //Count the number of days<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        //     leaveCount[leaveApplication-&gt;getTaskType( &nbsp;&nbsp;)] += ceil( &nbsp;( &nbsp;weekend - leaveApplication-&gt;getStartDate( &nbsp;&nbsp;)&nbsp;) / ( &nbsp;24 * 60 * 60&nbsp;)&nbsp;) + 1;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        // }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        else if ( &nbsp;leaveApplication-&gt;getStartDate( &nbsp;&nbsp;) &lt; weekstart &amp;&amp; leaveApplication-&gt;getEndDate( &nbsp;&nbsp;) &gt; weekend&nbsp;) {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            //Count the number of days<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            leaveCount[leaveApplication-&gt;getTaskType( &nbsp;&nbsp;)] += ceil( &nbsp;( &nbsp;weekend - weekstart&nbsp;) / ( &nbsp;24 * 60 * 60&nbsp;)&nbsp;) + 1;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        else if ( &nbsp;leaveApplication-&gt;getStartDate( &nbsp;&nbsp;) &lt;= weekstart &amp;&amp; leaveApplication-&gt;getEndDate( &nbsp;&nbsp;) &gt;= weekstart&nbsp;) {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            if ( &nbsp;leaveApplication-&gt;getEndDate( &nbsp;&nbsp;) &lt; weekend&nbsp;) {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                //Count the number of days<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                leaveCount[leaveApplication-&gt;getTaskType( &nbsp;&nbsp;)] += ceil( &nbsp;( &nbsp;leaveApplication-&gt;getEndDate( &nbsp;&nbsp;) - weekstart&nbsp;) / ( &nbsp;24 * 60 * 60&nbsp;)&nbsp;) + 1;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            else {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                //Count the number of days<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                leaveCount[leaveApplication-&gt;getTaskType( &nbsp;&nbsp;)] += ceil( &nbsp;( &nbsp;weekend - weekstart&nbsp;) / ( &nbsp;24 * 60 * 60&nbsp;)&nbsp;) + 1;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        else if ( &nbsp;leaveApplication-&gt;getStartDate( &nbsp;&nbsp;) &lt; weekend &amp;&amp; leaveApplication-&gt;getEndDate( &nbsp;&nbsp;) &gt; weekend&nbsp;) {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            //Count the number of days<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            leaveCount[leaveApplication-&gt;getTaskType( &nbsp;&nbsp;)] += ceil( &nbsp;( &nbsp;weekend - leaveApplication-&gt;getStartDate( &nbsp;&nbsp;)&nbsp;) / ( &nbsp;24 * 60 * 60&nbsp;)&nbsp;) + 1;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    }<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    //Multiply by 8 to get hours of leave<BR>
@@ -644,7 +669,7 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    return leaveCount;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       107">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;107&nbsp;&nbsp;</A>std::map&lt;std::string, &nbsp;int&gt; Employee::getLeaveInMonth( &nbsp;time_t monthstart&nbsp;) {<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       132">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;132&nbsp;&nbsp;</A>std::map&lt;std::string, &nbsp;int&gt; Employee::getLeaveInMonth( &nbsp;time_t monthstart&nbsp;) {<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    //getLeaveInMonth: Get the leave details for the month<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    monthstart = get_start_of_month( &nbsp;monthstart&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    time_t monthend = get_end_of_month( &nbsp;monthstart&nbsp;);<BR>
@@ -670,6 +695,20 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        }<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        else if ( &nbsp;leaveApplication-&gt;getStartDate( &nbsp;&nbsp;) &lt; monthstart &amp;&amp; leaveApplication-&gt;getEndDate( &nbsp;&nbsp;) &gt; monthend&nbsp;) {<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            //Count the number of days<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            leaveCount[leaveApplication-&gt;getTaskType( &nbsp;&nbsp;)] += ceil( &nbsp;( &nbsp;monthend - monthstart&nbsp;) / ( &nbsp;24 * 60 * 60&nbsp;)&nbsp;) + 1;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        else if ( &nbsp;leaveApplication-&gt;getStartDate( &nbsp;&nbsp;) &lt;= monthstart &amp;&amp; leaveApplication-&gt;getEndDate( &nbsp;&nbsp;) &gt;= monthstart&nbsp;) {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            if ( &nbsp;leaveApplication-&gt;getEndDate( &nbsp;&nbsp;) &lt; monthend&nbsp;) {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                //Count the number of days<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                leaveCount[leaveApplication-&gt;getTaskType( &nbsp;&nbsp;)] += ceil( &nbsp;( &nbsp;leaveApplication-&gt;getEndDate( &nbsp;&nbsp;) - monthstart&nbsp;) / ( &nbsp;24 * 60 * 60&nbsp;)&nbsp;) + 1;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            else {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                //Count the number of days<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                leaveCount[leaveApplication-&gt;getTaskType( &nbsp;&nbsp;)] += ceil( &nbsp;( &nbsp;monthend - monthstart&nbsp;) / ( &nbsp;24 * 60 * 60&nbsp;)&nbsp;) + 1;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        }<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        else if ( &nbsp;leaveApplication-&gt;getStartDate( &nbsp;&nbsp;) &lt; monthend &amp;&amp; leaveApplication-&gt;getEndDate( &nbsp;&nbsp;) &gt; monthend&nbsp;) {<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            //Count the number of days<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            leaveCount[leaveApplication-&gt;getTaskType( &nbsp;&nbsp;)] += ceil( &nbsp;( &nbsp;monthend - leaveApplication-&gt;getStartDate( &nbsp;&nbsp;)&nbsp;) / ( &nbsp;24 * 60 * 60&nbsp;)&nbsp;) + 1;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        }<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    }<BR>
@@ -683,7 +722,7 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       146">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;146&nbsp;&nbsp;</A>std::ostream &amp;operator&lt;&lt;( &nbsp;std::ostream &amp;out, &nbsp; const Employee &amp;employee&nbsp;) {<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       185">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;185&nbsp;&nbsp;</A>std::ostream &amp;operator&lt;&lt;( &nbsp;std::ostream &amp;out, &nbsp; const Employee &amp;employee&nbsp;) {<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // operator&lt;&lt;: Overload the &lt;&lt; operator for Employee<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    out &lt;&lt; dynamic_cast&lt;const User &amp;&gt;( &nbsp;employee&nbsp;) &lt;&lt; " " &lt;&lt; employee.position;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
@@ -692,7 +731,7 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       155">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;155&nbsp;&nbsp;</A>json Employee::to_json( &nbsp;&nbsp;) {<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       194">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;194&nbsp;&nbsp;</A>json Employee::to_json( &nbsp;&nbsp;) {<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // to_json: Convert the employee to json<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    json j = User::to_json( &nbsp;&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    j["position"] = position;<BR>
@@ -700,7 +739,7 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       163">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;163&nbsp;&nbsp;</A>int Employee::getAttendancePercentage( &nbsp;int month, &nbsp; int year&nbsp;){<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       202">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;202&nbsp;&nbsp;</A>int Employee::getAttendancePercentage( &nbsp;int month, &nbsp; int year&nbsp;){<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // getAttendancePercentage: Get the attendance percentage for the month<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    std::tm time_in = {0, &nbsp; 0, &nbsp; 0, &nbsp; 1, &nbsp; month - 1, &nbsp; year - 1900};<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    time_t monthstart = get_start_of_month( &nbsp;std::mktime( &nbsp;&amp;time_in&nbsp;)&nbsp;);<BR>
@@ -726,7 +765,7 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    return ( &nbsp;total_work_days * 100&nbsp;) / ( &nbsp;total_days - weekends&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
-<A NAME="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       189">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;189&nbsp;&nbsp;</A>int Employee::getPendingLeaves( &nbsp;time_t monthstart&nbsp;) {<BR>
+<A NAME="C:\Users\nouma\Downloads\attendance_system\src\Employee.cpp:       228">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;228&nbsp;&nbsp;</A>int Employee::getPendingLeaves( &nbsp;time_t monthstart&nbsp;) {<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // getPendingLeaves: Get the number of pending leaves for the month<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    int count = 0;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    monthstart = get_start_of_month( &nbsp;monthstart&nbsp;);<BR>
@@ -1616,7 +1655,15 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // add the user to the database<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // DataManager dm;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Employee newEmployee( &nbsp;userName.ToStdString( &nbsp;&nbsp;), &nbsp; 0, &nbsp; password.ToStdString( &nbsp;&nbsp;), &nbsp; userType.ToStdString( &nbsp;&nbsp;), &nbsp; nullptr, &nbsp; nullptr&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    std::shared_ptr&lt;Employee&gt; newEmployee = std::make_shared&lt;Employee&gt;( &nbsp;userName.ToStdString( &nbsp;&nbsp;), &nbsp; 0, &nbsp; password.ToStdString( &nbsp;&nbsp;), &nbsp; userType.ToStdString( &nbsp;&nbsp;), &nbsp; nullptr, &nbsp; nullptr&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    std::shared_ptr&lt;AttendanceRecord&gt; attendanceRecord = std::make_shared&lt;AttendanceRecord&gt;( &nbsp;newEmployee, &nbsp; std::vector&lt;AttendanceEntry&gt;( &nbsp;&nbsp;)&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    std::shared_ptr&lt;std::vector&lt;std::shared_ptr&lt;LeaveApplication&gt;&gt;&gt; leaveApplications = std::make_shared&lt;std::vector&lt;std::shared_ptr&lt;LeaveApplication&gt;&gt;&gt;( &nbsp;&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    newEmployee-&gt;setAttendanceRecord( &nbsp;attendanceRecord&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    newEmployee-&gt;setLeaveApplication( &nbsp;leaveApplications&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // dm.writeEmployee( &nbsp;newEmployee&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    bool success = dm-&gt;writeEmployee( &nbsp;newEmployee&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    if ( &nbsp;!success&nbsp;) {<BR>
@@ -2333,7 +2380,7 @@ source file
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // Add date range label<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    dateRangeText = new wxStaticText( &nbsp;this, &nbsp; wxID_ANY, &nbsp; "12/1/2021 - 12/7/2021", &nbsp; wxDefaultPosition, &nbsp; wxDefaultSize, &nbsp; wxALIGN_CENTER&nbsp;);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    dateRangeSizer-&gt;Add( &nbsp;dateRangeText, &nbsp; 0, &nbsp; wxALL | wxALIGN_CENTER_VERTICAL, &nbsp; 5&nbsp;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    dateRangeSizer-&gt;Add( &nbsp;dateRangeText, &nbsp; 0, &nbsp; wxALL | wxALIGN_CENTER_VERTICAL, &nbsp; 10&nbsp;);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    // Add right button<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    wxButton *rightButton = new wxButton( &nbsp;this, &nbsp; ID_NEXT_WEEK, &nbsp; "&gt;"&nbsp;);<BR>
