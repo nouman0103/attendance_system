@@ -79,7 +79,9 @@ void HorizontalBar::OnPaint(wxPaintEvent& event)
 
     // draw a vertical dotted white line at 80% of the width
     dc.SetPen(wxPen(wxColour(255, 255, 255), 1, wxPENSTYLE_DOT));
-    dc.DrawLine(barWidth * 0.8, 0, barWidth * 0.8, barHeight);
+    dc.DrawLine(barWidth * 0.8, 2, barWidth * 0.8, barHeight-2);
+
+    dc.SetPen(wxPen(wxColour(0, 0, 0), 1, wxPENSTYLE_SOLID));
     
 
     // draw labels below the bar with a colored dot
